@@ -1,6 +1,3 @@
-基于博客`https://javabetter.cn/jvm/arthas.html`整理详细的学术笔记。在保持学术严谨性与剔除无关内容的基础上，优先考虑内容的可读性与逻辑连贯性
-
-
 ![](images/20260112105901.png)
 
 # Java语法基础
@@ -15188,5 +15185,6 @@ public ThreadPoolExecutor(int corePoolSize,
 
 
 ## 虚拟线程
+
 
 
