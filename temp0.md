@@ -1,5 +1,4 @@
-基于博客`https://javabetter.cn/thread/pianxiangsuo.html`的内容完成技术文章的写作，剔除对话等无关技术的内容；内容完整保留原博客的所有知识点，确保文章逻辑连贯。
-
+基于博客`https://javabetter.cn/thread/Unsafe.html`的内容完成技术文章的写作，剔除对话等无关技术的内容；内容完整保留原博客的所有知识点，确保文章逻辑连贯。
 
 # 并发编程
 
@@ -1016,12 +1015,47 @@ JDK1.6之前，`synchronized`锁是**使用操作系统互斥量mutex实现的�
 - 当且仅当Entry List空时，Owner 线程才会读Contention List竞争队列批量弹出一部分线程到Entry List，其他时刻Contention List竞争队列是仅写的
 - Contention List竞争队列是高竞争区域，Entry List实现了读写分离，减少对队列锁的竞争，把“多线程并发入队”和“单线程调度唤醒”隔离开，避免 Owner 释放锁时还需要和入队线程抢占队列的控制权。
 
+### CAS、MESI、Futex、LockSupport、缓存行填充
+
+**内存屏障、Futex、MESI缓存一致性协议、LockSupport、伪共享与填充作为并发编程的基石**构建了整个并发编程体系，解决了并发编程的原子性、可见性、有序性、线程调度与内存效率问题
+
+**Futex**：Fast Userspace Mutex
+- 早期的 Linux使用Mutex构建悲观锁工具，现代Linux底层的Futex改进Mutex，作为`synchronized`、`ReentrantLock` 的底层挂起机制
+- Mutex 每次加锁解锁都要陷入内核态，开销极大。但实际上，大部分锁在同一时刻是没有竞争的。
+- Futex 维护一个在**用户态**共享的整数。
+  - 如果没有竞争，直接在用户态用 **CAS** 原子操作修改这个整数，**完全不进入内核**
+  - 只有当 CAS 失败时，才调用系统调用进入内核，挂起线程。
+
+**MESI缓存一致性协议**
+- CAS 指令的原子性保证和volatile的可见性依赖于多核Cpu工作在MESI缓存一致性协议下
+- MESI缓存一致性协议原理：当一个Cpu核心修改了缓存行中的数据时，必须通过总线通知其他核心对应的缓存行失效
+* **M (Modified)**: 修改过，未同步到内存。
+* **E (Exclusive)**: 独占，只有我有，且和内存一致。
+* **S (Shared)**: 共享，大家都有，只能读。
+* **I (Invalid)**: 失效，我的数据过期了，由于别人修改了。
+
+
+**LockSupport.park/LockSupport..unpark**
+- LockSupport是Java 线程调度的最小原语，不同于`Object.wait()`必须配合 `synchronized` 使用，`LockSupport.park()` 可以在任何地方阻塞当前线程
+- LockSupport底层使用Futex实现，所有 JUC 工具类中的`ReentrantLock`、`CountDownLatch`、`FutureTask`在阻塞线程时最终调用的都是 `LockSupport.park()`
+
+
+
+**伪共享与填充**
+- Cpu每次以缓存行为单位加载数据，单个缓存行是64字节；
+- **伪共享**：如果变量A和变量B在同一个缓存行中，线程1和线程2分别修改变量A和变量B，会导致互相的缓存行失效，两个不相干的变量最终导致两个线程互相拖慢速度
+  - **伪共享**定义：不相关的变量共享了同一个缓存行
+- **缓存行填充Padding**：通过填充大量long类型空白行，将相邻的变量挤到不同的缓存行里
+- Java 的 `LongAdder`、Disruptor 框架的底层都大量使用了**缓存行填充Padding**来提升并发吞吐量
+
+**CAS：Compare and Swap**
+
 
 ### 无锁
 
 #### CAS
 
-CAS现代计算机在硬件层面支持度的历史变迁
+
 #### Unsafe
 
 #### Atomic
@@ -1040,6 +1074,7 @@ CAS现代计算机在硬件层面支持度的历史变迁
 * *抽象队列同步器AQS* （CLH 队列设计模式）。
 * *线程阻塞唤醒类LockSupport*
 
+#### Locksupport
 #### *重入锁ReentrantLock*
 
 * *等待通知条件Condition*
@@ -1061,9 +1096,9 @@ CAS现代计算机在硬件层面支持度的历史变迁
 
 #### Semaphore.
 
-#### 数据交换Exchanger
+#### 通信工具
 
-
+Semaphore、Exchanger、CountDownLatch、CyclicBarrier、Phaser
 
 
 ## 并发集合
@@ -1090,7 +1125,9 @@ JDK 1.7 Segment 分段锁 vs JDK 1.8 CAS+Synchronized 的演进。
 
 * *CopyOnWriteArrayList*
 
-## ThreadPoolExecutor
+## 线程池
+
+ThreadPoolExecutor
 
 * *线程池*
 * *ScheduledThreadPoolExecutor*

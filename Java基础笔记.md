@@ -7007,6 +7007,8 @@ while (true) {
 ```
 ## Netty
 
+学习Netty的前置知识：[JVM](#jvm)、[并发编程](#并发编程)
+
 **BIO (Blocking IO):** 一连接一线程模式。线程上下文切换开销，需要创建大量线程占用大量内存，无法支撑万级并发。
 
 **NIO (Non-blocking IO):** 基于 **Selector多路复用器**、**Channel通道** 和 **Buffer缓冲区**
