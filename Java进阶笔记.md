@@ -28,6 +28,3763 @@
 ## Jackson
 ## SLF4J + Logback
 
+# Mysql
+
+## 数据库设计基础与SQL核心实战
+
+### 数据库逻辑设计：从业务到表格
+
+#### ER模型
+
+#### 关系数据库规范化理论
+
+### MySQL表设计
+
+#### 核心数据类型
+
+#### 数据完整性约束
+
+### SQL查询
+
+#### 基础DQL
+
+##### 条件过滤
+
+##### 排序逻辑
+
+##### 分页技术
+
+#### 函数与计算
+
+##### 常用聚合函数
+
+##### 流程控制函数
+
+#### 分组与过滤
+
+##### GROUP BY
+
+##### HAVING 与 WHERE 的本质区别
+
+#### 多表联接查询 
+
+##### 笛卡尔积
+
+##### 内联接
+
+##### 左/右外联接
+
+
+
+#### 子查询与组合查询
+
+##### 嵌套子查询、关联子查询的执行差异
+
+##### UNION 与 UNION ALL
+
+
+## MySQL 索引原理与底层数据结构
+
+### 索引的本质与数据结构演进史
+
+#### 索引
+
+#### 被淘汰的数据结构分析
+
+#### B+ Tree
+
+### InnoDB 引擎的索引物理实现与存储分离
+
+#### 聚簇索引
+
+#### 辅助索引
+
+#### 回表查询
+
+#### 页分裂与页合并
+
+### 高阶索引技术与性能的极限拉扯
+
+#### 覆盖索引：优雅避开回表
+
+#### 联合索引的内部排序魔法
+
+#### 索引下推技术
+
+#### 前缀索引
+
+### 索引的设计规范与生命周期管理
+
+#### 索引的创建时机与黄金法则
+
+#### 不应建索引的黑名单
+
+#### 索引失效的经典案发现场分析
+
+
+
+---
+
+
+## 事务并发控制与锁机制
+
+### 事务的灵魂：ACID 特性与底层支撑机制
+
+#### 原子性
+
+#### 隔离性
+
+
+#### 持久性
+
+#### 一致性
+
+###  并发事务引发的“灾难现场”与隔离级别
+
+#### 三大数据并发读取异常
+
+##### 脏读
+
+##### 不可重复读
+
+##### 幻读
+
+#### SQL 标准四大隔离级别与权衡
+
+##### 读未提交
+
+
+##### 读已提交
+
+##### 可重复读
+
+##### 串行化
+
+
+### InnoDB 读的艺术：MVCC（多版本并发控制）
+
+#### 核心概念：当前读 vs 快照读
+
+##### 当前读
+
+##### 快照读
+
+
+#### MVCC 的底层三剑客
+
+##### 隐藏字段
+
+##### Undo Log 版本链
+
+##### Read View 读视图
+
+#### RC 与 RR 的底层本质区别
+
+### InnoDB 写的艺术：MySQL 锁机制
+
+#### 锁的模式：互斥与共享
+
+##### 共享锁
+
+##### 排他锁
+
+#### 锁的粒度与意向锁
+
+##### 表锁 vs 行锁
+
+##### 意向锁 (IS / IX)
+
+#### 行级锁的“三大形态”
+
+
+##### 记录锁
+
+##### 间隙锁
+
+##### 临键锁
+
+
+#### 锁退化机制
+
+#### 死锁
+
+
+##### 死锁形成的经典场景
+
+##### 死锁检测
+
+
+
+
+
+---
+
+
+
+## SQL 性能调优与执行计划
+
+### 性能调优的方法论与宏观排查路径
+#### 发现问题：慢查询的捕获
+
+##### 慢查询日志的参数配置
+
+##### 慢查询分析工具`mysqldumpslow`
+
+#### SQL变慢的架构原因
+
+##### 解析器
+
+##### 优化器
+
+##### 执行器
+
+### 调优工具EXPLAIN
+
+#### `id` 列
+
+#### select_type` 列
+
+####  `type` 列
+
+#### `possible_keys` vs `key`
+
+#### `key_len` 列
+
+#### `rows` 列
+
+#### `Extra` 列
+
+### 经典 SQL 调优场景与重构方案
+
+#### 深度分页优化的破局
+
+#### 聚合统计性能
+
+#### 排序 `ORDER BY` 与分组 `GROUP BY` 的优化法则
+
+#### 索引失效
+
+### MySQL 参数调优
+
+#### `innodb_buffer_pool_size`
+
+#### `innodb_flush_log_at_trx_commit`
+
+
+---
+
+
+## 高可用架构与分库分表
+
+### 架构演进与横向扩展
+
+#### 单机瓶颈的四大维度
+
+#### 演进路线图
+
+#### 引入分库分表的代价
+
+### 复制基石：MySQL主从复制底层原理剖析
+
+#### 主从复制核心工作流
+
+#### 同步机制演进与可靠性保障
+
+##### 异步复制
+
+##### 半同步复制
+
+##### 全同步复制
+
+#### 主从延迟的根因与终极优化
+
+### 容灾与故障转移：常见高可用（HA）架构方案选型
+
+#### 经典主备切换方案
+
+#### MHA架构
+
+#### 现代主流选型：Orchestrator 集群拓扑管理
+
+#### 原生终极方案：MGR (MySQL Group Replication) 与 InnoDB Cluster
+
+### 性能外扩：读写分离与路由中间件
+
+#### 客户端直连 vs. 代理层（Proxy）路由对比
+
+#### ProxySQL 实战核心配置
+
+#### 读写分离的致命痛点：主从延迟导致“读不到写”的解决方案
+
+### 数据分流：分库分表核心理论与分片策略
+
+#### 垂直拆分
+
+#### 水平拆分
+
+### 分布式环境下的 SQL 难题与解决之道
+
+#### 全局唯一主键生成策略
+
+#### 跨节点查询的降维打击
+
+#### 分布式排序与分页的性能灾难
+
+### ACID 的妥协：分布式事务机制选型
+
+#### CAP定理与BASE理论在数据库中的映射
+
+#### 强一致性事务（2PC / XA 协议）
+
+#### 主流柔性事务方案
+
+#### 基于本地消息表 / 靠谱MQ 的最终一致性方案
+
+### 极限操作：不停机数据平滑迁移与扩容实战
+
+#### 停机迁移
+
+#### 平滑迁移双写方案
+
+
+
+
+
+
+
+
+# Spring Framework
+
+## IoC & DI
+
+**IoC控制反转和 DI依赖注入解决的软件工程核心**：**解耦**。**IoC 是设计思想，DI 是具体实现。**
+
+* **传统开发模式：** 当对象 A 需要使用对象 B 的时候，A 会在自己的代码里显式地 `new` 一个 B 的实例。**控制权在 A 手里**。这种方式导致 A 和 B 强耦合，如果 B 的构造方式变了，A 的代码也得跟着改。
+* **IoC (Inversion of Control) 控制反转：** 对象 A 不再自己去 `new` 对象 B，而是把创建对象、管理对象的权力**交给了 Spring 容器**。控制权由程序员的代码“反转”给了框架。
+* **DI (Dependency Injection) 依赖注入：** 既然 A 自己不创建 B 了，那 A 运行的时候怎么拿到 B 呢？Spring 容器会在 A 实例化之后，自动把 B 传给 A。这个**由容器把依赖对象传递给当前对象的过程**，就叫依赖注入。
+
+---
+
+### DI 的三种主要注入方式
+
+#### 字段注入
+
+字段注入直接在类的属性上加 `@Autowired`，代码最简洁，写起来最快
+
+
+```JAVA
+@RestController
+public class UserController {
+    
+    @Autowired
+    private UserService userService; // 直接在字段上打注解
+
+    public void doSomething() {
+        userService.login();
+    }
+}
+```
+极度不推荐字段注入的理由：
+
+* **脱离容器后抛出 NullPointerException（致命缺点）：**
+    * **原理：** Spring 底层是通过**反射机制**，在 `UserController` 实例化（调用默认无参构造方法）**之后**，强行把 `userService` 塞进去的。
+    * **后果：** 如果你在写单元测试，脱离了 Spring 环境，直接 `new UserController()` 时，`userService` 并没有被赋值。一旦调用 `doSomething()` 方法，就会立刻引发空指针异常（NPE）。
+* **破坏了类的封装性（隐藏了依赖）：**
+    * **原理：** 一个正常的 Java 类，应该通过对外暴露的接口（如构造方法、普通方法）来声明自己需要什么外部资源。
+    * **后果：** 字段注入把依赖项“藏”在了类内部。别人调用这个类时，根本不知道它到底依赖了哪些东西。
+* **无法使用 `final` 关键字：**
+    * **原理：** Java 语法规定，`final` 变量必须在声明时或构造方法中初始化。字段注入是在对象实例化之后才赋值的，所以绝对不能加 `final`。这导致你的 Bean 状态是可变的，存在并发安全隐患。
+* **掩盖了“单一职责原则”的破坏：**
+    * **原理：** 只要你想，你可以无限地在一个类里写 `@Autowired` 注入几十个依赖，代码依然看起来“很整洁”。但这实际上意味着这个类干了太多杂事，严重违背了面向对象设计原则。
+
+**先实例化对象，再注入依赖的危害**：空指针，**破坏了“快速失败 (Fail-Fast)”原则**
+- 假设你的代码由于配置疏忽、依赖的 Bean 名称写错，或者某个特定的 Profile 没有激活，导致某个依赖 Bean 根本没有被注入到 Spring 容器中
+- **如果用字段/Setter注入**： Spring 可能会正常启动（某些版本或配置下容忍缺失），或者即使报错你也没注意到。服务看似健康地上线了。直到真实用户点击了某个按钮，触发了那行调用缺失依赖的代码，系统才会当场抛出 NullPointerException (NPE) 并崩溃。
+- **如果用构造器注入**： 依赖缺失会导致 Bean 根本无法完成实例化。Spring 容器在启动阶段就会直接崩溃报错（Fail-Fast）。这是一种保护机制：把错误暴露在编译或启动阶段，绝不让带病的服务器接管线上流量。
+
+
+**无法保障并发环境下的“绝对不可变性”**
+* 如果“慢慢准备依赖”，意味着这个对象的属性是可以被修改的（不能加 `final` 关键字）。
+* 在 Java 的内存模型（JMM）中，没有被 `final` 修饰的变量，在多线程高并发环境下（Web 服务器天生就是多线程环境），存在**指令重排序**和**可见性**的问题。虽然 Spring 容器对单例 Bean 的生命周期管理能最大程度避免这事，但从面向对象设计的严谨性来说，状态可变的对象天生是不安全的。构造器注入配合 `final`，能在对象发布的第一时间，向所有线程保证其状态的绝对可见和不可变。
+
+**纵容了“循环依赖”这种糟糕的设计**
+* 字段注入允许 A 依赖 B，B 依赖 A。Spring 为了帮你填坑，搞出了复杂的“三级缓存”机制。
+* 但从架构角度看，**循环依赖本身就是设计缺陷**，说明模块划分不清晰。构造器注入因为要求在实例化时必须拿到完整的依赖，所以**天然不支持循环依赖**。一旦代码出现循环依赖，启动直接报错，这就倒逼开发者去重构代码（比如提取公共的第三个类 C），从而写出更健康的架构。
+
+
+#### Setter 方法注入
+
+**Setter 方法注入**为属性提供 setter 方法，并在方法上加 `@Autowired`
+* **优点（灵活性高）：** 允许在对象实例化之后，甚至在程序运行期间，动态地更改注入的依赖对象。
+* **缺点（状态不安全）：** Setter 方法是可以被多次调用的。如果是核心强依赖，一旦在运行时被别人错误地调用 Setter 传入了 `null`，整个系统就会崩溃。
+  * 即Setter 方法注入的字段不能是 final
+* **适用场景：** 当某个依赖是**非必须的（可选的）**，没有它系统也能按默认逻辑运行时；或者需要在运行期间动态改变依赖时，可以使用 Setter 注入。
+
+```java
+@RestController
+public class UserController {
+    
+    private UserService userService;
+
+    @Autowired // 注入点在 Setter 方法上
+    public void setUserService(UserService userService) {
+        this.userService = userService;
+    }
+}
+```
+
+#### 构造器注入
+
+构造器注入是 Spring 官方强烈推荐的依赖注入方式。通过类的构造方法传入外部依赖，不仅能保证代码的健壮性，还能与面向对象设计原则完美契合。
+
+相比于字段注入，构造器注入具有不可替代的优势：
+* **防空指针（保证强依赖强制初始化）：** Java 语法规定，实例化对象必须调用构造方法。这从根源上杜绝了对象创建完毕但依赖尚未准备好的情况，只要 Bean 实例化成功，依赖一定不为 `null`。
+* **支持 `final` 关键字（保证不可变性与线程安全）：** 完美契合 `final` 变量必须在构造时赋值的语法要求。依赖一旦注入便不可更改，保障了单例 Bean 在多线程环境下的绝对安全。
+* **完美支持单元测试：** 脱离 Spring IoC 容器后，可以通过常规的 `new` 关键字手动传入 Mock 对象（如 `new UserController(mockUserService)`），测试代码更纯粹。
+* **主动暴露“代码异味” (Code Smell)：** 如果一个类依赖过多（例如构造方法有 15 个参数），代码会非常臃肿，这就良性地“逼迫”开发者审视该类是否违背了单一职责原则，进而进行拆分重构。
+
+```java
+@RestController
+public class UserController {
+    // 推荐加上 final 关键字
+    private final UserService userService;
+
+    // 通过构造方法传入依赖
+    public UserController(UserService userService) {
+        this.userService = userService;
+    }
+}
+```
+
+**最佳实践：结合 Spring 4.3+ 与 Lombok 精简代码**
+* **Spring 4.3 隐式注入特性：**
+    * **规则：** 如果一个类**只定义了一个构造器**，Spring 会默认使用该构造器进行自动装配，无需显式标注 `@Autowired`。
+    * **优势：** 代码更整洁，天然鼓励“单构造器 + 不可变字段”的优秀实践。
+* **Lombok `@RequiredArgsConstructor` 注解：**
+    * **作用：** 自动生成一个包含类中所有 `final` 字段和带有 `@NonNull` 注解字段的有参构造器。
+    * **注意点：** 如果类中既没有未初始化的 `final` 字段，也没有 `@NonNull` 字段，该注解会静默生成一个无参构造器（属于误用，但不报错）。若确实只需无参构造器，应明确使用 `@NoArgsConstructor`。
+
+
+---
+
+#### `@Autowired` 行为与多构造器解析规则
+
+当类中存在多个构造器时，Spring 会按特定规则寻找合适的构造器来实例化 Bean：
+
+* **`@Autowired` 的 `required` 属性（默认值为 `true`）：**
+    * `required = true`：强制依赖。找不到匹配 Bean 时，启动抛出 `NoSuchBeanDefinitionException`，初始化失败。
+    * `required = false`：可选依赖。找不到时，Spring 忽略它并尝试正常启动。
+
+* **Spring 多构造器解析步骤与规则：**
+    1. **唯一性直接使用：** 若有且仅有一个构造器，直接使用（无需注解）。
+    2. **显式首选：** 若有多个构造器，被 `@Autowired` 标记的会成为“首选构造器”。
+    3. **冲突报错：** 若一个构造器标为 `@Autowired(required = true)`，此时若有任何其他带有 `@Autowired` 的构造器（无论 true/false），直接启动报错。
+    4. **贪婪匹配 (Greedy Matching)：** 允许将所有带 `@Autowired` 构造器的 `required` 设为 `false`。此时 Spring 会检查所有候选者，优先选择**参数最多且能被 Spring 容器完全满足**的构造器。
+    5. **单构造器 + `required=false` 的反模式行为：** 如果你**只有一个带参构造器**，却标记为 `@Autowired(required = false)`，当依赖缺失时：
+        * 若类中还有无参构造器：退化调用无参构造器生成残缺 Bean（需手动判空）。
+        * 若没有无参构造器：直接抛出实例化异常，而不会硬塞 `null`。
+        * **设计定性：** 这种做法在设计上是**错误**的。`required = false` 语义是“可选”，而唯一带参构造器语义是“强制”，两者自相矛盾。
+        * 
+---
+
+#### @Primary 与 @Qualifier
+**“当容器中有多个同类型 Bean 时，如何优雅地选妃”**。
+- 在 Spring 中，`@Autowired` 默认是**按类型（ByType）**去寻找 Bean 并注入的。
+- 假设你定义了一个接口 `PaymentStrategy`（支付策略），并且写了两个实现类：`WechatPay`（微信支付）和 `AliPay`（支付宝支付），它们都被加上了 `@Component` 交给 Spring 管理。
+- 此时，你在订单服务里这样写：
+```java
+@Service
+public class OrderService {
+    @Autowired
+    private PaymentStrategy paymentStrategy; // Spring 懵了：你到底要微信还是支付宝？
+}
+```
+- 当你启动项目时，Spring 会直接抛出 `NoUniqueBeanDefinitionException` 异常。这就好比皇帝翻牌子，只说了一句“叫妃子来”，太监根本不知道该叫哪一个，只能原地死机报错。
+
+为了解决这个问题，Spring 给了你两道圣旨：`@Primary` 和 `@Qualifier`。
+
+---
+
+**方案一：`@Primary`** —— 册立“正宫娘娘”
+
+- `@Primary` 是贴在**Bean 的定义类**上的。它的意思是：当出现多个同类型的 Bean 时，**优先选择我**。
+
+- 如果你公司的业务里 90% 都是用微信支付，你就可以把微信支付设为默认项：
+
+```java
+@Component
+@Primary  // 👈 重点在这里：确立默认首选地位
+public class WechatPay implements PaymentStrategy {
+    // ...
+}
+
+@Component
+public class AliPay implements PaymentStrategy {
+    // ...
+}
+```
+
+- **注入时的效果：**
+```java
+@Service
+public class OrderService {
+    @Autowired
+    private PaymentStrategy paymentStrategy; // 这里会自动注入 WechatPay
+}
+```
+- **特点：** `@Primary` 是一种**全局默认策略**。你不需要修改任何调用的代码，只要在定义处加一个注解，冲突就解决了。
+
+---
+
+**方案二：`@Qualifier`** —— 皇帝“亲自点名”
+
+- `@Qualifier` 是贴在**注入点（也就是调用方）**上的。它的意思是：别管什么默认规则了，我就要名字叫 `xxx` 的那个 Bean。
+
+- 假设你的项目中，普通订单用微信支付，但大额订单必须用支付宝支付。这个时候 `@Primary` 就搞不定了，你必须精确控制：
+
+```java
+@Service
+public class VipOrderService {
+    
+    @Autowired
+    @Qualifier("aliPay") // 👈 重点：强行指定要注入的 Bean 的名字（默认是类名首字母小写）
+    private PaymentStrategy paymentStrategy; 
+    
+}
+```
+
+- **特点：** `@Qualifier` 是一种**局部精准打击**。它直接把按类型查找（ByType）降级成了按名称查找（ByName），指名道姓，绝不认错。
+
+---
+
+
+
+#### `@Autowired`自动装配规则：ByName vs ByType，对比`@Resource`
+
+
+* **ByType（按类型）：** 就像老板说：“给我叫一个**写 Java 的程序员**来。” 
+    * **优点：** 很灵活。哪怕这个程序员离职了，换了一个新的 Java 程序员，只要“职位（接口/类型）”没变，业务就能继续跑。
+    * **致命弱点：** 如果公司里有三个 Java 程序员，老板又不说是谁，HR（Spring 容器）就会当场崩溃（抛出 `NoUniqueBeanDefinitionException`）。
+* **ByName（按名称）：** 就像老板说：“给我把**张三**叫过来。”
+    * **优点：** 极其精准，绝对不会叫错人。
+    * **致命弱点：** 强耦合。如果张三改名了，或者换人了，代码立马报错（找不到 Bean）。
+
+---
+
+**`@Autowired` 的真实内幕：它是怎么找人的？**
+- 很多人以为 `@Autowired` 就是纯粹的 ByType，**这是一个巨大的误区。** 它的真实查找逻辑其实分了三步：
+
+- **第一步：先 ByType 找**
+    * 它去 Spring 容器里找类型匹配的 Bean。
+    * 如果只找到 **1** 个：完美，直接注入。
+    * 如果找到 **0** 个：报错（除非你设置了 `@Autowired(required = false)`）。
+    * 如果找到 **多个**：进入第二步。
+
+- **第二步：找 `@Primary`**
+    * 如果有多个同类型的 Bean，它会看看有没有哪个候选人头上顶着 `@Primary`（正宫娘娘）。如果有，选她。如果没有，进入第三步。
+
+- **第三步：退化为 ByName 找（隐藏彩蛋）**
+    * 这是最容易被忽略的！当类型有冲突时，`@Autowired` 会自动用你的**变量名**作为 Bean 的名字去容器里找。
+    * 如果多个同类型的Bean的所有名字，没有和依赖注入的成员变量名一样的，就报错
+
+```java
+@Component("alipay") // 名字叫 alipay
+public class AliPay implements PaymentStrategy {}
+
+@Component("wechat") // 名字叫 wechat
+public class WechatPay implements PaymentStrategy {}
+
+@Service
+public class OrderService {
+    // 容器里有两个 PaymentStrategy。
+    // 但因为你的变量名叫 "wechat"，匹配上了其中一个 Bean 的名字！
+    // 此时 @Autowired 奇迹般地不会报错，它成功注入了 WechatPay！
+    @Autowired
+    private PaymentStrategy wechat; 
+}
+```
+
+---
+
+`@Resource`：企业级开发的老大哥
+
+- `@Resource` 是 Java EE 的官方规范（JSR-250），Spring 对它进行了完全的兼容。在很多大厂的编码规范中，反而更推荐使用 `@Resource`。
+
+它的查找逻辑与 `@Autowired` **恰恰相反**：
+
+**第一步：先 ByName 找**
+它默认用**变量名**（或者你指定的 `name` 属性）去容器里搜寻同名的 Bean。
+* 如果找到了名字一样的，且类型也匹配：直接注入。
+* 如果没找到这个名字的 Bean：进入第二步。
+
+**第二步：退化为 ByType 找**
+既然按名字找不到，那就按类型捞捞看。
+* 如果恰好只有一个该类型的 Bean：注入成功。
+* 如果有多个：直接报错。
+
+```java
+@Service
+public class OrderService {
+    // 第一步：找名字叫 "paymentStrategy" 的 Bean，没找到。
+    // 第二步：按类型找，发现有 AliPay 和 WechatPay，报错冲突！
+    @Resource
+    private PaymentStrategy paymentStrategy; 
+    
+    // ==========================================
+    
+    // 第一步：找名字叫 "wechat" 的 Bean，找到了！直接注入。
+    @Resource
+    private PaymentStrategy wechat; 
+    
+    // ==========================================
+    
+    // 终极杀招：直接指定 name，这是最稳妥的写法
+    @Resource(name = "alipay")
+    private PaymentStrategy abc; 
+}
+```
+
+---
+
+
+
+1.  **如果项目只有一个实现类：** 闭着眼睛用 `@Autowired` 或者 `@Resource` 都可以，效果一模一样。推荐 `@Resource` 的原因是它不强依赖 Spring 的 API。
+2.  **如果是多个实现类（策略模式）：** 坚决推荐 `@Resource(name = "具体名字")`。它比 `@Autowired` + `@Qualifier` 看起来要简洁得多。
+
+
+
+
+
+#### 注入方案选择
+
+在真实的工程实践中，推荐将依赖严格划分为**强制依赖**和**可选依赖**：
+
+**代码精简最佳实践：结合 Spring 4.3+ 与 Lombok**
+* **Spring 4.3 隐式注入特性：** 若类**只定义了一个构造器**，Spring 会默认使用该构造器自动装配，无需显式标 `@Autowired`。
+* **Lombok `@RequiredArgsConstructor` 注解：** 自动生成包含所有 `final` 字段和 `@NonNull` 字段的有参构造器。
+  * *注意：* 若类中既无未初始化的 `final` 字段也无 `@NonNull` 字段，该注解会静默生成无参构造器（属于误用）。若确需无参，应明确使用 `@NoArgsConstructor`。
+
+1. **强制依赖：** 完全由**构造器注入**完成。
+2. **可选依赖：** 完全由 **Setter 方法注入**完成。
+3. **CGLIB 代理兼容性保证：**
+   * 使用 `@NoArgsConstructor` 生成一个无参构造器，并总是确保**至多只有一个**有参构造器来注入强制依赖。
+   * *原因：* Spring AOP 底层依赖 CGLIB 动态代理（通过继承目标类生成子类来实现增强）。CGLIB 要求父类**必须拥有无参构造器**，否则子类无法调用 `super()` 初始化父类状态。
+---
+
+### IoC 容器的核心大脑：BeanFactory 与 ApplicationContext
+
+在 Spring 框架中，IoC 容器是负责实例化、配置和装配对象的大管家。Spring 主要提供了两种核心容器接口来实现这些功能。
+
+
+#### `BeanFactory`
+
+
+
+* **定义：** `BeanFactory` 是 Spring IoC 容器的最顶层接口，是所有 Spring 容器的“老祖宗”。
+* **本质：** 它是一个 **工厂模式（Factory Pattern）** 的超级实现。它负责生产和管理系统中的所有 Bean。
+* **设计哲学：** 极简主义。它只负责定义最基础的 IoC（控制反转）和 DI（依赖注入）规范，不包含任何高级的系统级服务（如 AOP、事件机制等）。
+
+
+---
+
+`BeanFactory` 的核心工作可以总结为“看图纸，造零件”：
+
+* **看图纸（解析 BeanDefinition）：** Spring 不会直接把 Java 类变成 Bean。它会先通过各种 Reader（如 `XmlBeanDefinitionReader` 或注解解析器）读取配置（XML、注解或 JavaConfig），把类的特征（类名、依赖关系、是否单例、懒加载等）封装成一个中间模型 —— **`BeanDefinition`**（Bean 的图纸）。
+* **造零件（实例化与注入）：**
+  当调用 `getBean()` 时，`BeanFactory` 会拿着这张 `BeanDefinition` 图纸，利用反射机制实例化对象，并根据图纸上的说明，把需要的依赖项（其他 Bean）装配进去。
+
+---
+
+**BeanFactory 的四大派系（重要子接口）**
+- `BeanFactory` 本身的方法很少，Spring 通过一系列子接口扩展了它的能力，这在源码阅读中非常关键：
+
+1. **`ListableBeanFactory`（可列表的工厂）：**
+   * **能力：** 突破了顶级接口只能按名字单查的限制，允许按类型、按注解批量获取系统中有哪些 Bean。
+   * **常见方法：** `getBeansOfType()`, `getBeanDefinitionNames()`。
+2. **`HierarchicalBeanFactory`（分层工厂）：**
+   * **能力：** 引入了“父子容器”的概念。允许一个 BeanFactory 拥有一个 Parent。
+   * **应用场景：** Spring MVC 中最经典的“父子容器”（Spring 容器做父，装配 Service/Dao；Spring MVC 容器做子，装配 Controller）。子可以访问父的 Bean，父不能访问子的 Bean。
+3. **`AutowireCapableBeanFactory`（具备自动装配能力的工厂）：**
+   * **能力：** 提供向现有脱管的 Java 实例（非 Spring 创建的对象）强制进行依赖注入的能力。
+4. **`DefaultListableBeanFactory`（🔥 终极集大成者）：**
+   * **地位：** 这是 Spring 中**最核心的类，没有之一**。它是上述所有接口的默认实现类。
+   * **真相：** 你平时用的 `ApplicationContext`，其底层也是偷偷 new 了一个 `DefaultListableBeanFactory` 来干活的（组合模式）。真正造 Bean 的苦力，永远是它。
+
+---
+
+BeanFactory 的核心 API 概览
+
+* `getBean(String name)` / `getBean(Class<T> requiredType)`：最常用的获取 Bean 的方法。
+* `containsBean(String name)`：判断容器中是否包含指定名字的 Bean。
+* `isSingleton(String name)`：判断某个 Bean 是否是单例模式。
+* `isPrototype(String name)`：判断某个 Bean 是否是多例（原型）模式。
+* `getType(String name)`：获取某个 Bean 的 Class 类型。
+* `getAliases(String name)`：获取某个 Bean 的所有别名。
+
+---
+
+延迟加载的底层表现
+- 正如我们之前对比的，`BeanFactory` 最大的特性是**延迟加载**。
+
+* **启动阶段：** 仅仅是读取了配置，将配置转化为 `BeanDefinition` 存入内存的 `ConcurrentHashMap` 中（图纸画好了）。此时没有实例化任何业务 Bean。
+* **运行阶段：** 当你第一次执行 `beanFactory.getBean("userService")` 时，底层才会触发类的实例化、属性注入、初始化方法（`@PostConstruct`）等一整套 Bean 的生命周期。
+
+
+---
+
+为什么现在工程中几乎看不到直接使用 BeanFactory？
+- 在早期学习 Spring 或者写极简 Demo 时，你可能会看到这样的代码：
+```java
+// 传统 BeanFactory 写法（现已极其少见）
+Resource resource = new ClassPathResource("beans.xml");
+BeanFactory factory = new XmlBeanFactory(resource); // XmlBeanFactory 已被废弃
+UserService user = factory.getBean(UserService.class);
+```
+**被淘汰的原因：**
+1. **API 太底层：** 很多功能（如 BeanPostProcessor 的注册）需要手动硬编码调用，极不方便。
+2. **缺乏企业级功能：** 不支持 AOP、事务声明、事件发布、环境变量解析。
+3. **隐藏配置错误：** 懒加载会导致依赖配置的 Bug 被延迟到运行时才爆炸，这在大型线上系统中是无法容忍的。
+
+**总结结论：** `BeanFactory` 是 Spring 架构设计的地基，理解它能帮助你彻底看懂 Spring IoC 的源码脉络；但在应用开发层面，请永远信任并使用它的进阶版：`ApplicationContext`。
+
+
+
+---
+
+#### `ApplicationContext`
+
+
+
+`ApplicationContext`核心定位
+* **定义：** 它是 Spring 中的高级容器接口，代表了真正的“Spring 应用上下文”，也是日常企业级开发中我们直接打交道的核心对象。
+* **底层真相（组合模式）：** 面试常考的一个误区是认为 `ApplicationContext` 覆写了 `BeanFactory` 所有的造 Bean 逻辑。**并不是！**
+  `ApplicationContext` 内部其实**持有一个** `DefaultListableBeanFactory` 的实例。遇到创建 Bean、获取 Bean 的脏活累活，它会直接委托给底层的 `BeanFactory` 去做。它自己则腾出手来，专注于提供更高阶的企业级服务。
+
+---
+
+**四大核心扩展能力**
+- 为什么它被称为企业级标准？因为它通过继承不同的接口，集成了四大杀手锏功能：
+
+1. **环境与配置管理 (`EnvironmentCapable`)：**
+   * **能力：** 统一管理系统的环境变量、JVM 参数、以及我们熟悉的 `application.properties/yml` 配置文件。
+   * **实战：** 我们常用的 `@Value("${xxx}")` 属性注入，以及 `@Profile("dev")` 环境隔离，底层都是由它支撑的。
+2. **事件发布与监听 (`ApplicationEventPublisher`)：**
+   * **能力：** 提供了开箱即用的**观察者模式**实现。允许 Bean 之间通过发布和监听事件进行解耦通信。
+   * **实战：** 业务代码中使用 `applicationContext.publishEvent(new OrderCreatedEvent())` 发布事件，另一个类使用 `@EventListener` 异步监听处理（比如发短信），做到主链路与副链路彻底解耦。
+3. **统一资源加载 (`ResourcePatternResolver`)：**
+   * **能力：** 屏蔽了底层文件系统的差异，提供极其强大的资源读取能力。
+   * **实战：** 可以轻松使用 `classpath:mappers/*.xml` 或 `file:/etc/config.json` 这种通配符路径去一次性读取多个配置文件。
+4. **国际化支持 (`MessageSource`)：**
+   * **能力：** 支持根据不同的国家/语言环境（Locale），返回不同的文本信息（如错误提示语）。
+
+---
+
+预加载与 Fail-Fast（快速失败）原则
+- 这是它在架构设计上与 `BeanFactory` 最核心的差异。
+
+* **预加载机制（Eager-load）：** 在容器启动阶段，`ApplicationContext` 会找出所有作用域为 `singleton`（单例）且没有标记为懒加载的 Bean，并**一次性将它们全部实例化、注入依赖并初始化完毕**。
+* **架构优势（Fail-Fast）：** * 任何配置错误（类名写错、包扫不到）、依赖缺失（找不到对应的 `@Autowired` Bean）、或者代码循环依赖，都会在**服务器启动的这几秒钟内当场报错，并终止启动**。
+  * 这种设计绝不把隐患留到运行时，极大地保障了线上生产环境的安全。
+
+---
+
+**常见的实现类**（容器的实体）
+- 在不同时代的 Spring 技术栈中，我们会使用不同的 `ApplicationContext` 实现类来启动容器：
+
+* **`AnnotationConfigApplicationContext`（纯注解时代的主力）：**
+  * **场景：** 现代无 XML 的纯 Java 架构。基于 `@Configuration` 配置类和 `@ComponentScan` 包扫描来构建容器。
+* **`ClassPathXmlApplicationContext`（古典时代的遗迹）：**
+  * **场景：** 老旧的 SSM/SSH 项目。从 ClassPath 路径下读取传统的 `applicationContext.xml` 文件来启动。
+* **`AnnotationConfigServletWebServerApplicationContext`（Spring Boot Web 的基石）：**
+  * **场景：** 当你写下 `SpringApplication.run()` 启动一个 Spring Boot Web 项目时，底层悄悄实例化的就是这个长名字的怪物。它不仅拥有上述所有能力，还能自动内嵌并启动 Tomcat / Undertow 服务器。
+
+
+Spring Boot 中，不需要手动指定实现类，而是直接在启动类中`SpringApplication.run(MyApplication.class, args);`启动
+- 它会**自动挑选合适的实现类**，如果你写的是 Web 程序，Spring 会自动选一个支持 Servlet 的实现类；如果只是普通的控制台程序，它会选一个轻量级的实现类，无需手动干预选择过程。
+
+```JAVA
+public static void main(String[] args) {
+    // 这行代码执行完，实现类就已经在后台默默运行了
+    SpringApplication.run(MyApplication.class, args);
+}
+
+```
+
+
+---
+
+容器的“大动脉”：`refresh()` 方法
+- 如果你准备翻阅 Spring 源码，`ApplicationContext` 接口中最重要的一个方法叫 **`refresh()`**。
+* 它是整个 Spring 容器启动的入口和核心流程。
+* 这个方法内部有著名的 **13 个步骤**，严格定义了 Spring 容器是如何一步步从解析配置、到调用各种处理器（BeanFactoryPostProcessor）、再到注册监听器、最后完成所有 Bean 实例化的全生命周期。可以说是 Java 世界里最经典的模板方法模式（Template Method Pattern）应用。
+* 当 SpringApplication.run() 执行时，它内部调用了 refresh()，然后你的 Bean 就全部出生并准备就绪了
+
+---
+
+**总结结论：** 在实际工程中，除非你正在开发极其底层的框架级组件，或者运行环境的内存只有几兆大小（比如某些老式物联网设备），否则**永远只使用 `ApplicationContext`**。它的预加载机制和丰富的生态扩展，是现代 Java 企业级开发的绝对基石。
+
+
+---
+
+### Bean
+
+
+#### Bean的配置
+
+在 Spring 中，Bean 并不是凭空产生的，容器在实例化 Bean 之前，首先会将我们的配置（XML、注解等）解析成一种内部的元数据结构——**`BeanDefinition`**。
+
+
+**Bean 的元数据**：Spring 是怎么描述一个对象的？
+
+- `BeanDefinition` 就好比是建造 Bean 的“图纸”。即使你写了一个普通的 Java 类，Spring 也需要将其包装成 `BeanDefinition` 才能进行管理。它包含了以下关键信息：
+
+  * **Bean 的全限定类名**（包名+类名，用于反射创建对象）。
+  * **作用域（Scope）**：单例、多例等。
+  * **行为配置**：是否懒加载（Lazy）、是否是首选（Primary）。
+  * **生命周期回调**：初始化方法名（`init-method`）、销毁方法名（`destroy-method`）。
+  * **依赖信息**：构造函数参数、属性值（用于依赖注入）。
+
+---
+
+Bean的配置方式有四种
+- XML配置
+- `@Component`及其衍生 (`@Service`, `@Controller`、`@Configuration`、`@Repository`)注解，只能标注自己写的类
+- `@Configuration` 配置类 + 配置类内标注方法的`@Bean`注解，配置类引入第三方库组件，`@Bean`方法返回Bean对象给Ioc容器
+- `FactoryBean`接口
+
+
+---
+
+#### 给Bean取名
+
+
+**给 Bean 取名**
+- 默认情况下，Spring 会把类名的首字母小写作为 Bean 的名字（比如 `UserService` 变成 `userService`）。但如果你想自己做主，有以下几种常见方式：
+  1. **在模式注解上直接指定**
+       - 通过 `@Component`、`@Service`、`@Controller` 等注解的 `value` 属性直接命名：
+        ```java
+        // 我偏不叫 aliPayService，我就要叫 aliPay
+        @Service("aliPay") 
+        public class AliPayService implements PayService { ... }
+        ```
+
+  2. **在 `@Bean` 方法上指定**
+        - 在使用 `@Configuration` 配置类手动创建 Bean 时，可以通过 `name` 属性指定（甚至可以起多个名字作为别名）：
+        ```java
+        @Configuration
+        public class MyConfig {
+            @Bean(name = {"myRedisTemplate", "redisTool"})
+            public RedisTemplate redisTemplate() { ... }
+        }
+        ```
+
+---
+
+**为什么要给 Bean 取名？**
+- 在简单的增删改查项目里，默认名字确实够用了。但一旦业务变复杂，自定义 Bean 名字就成了刚需。以下是三个最核心的实战场景：
+- **场景 1：解决“多胞胎”冲突（消除歧义）**
+  - 假设你有一个接口 `PayService`，它有两个实现类：`AliPayServiceImpl` 和 `WechatPayServiceImpl`。
+如果你在别的类里直接这样写：
+    ```java
+    @Autowired
+    private PayService payService; // 报错警告！
+    ```
+  - **Spring 会当场崩溃**（报 `NoUniqueBeanDefinitionException`）。因为容器里有两个 `PayService` 类型的 Bean，Spring 就像个迷茫的老父亲：“这俩多胞胎，你到底要我抱哪个给你？”
+
+  - **破局思路：利用名字精确打击**，先给实现类取好名字，再配合 `@Qualifier` 或者 `@Resource` 按名字注入：
+    ```java
+    @Service("wechatPay")
+    public class WechatPayServiceImpl implements PayService { ... }
+
+    @Service("aliPay")
+    public class AliPayServiceImpl implements PayService { ... }
+
+    // 使用方：
+    @Autowired
+    @Qualifier("aliPay") // 明确告诉 Spring：我要名字叫 aliPay 的那个！
+    private PayService payService;
+    ```
+
+- **场景 2：结合 Map 实现优雅的“策略模式”（封神级用法）**
+  -  这是高级开发最爱用的一招，用来消灭代码里成百上千行的 `if-else`。
+
+  - 如果你在 Service 里注入一个 `Map<String, 接口>`，Spring 会施展一个魔法：**它会自动把容器里所有实现该接口的 Bean 全找出来，把它们的【Bean 名字】作为 Key，【Bean 实例】作为 Value，塞进这个 Map 里！**
+
+    ```java
+    @Service
+    public class OrderService {
+        
+        // Spring 的魔法注入：Key 就是 Bean 的名字（"aliPay" 或 "wechatPay"）
+        @Autowired
+        private Map<String, PayService> payStrategyMap; 
+
+        public void checkout(String payType) {
+            // 前端传过来 payType = "aliPay"，直接去 Map 里拿对应的 Bean，连 if-else 都不用写！
+            PayService targetService = payStrategyMap.get(payType);
+            targetService.pay();
+        }
+    }
+    ```
+  - 在这个场景里，**精确控制 Bean 的名字，就是控制策略路由的 Key。**
+
+- **场景 3：AOP 面向切面的“精准拦截”**
+  -  在写 AOP 切面时，我们通常按包名或注解来拦截方法。但有时候，你只想拦截特定的几个 Bean。
+  -  在 AspectJ 的切点表达式里，可以直接使用 `bean(你的Bean名字)`：
+    ```java
+    // 只拦截名字叫 wechatPay 或者以 Service 结尾的 Bean
+    @Pointcut("bean(wechatPay) || bean(*Service)") 
+    public void pointcut() {}
+    ```
+
+---
+
+
+#### Bean 的作用域Scope
+##### Singleton单例作用域
+
+在 Spring 中，如果你不显式指定，所有的 Bean 默认都是单例的。
+
+* **核心机制**：对于同一个 Bean 定义，Spring IoC 容器中**只存在一个共享的实例**。无论你通过 `@Autowired` 注入多少次，或者通过 `context.getBean()` 获取多少次，拿到的永远是内存中的同一个对象。
+* **创建时机**：默认情况下，单例 Bean 在 **Spring 容器启动时**就会被实例化并初始化好（除非你加了 `@Lazy` 延迟加载）。
+
+---
+
+**线程安全问题**
+- 由于单例 Bean 在整个应用中共享，如果多个线程同时访问并修改它的成员变量，就会引发线程安全问题。
+
+* **无状态 Bean（安全）**：比如我们常用的 `xxxController`、`xxxService`、`xxxDao`。它们通常只有方法（执行逻辑），没有用来存储数据的成员变量（或者只有被 `final` 修饰的依赖组件）。这种 Bean 是线程安全的。
+* **有状态 Bean（危险）**：如果你的单例 Bean 里定义了一个普通的成员变量（比如 `private int count = 0;`），多个请求并发调用修改 `count` 时，数据必然错乱。
+* **破局方案**：
+    1.  尽量避免在单例 Bean 中定义可变的成员变量。
+    2.  如果必须存储状态，使用 `ThreadLocal` 将变量绑定到当前线程。
+    3.  使用同步锁（`synchronized` 或 `ReentrantLock`），但会严重影响性能，极不推荐。
+
+---
+##### Prototype多例作用域
+
+当你使用 `@Scope("prototype")` 标注一个 Bean 时，它就变成了多例。
+
+* **核心机制**：每次向 Spring 容器请求这个 Bean（通过注入或 `getBean`）时，容器都会 **重新 `new` 一个全新的实例** 给你。
+* **创建时机**：容器启动时**不会**创建多例 Bean，只有在被请求时才创建。
+* **生命周期管理差异**：这是一个容易被忽略的点。对于单例，Spring 管杀也管埋（负责销毁）；但对于多例，**Spring 把对象创建好交给你之后，就不再管理它了**。多例 Bean 的 `@PreDestroy` 销毁方法永远不会被 Spring 调用，回收工作完全交由 JVM 垃圾回收器负责。
+
+---
+##### 单例依赖多例+方法注入
+
+这是 Spring 中最经典、最容易让人抓狂的坑：**作用域（Scope）不一致的问题**
+
+- **场景还原**：假设你有一个单例的 `OrderService`，它内部通过 `@Autowired` 注入了一个多例的 `OrderIdGenerator`（用于生成唯一的订单号）。
+
+- **现象：**
+你期望每次调用 `OrderService.generate()` 时，都能用到一个全新的 `OrderIdGenerator` 实例。但实际运行你会发现，无论调用多少次，`OrderIdGenerator` **始终是同一个**，多例失效了！
+
+- **原理解析：**
+Spring 注入依赖的动作**只发生一次**（在 `OrderService` 这个单例 Bean 初始化的时候）。那时候 Spring 确实去拿了一个新的 `OrderIdGenerator` 塞给了 `OrderService`。但因为 `OrderService` 是单例的，它永远活在内存里，它肚子里的那个 `OrderIdGenerator` 也就被“定格”了，再也不会刷新。
+
+- 错误代码演示
+```JAVA
+
+// 1. 定义一个多例的组件
+@Component
+@Scope("prototype") // 标记为多例：每次获取都应该创建新对象
+public class OrderIdGenerator {
+    public OrderIdGenerator() {
+        System.out.println("====== OrderIdGenerator 被 new 出来了 ======");
+    }
+    
+    public String generateId() {
+        return "ID-" + System.currentTimeMillis();
+    }
+}
+
+// 2. 定义一个单例的 Service
+@Service
+public class OrderService {
+    
+    // 【致命错误点】：直接使用 @Autowired 注入多例对象
+    @Autowired
+    private OrderIdGenerator orderIdGenerator; 
+    
+    public void generate() {
+        // 无论你调用这个方法多少次，用的都是同一个 orderIdGenerator 实例
+        System.out.println("使用的生成器实例: " + orderIdGenerator);
+        orderIdGenerator.generateId();
+    }
+}
+```
+
+---
+
+**优雅的解决方案：方法注入**
+- 不要再用 `@Autowired` 直接注入多例 Bean。**使用`@Lookup` 注解**
+- 在单例 Bean 中写一个返回多例 Bean 的方法，并打上 `@Lookup` 注解。Spring 会使用 CGLIB 字节码技术动态重写这个方法，每次调用都去容器里拿新的实例。
+    ```java
+    @Service
+    public class OrderService {
+        // 每次调用这个方法，Spring 都会拦截并返回一个新的多例对象
+        @Lookup
+        protected OrderIdGenerator getOrderIdGenerator() {
+            return null; // 方法体随意，因为 Spring 运行时会覆盖它，压根不会运行方法体内的代码
+        }
+        
+        public void generate() {
+            OrderIdGenerator generator = getOrderIdGenerator(); // 拿到的是新实例！
+        }
+    }
+    ```
+
+- 当 Spring 启动并扫描到你的 OrderService 里有 @Lookup 注解时，它不会把原始的 OrderService 放到容器里。相反，它会在内存里动态地写一个 OrderService 的子类，并把这个子类放进容器里供大家使用。
+- 我们可以想象 Spring 在底层悄悄帮你生成了类似下面这段代码（伪代码）：
+```JAVA
+// 这是 Spring 动态生成的子类（代理类），它继承了你写的 OrderService
+public class OrderService$$EnhancerBySpringCGLIB extends OrderService {
+    
+    // Spring 强行重写（覆盖）了你的方法！
+    @Override
+    protected OrderIdGenerator getOrderIdGenerator() {
+        // 它根本不会去执行你写的 return null;
+        // 而是直接向 Spring 容器要一个全新的对象！
+        return applicationContext.getBean(OrderIdGenerator.class); 
+    }
+}
+```
+
+---
+
+---
+##### Web 专属作用域
+
+在引入 `spring-webmvc` 后，Spring 会在原有的 Singleton（单例）和 Prototype（原型）基础上，增加与 HTTP 生命周期绑定的特殊作用域。
+
+---
+
+Session作用域 & Application作用域
+* **Session 作用域**：同一个 HTTP Session 共享同一个 Bean 实例。传统项目中常用于存储购物车、登录态，但在如今前后端分离、JWT 无状态认证的架构下，**已基本淘汰，极少使用**。
+* **Application 作用域**：生命周期与 Web 容器的 `ServletContext` 一致。在绝大多数情况下，它的表现和普通的 Singleton（单例）没有区别，**通常直接使用默认的单例即可**。
+
+---
+
+**Request 作用域**
+- **每次发起一个完整的 HTTP 请求，Spring 都会为该请求创建一个全新的 Bean 实例；当请求处理完毕并返回响应后，该 Bean 自动销毁**。
+- **核心场景**：非常适合作为**当前请求上下文**来使用。例如：存储拦截器解析出来的当前用户信息（User ID）、链路追踪的 TraceId 等。
+* **好处**：**避免了在 Controller -> Service -> DAO 的整条调用链路上，把 `userId` 作为方法参数痛苦地传来传去。**
+
+---
+
+**为什么 Request 作用域必须依赖 `proxyMode`？**
+
+**1. 致命的“寿命冲突”问题**
+通常，我们的 Service 是默认的**单例（寿命极长，随项目启动而生）**。如果我们想在 Service 中注入一个 Request 作用域的 Bean（**寿命极短，请求来了才生，请求结束就死**），会发生什么？
+* 项目启动阶段，Spring 尝试实例化 Service，并试图把 Request Bean 注入进去。
+* **但此时根本没有任何 HTTP 请求！** Spring 找不到 Request 对象，直接导致启动报错；或者发生严重的“数据串门”（所有请求复用了同一个假请求对象）。
+
+**2. 破局之道：`proxyMode` (代理模式)**
+为了解决长生命周期依赖短生命周期的问题，我们在声明 Request 作用域时，必须加上 `proxyMode`（生成代理对象）。
+* **原理**：Spring 启动时，并不会把真正的 Request Bean 注入给 Service，而是给 Service 塞入一个**空壳代理对象（Proxy）**。
+* **运行**：当真实的 HTTP 请求进来，调用到 Service 执行相关代码时，这个代理对象会动态去当前线程的 HTTP 请求中，抓取**属于当前请求的、真正的** Request Bean 来执行逻辑。
+
+---
+
+**代码模板**
+
+以下是一个使用 Request 作用域存储当前用户上下文的完整闭环代码：
+
+**1. 定义 Request 作用域的上下文对象（必须加 proxyMode）**
+```java
+import org.springframework.context.annotation.Scope;
+import org.springframework.context.annotation.ScopedProxyMode;
+import org.springframework.stereotype.Component;
+import org.springframework.web.context.WebApplicationContext;
+
+@Component
+// 声明为 Request 作用域，并告诉 Spring 使用 CGLIB 生成目标类的代理对象
+@Scope(value = WebApplicationContext.SCOPE_REQUEST, proxyMode = ScopedProxyMode.TARGET_CLASS)
+public class CurrentUserContext {
+    
+    private String userId;
+    private String userName;
+
+    // 省略 getter 和 setter
+    public String getUserId() { return userId; }
+    public void setUserId(String userId) { this.userId = userId; }
+}
+```
+
+**2. 在拦截器（Interceptor）或 Filter 中初始化数据**
+```java
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.springframework.web.servlet.HandlerInterceptor;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+@Component
+public class AuthInterceptor implements HandlerInterceptor {
+
+    @Autowired
+    private CurrentUserContext currentUserContext; // 注入的是代理对象
+
+    @Override
+    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
+        // 模拟从请求头中的 JWT Token 解析出 userId
+        String token = request.getHeader("Authorization");
+        String userId = parseTokenToGetUserId(token); 
+        
+        // 将 userId 塞入当前请求专属的 Context 中
+        currentUserContext.setUserId(userId); 
+        return true;
+    }
+}
+```
+
+**3. 在任意深度的单例 Service 中优雅使用**
+```java
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+@Service
+public class OrderService { // 默认单例
+
+    @Autowired
+    private CurrentUserContext currentUserContext; // 注入的是代理对象
+
+    public void createOrder() {
+        // 直接获取当前用户的 ID，不需要 Controller 通过参数传进来！
+        // 代理对象会自动去当前 HTTP 请求的专属 Context 里拿数据，绝对不会拿错成别人的
+        String currentUserId = currentUserContext.getUserId();
+        
+        System.out.println("正在为用户 " + currentUserId + " 创建订单...");
+        // 执行业务逻辑...
+    }
+}
+```
+
+
+#### Bean 的生命周期
+
+Bean 的生命周期宏观上只有四个大阶段：**实例化 $\rightarrow$ 属性赋值 $\rightarrow$ 初始化 $\rightarrow$ 销毁**。
+
+
+请务必先死死记住这四个词，并且**千万不要把“实例化”和“初始化”搞混**：
+
+1.  **实例化 (Instantiation)**：在堆内存中开辟空间（相当于 `new` 了一个空壳对象）。
+2.  **属性赋值 (Populate Properties)**：也就是**依赖注入**，把这个 Bean 需要用到的其他 Bean 塞进去（比如处理 `@Autowired`）。
+3.  **初始化 (Initialization)**：执行一些自定义的准备工作，让这个 Bean 达到真正能对外提供服务的状态。
+4.  **销毁 (Destruction)**：容器关闭时，清理资源。
+
+---
+
+在上面这四个骨架中，Spring 提供了一大堆“回调接口”（钩子），让我们可以随时插手 Bean 的创建过程。
+
+#####  实例化阶段、属性赋值阶段、循环依赖
+
+**实例化阶段**
+- 实例化阶段通过**执行构造器注入**完成Bean的实例化
+
+
+**属性赋值阶段**
+- 属性赋值阶段完成**字段注入和Setter注入**
+
+---
+
+**循环依赖**
+- **字段注入/Setter注入可以解决循环依赖，而构造器注入直接报错死锁**
+- 构造器注入阶段，Bean还没有创建出来，互相依赖的Bean找不到彼此，直接报错
+- 在实例化阶段刚结束、对象刚刚被 new 出来时，Spring 就会立马将这个半成品暴露到**三级缓存**中。因此，当进入属性赋值阶段时，即便发生循环依赖，字段/Setter 注入也能从缓存中拿到彼此的引用，从而化解死锁。
+- 在最严苛的架构规范中，根本不允许出现强循环依赖，出现了就打回去重构代码。这也是为什么 Spring Boot 2.6.0 之后，**默认直接禁用了所有的循环依赖**（哪怕是字段注入也会报错），就是为了逼迫开发者去写出更优雅的架构。
+
+
+**强循环依赖本身就是设计缺陷**
+-  **面向对象最佳实践告诉我们**：强依赖必须用构造器注入，且应当声明为 `final` 以保证不可变性。
+-  **Spring 框架底层限制告诉我们**：构造器注入无法解决循环依赖，直接报错。
+- 如果 A 和 B 互相作为绝对必需的强依赖，这意味着 A 离开 B 活不了，B 离开 A 也活不了。在软件工程里，这通常意味着**它们违反了单一职责原则（SRP），它们本质上应该是一个整体，或者纠缠了不该纠缠的业务。**
+- 从设计上根本解决强循环依赖
+  1. **提取第三者（引入中介者模式）**：
+     假设 `OrderService`（订单）和 `PayService`（支付）互相强依赖。
+     * **破局**：把互相调用的那部分公共逻辑抽离出来，新建一个 `OrderPayFacade`（门面层）或者 `TransactionService`（C）。让 A 和 B 都去强依赖 C，或者让 C 强依赖 A 和 B。循环依赖瞬间瓦解。
+  2. **事件驱动（解耦利器）**：
+     如果 `UserService` 注册完成后必须调用 `EmailService` 发邮件，而 `EmailService` 又需要强依赖 `UserService` 查数据。
+     * **破局**：使用 Spring 的 `ApplicationEventPublisher`。`UserService` 注册完只管发一个“用户已注册事件”，`EmailService` 监听这个事件去发邮件。彻底切断双向强依赖。
+- 撤销构造器注入，在两个类里老老实实写上 `@Autowired` 字段注入，让三级缓存解决循环依赖，放弃 `final` 关键字和不可变性，存在被意外修改的风险，且脱离 Spring 容器无法进行单元测试
+- 引入代理魔法：
+  - 如果老项目无法大重构，但又必须坚持构造器注入和 final 关键字，可以在构造参数上使用 `@Lazy` 注解。
+  - Spring 会在实例化阶段注入一个“空壳代理对象（Proxy）”来欺骗当前 Bean，从而打破第一阶段的死锁。直到真正在代码里调用该依赖的方法时，代理对象才会去容器里获取真实的 Bean。
+
+---
+
+在实例化阶段和属性赋值阶段中，业务开发场景下**几乎绝对不会去实现和调用任何自定义的钩子函数**，只有需要开发底层中间件（比如自研的 RPC 框架、自研的分布式配置中心、动态数据源切换组件）时，才会用到这两个阶段的钩子。
+
+
+---
+
+
+
+
+
+#####  初始化阶段
+
+###### Aware接口回调
+
+在 Spring 的世界里，我们自己写的 `OrderService`、`UserService` 默认都是普通的 Java 对象（POJO）。它们就像一个个被蒙着眼睛干活的工人，**它们根本不知道自己是生活在 Spring 容器里的**。
+
+这种“无知”在绝大多数情况下是好事（解耦），但有时候，某个 Bean 突然需要用到 Spring 框架底层的功能了，比如：
+* 想要获取当前的运行环境配置（`Environment`）
+* 想要动态去拉取其他的 Bean（`ApplicationContext`）
+* 想要知道自己在 Spring 里的 Bean 名字是什么（`BeanName`）
+
+这时候，Spring 怎么把这些底层资源交给你？**通过 `Aware` 接口。**
+- `Aware` 翻译过来是“察觉的、意识到的”。只要你的类实现了一个特定的 `Aware` 接口，Spring 就会在这个阶段主动调用你，把底层资源当做参数塞给你，让你“觉醒”。
+- 它发生的时机极其精准：**紧紧跟在“属性赋值阶段（DI 完成）”之后，在其他任何复杂的初始化逻辑开始之前。**
+- 也就是：此时这个 Bean 已经有了完整的业务依赖（你写的 `@Autowired` 已经塞满了），但尚未执行任何你自定义的启动逻辑（`@PostConstruct` 还没执行）。Spring 赶紧趁这个空档，把“框架级”的依赖发给你。
+- Spring 源码里有几十个 `Aware` 接口，但在业务开发中最常用Aware 接口有三个
+
+---
+
+`ApplicationContextAware`
+- 这是日常开发中出场率最高的 Aware 接口。
+* **作用**：让 Bean 获取到当前的 Spring 整体容器对象（`ApplicationContext`）。
+* **高频场景**：我们在上一轮讨论中提到的“解决策略模式动态获取 Bean”的问题。很多项目里都有一个叫 `SpringContextUtil` 的工具类，就是靠它实现的。
+
+**实战代码：**
+```java
+@Component
+public class SpringContextHolder implements ApplicationContextAware {
+    // 静态变量保存上下文
+    private static ApplicationContext applicationContext;
+
+    // Spring 在初始化第一步，会主动调用这个方法，把容器塞进来
+    @Override
+    public void setApplicationContext(ApplicationContext context) throws BeansException {
+        SpringContextHolder.applicationContext = context;
+    }
+
+    // 业务侧全局随便调
+    public static <T> T getBean(Class<T> clazz) {
+        return applicationContext.getBean(clazz);
+    }
+}
+```
+
+---
+
+配置小能手：`EnvironmentAware`
+* **作用**：让 Bean 获取到 `Environment` 对象，里面包含了 `application.yml` 里的所有配置、系统环境变量、JVM 参数等。
+* **高频场景**：当你不想用 `@Value` 写死在字段上，而是想在代码逻辑里**动态**读取某个配置项，或者判断当前处于 `dev` 还是 `prod` 环境时。
+
+**实战代码：**
+```java
+@Component
+public class EnvChecker implements EnvironmentAware {
+    
+    private Environment env;
+
+    @Override
+    public void setEnvironment(Environment environment) {
+        this.env = environment;
+    }
+
+    public void printCurrentEnv() {
+        // 动态获取环境标识和自定义配置
+        String[] activeProfiles = env.getActiveProfiles();
+        String myUrl = env.getProperty("custom.api.url");
+    }
+}
+```
+
+---
+
+偶尔一用：`BeanNameAware`
+* **作用**：告诉这个 Bean，你在 Spring 容器里叫什么名字（默认是类名首字母小写）。
+* **场景**：比较冷门。一般用于在记录复杂日志、或者注册某些底层组件时，需要用到当前 Bean 的唯一标识。
+
+---
+
+
+
+###### BeanPostProcessor 的前置处理
+
+如果说前面的阶段是 Spring 在给你搭架子，那么从这一步开始，Spring 展现出了它无与伦比的**扩展性**
+
+在讲“前置处理”之前，必须先隆重介绍 `BeanPostProcessor`。
+它不同于你写的普通业务 Bean，它是 Spring 容器里的**质检员或安检机**。
+
+* **普通 Bean 的视角**：“我”只关心我自己的生死和逻辑。
+* **BPP 的视角**：它是一个拦截器。Spring 容器里**所有**的 Bean 在初始化的前后，都必须从 BPP 这个安检机里过一遍。
+
+BPP 接口只有两个方法，简直对称得完美：
+1.  **`postProcessBeforeInitialization` (前置处理 —— 我们现在要讲的)**
+2.  `postProcessAfterInitialization` (后置处理 —— 第四步要讲的 AOP 诞生地)
+
+---
+
+**前置处理 `postProcessBeforeInitialization` 到底干了啥？**
+
+- 它发生在 Aware 接口回调结束之后，在你自定义的 `@PostConstruct` 初始化方法执行**之前**。
+-  `Object postProcessBeforeInitialization(Object bean, String beanName)`
+- 它的超能力：拦截与改造，请注意它的返回值是 `Object`！这意味着：
+     * **你可以原封不动地返回原来的 Bean**（安检通过，放行）。
+     * **你可以对 Bean 的属性进行疯狂修改**（安检员发现你没穿工服，强行给你套上一件）。
+     * **你甚至可以返回一个完全不同的新对象**（狸猫换太子，或者包一层代理）。
+
+---
+
+
+**`@PostConstruct` 是怎么执行的？**
+- 你可能会好奇，为什么我们加个 `@PostConstruct` 注解，方法就会自动执行？其实它根本不是 Java 原生的魔法，而是**正是由这个“前置处理钩子”实现的！**
+
+- Spring 内部有一个自带的质检员，叫 `InitDestroyAnnotationBeanPostProcessor`。
+- 在这个前置处理阶段，这个质检员会拿着放大镜看你这个 Bean：
+> *“哎？你这个 Bean 里面有个方法头上戴着 `@PostConstruct` 的帽子？好，我立刻用反射帮你执行这个方法！”*
+
+- **破案了！** 初始化阶段的第二步（BPP 前置处理），恰恰是驱动第三步（自定义初始化 `@PostConstruct`）的幕后推手！
+
+---
+
+**业务开发与中间件实战：我们能用它干嘛？**
+
+- 还是那句话：普通的纯业务 CRUD 开发，**几乎用不到**去自定义 BPP。
+但如果你在公司里负责写**公共组件、基础架构、或者是造轮子**，这个钩子就是你的神兵利器。
+
+**场景：强制代码规范检查（大厂常有）**
+- 假设你们架构组出了一个铁律：“所有以 `Service` 结尾的类，里面必须至少有一个方法，否则不允许启动！”（防止有人建空类当占位符）。
+
+- 你可以自己写一个“质检员”：
+
+```java
+@Component
+public class ServiceRuleCheckPostProcessor implements BeanPostProcessor {
+
+    @Override
+    public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
+        // 1. 只拦截名字以 Service 结尾的 Bean
+        if (beanName.endsWith("Service")) {
+            // 2. 利用反射获取类里所有的方法
+            Method[] methods = bean.getClass().getDeclaredMethods();
+            
+            // 3. 执行质检逻辑
+            if (methods.length == 0) {
+                // 如果发现是个空类，当场抛出异常，让 Spring 启动失败！
+                throw new RuntimeException("架构组严厉警告：类 " + beanName + " 是个空类，不允许上线！");
+            }
+        }
+        // 质检通过，原样放行
+        return bean;
+    }
+}
+```
+- **这就是“非侵入式”设计的巅峰。** 业务线的程序员完全不知道这个质检员的存在，他照常写他的代码，但只要违规，项目启动第一阶段就会被拦截报错。
+
+---
+
+**总结**
+- 初始化阶段的第二步（`BeanPostProcessor` 的前置处理），是 Spring 给所有 Bean 设置的**统一安检站**。它不仅是实现各种自定义注解（如 `@PostConstruct`）的底层引擎，更是架构师用来全局拦截、校验和修改 Bean 的绝佳位置。
+
+---
+###### 自定义初始化方法
+
+自定义初始化方法和构造器
+- 职责分离：在设计上，构造器应该专注于实例化而不是初始化，任何初始化逻辑都不该放在构造器中
+- 如果构造器使用了还没有注入的依赖，例如字段注入的依赖，直接报错
+
+Spring 给我们提供了三种方式来写自定义初始化逻辑。如果一个类同时用了这三种方式，Spring 会按照极其严格的顺序来执行它们：
+
+**第一名：`@PostConstruct` 注解**
+* **出场率**：99%。日常业务开发中，只要你需要初始化，用它就对了。
+* **特点**：极其简单，在普通方法头上加个注解就行。
+* **底层秘密**：我们在上一步学过，它其实是被 `InitDestroyAnnotationBeanPostProcessor` 这个“安检员”在前置处理阶段用反射抠出来执行的。
+* **实战代码**：
+    ```java
+    @Service
+    public class DictCache {
+        @Autowired
+        private DictMapper dictMapper;
+
+        @PostConstruct // 依赖注入完成后，自动执行此方法
+        public void initData() {
+            // 此时 dictMapper 已经有值了，安全！
+            List<Dict> list = dictMapper.selectAll();
+            System.out.println("本地缓存预热完毕！");
+        }
+    }
+    ```
+
+第二名（老派做法）：`InitializingBean` 接口
+* **出场率**：业务代码中很少用，但在 **Spring 框架自己的底层源码**中满地都是。
+* **特点**：需要让你的类实现 `InitializingBean` 接口，并重写 `afterPropertiesSet()` 方法。名字翻译过来非常直白：**“在属性设置（属性赋值）之后”**。
+* **为什么业务开发不爱用了？** 因为它是一种**强侵入式**的设计。你的业务类一旦实现了这个接口，就被死死地绑在 Spring 框架的战车上了，脱离了 Spring 就无法运行。
+* **实战代码**：
+    ```java
+    @Service
+    public class MyService implements InitializingBean {
+        @Override
+        public void afterPropertiesSet() throws Exception {
+            System.out.println("执行 InitializingBean 的初始化逻辑...");
+        }
+    }
+    ```
+
+第三名（借鸡生蛋）：`init-method` 属性
+* **出场率**：经常用于**整合第三方组件**。
+* **特点**：不修改 Bean 类本身的任何代码，而是在外部配置（XML 或 `@Bean` 注解）中指定哪个方法是初始化方法。
+* **实战场景**：假设你引入了一个第三方的 Redis 客户端包，里面的类是只读的，你没法往它源码里加 `@PostConstruct`，也没法让它实现接口。这时候只能在外部指定：
+    ```java
+    @Configuration
+    public class RedisConfig {
+        // 告诉 Spring：把第三方类里的 "startConnection" 方法当做初始化方法来执行
+        @Bean(initMethod = "startConnection")
+        public ThirdPartyRedisClient redisClient() {
+            return new ThirdPartyRedisClient();
+        }
+    }
+    ```
+
+---
+
+
+如果一个无聊的程序员，在一个类里把这三种方式全写了，它们的执行顺序是什么？
+
+**标准答案：**
+1.  先执行 `@PostConstruct` 注解修饰的方法。
+2.  再执行 `InitializingBean` 接口的 `afterPropertiesSet()` 方法。
+3.  最后执行通过 `@Bean(initMethod = "...")` 指定的方法。
+
+**为什么是这个顺序？**
+稍微回想一下我们的生命周期流水线就能理解：`@PostConstruct` 是在第二步（BPP 的前置处理）里被顺手执行掉的；而后面两个，是 Spring 在彻底度过前置处理阶段后，才去挨个检查并调用的。
+
+---
+
+可以在一个类里给多个方法加上了 @PostConstruct，项目不仅能正常启动，而且这几个方法也都会被执行。能这么做，但不建议这么做
+1. **执行顺序完全不可控**
+   - Spring 底层是通过 Java 反射（class.getDeclaredMethods()）来获取类中所有方法的，然后挨个检查谁头上戴了 @PostConstruct 帽子。
+   - 但是，Java 官方的 JDK 文档明确指出：反射返回的方法数组，其顺序是没有任何保证的！ 不同的 JDK 版本、不同的操作系统，甚至同一台机器上不同的启动批次，获取到的方法顺序都可能不一样。
+2. **违反了 JSR-250 官方规范**
+   - **在给定的一个类中，只能有一个方法被@PostConstruct注解修饰**
+   - 虽然 Spring 底层（InitDestroyAnnotationBeanPostProcessor）做得比较宽松，没有严格按照规范去拦截报错，但这并不代表我们应该去钻这个空子
+
+
+**唯一合理的“多 @PostConstruct”场景：父子类继承**
+- 在整个软件工程中，只有一种情况允许一个 Bean 经历多次 @PostConstruct，那就是继承。
+- 如果你有一个父类和一个子类，它们各自都有自己的 @PostConstruct 方法，这是完全合法且被 Spring 完美支持的
+- 在类的继承体系中，Spring 会严格保证先调用父类的 @PostConstruct，再调用子类的 @PostConstruct。这在封装底层通用组件时非常有用。
+```JAVA
+public class BaseService {
+    @PostConstruct
+    public void baseInit() {
+        System.out.println("1. 先执行父类的通用初始化...");
+    }
+}
+
+@Service
+public class UserServiceImpl extends BaseService {
+    @PostConstruct
+    public void childInit() {
+        System.out.println("2. 再执行子类的专属初始化...");
+    }
+}
+```
+
+---
+
+**优雅地编排多个初始化逻辑**
+- 如果你真的有很多杂七杂八的逻辑需要初始化，千万别打多个 `@PostConstruct`，正确的做法是：化繁为简，统一入口。
+- 只保留一个 `@PostConstruct` 方法作为总导演，在里面显式地、按确定顺序调用其他普通的私有方法：
+
+```Java
+@Service
+public class OrderService {
+
+    // 唯一暴露给 Spring 的生命周期入口
+    @PostConstruct
+    public void init() {
+        // 顺序由你自己用代码写死，绝对安全！
+        step1_loadCache();
+        step2_checkConfig();
+        step3_startTask();
+    }
+
+    // 下面都是普通的私有方法，供 init() 调度
+    private void step1_loadCache() { ... }
+    private void step2_checkConfig() { ... }
+    private void step3_startTask() { ... }
+}
+```
+
+###### BeanPostProcessor 的后置处理
+
+
+
+
+`postProcessAfterInitialization`是 `BeanPostProcessor` 接口里的第二个方法。它的执行时机是：**Bean 的所有初始化工作彻底结束之后。**
+
+- 在这个方法里，诞生了 Spring 框架的两大核心支柱之一：**AOP（面向切面编程）的动态代理。**
+
+**AOP的核心工作流（狸猫换太子）：**
+1. **审查**：专门处理 AOP 的质检员（比如 `AnnotationAwareAspectJAutoProxyCreator`）拿着放大镜来看这个刚刚完全初始化好的 Bean。
+2. **匹配**：它去翻看你写的切面规则（Aspect），或者看看这个 Bean 的方法上有没有挂着 `@Transactional`（事务）、`@Async`（异步）、`@Cacheable`（缓存）等注解。
+3. **包装（核心操作）**：
+   * 如果没有任何匹配，安检员挥挥手：“没你事了，过去吧。”原样返回真实的 Bean。
+   * **如果匹配上了！** 安检员会当场利用 JDK 动态代理 或 CGLIB 技术，动态生成一个**空壳代理对象（Proxy）**。把原来的真实 Bean 像套娃一样藏在代理对象肚子里。
+4. **入池**：最终，这个方法将**代理对象**返回。Spring 拿着这个返回的代理对象，喜滋滋地扔进了单例池（IoC 容器）中。
+
+---
+
+**单例池里的“冒牌货”**
+- 当你为一个类配置了事务（`@Transactional`）或者切面拦截后，**在 Spring 的大池子里（IoC 容器里），根本就不存在你原来写的那个类的真正实例！**。池子里躺着的，是一个长得跟你的类一模一样、但满脑子都是拦截逻辑的**代理替身**。
+- 当 Controller 层 `@Autowired` 注入这个 Service 时，Spring 塞给 Controller 的也是这个替身。
+当 Controller 调用 `service.doSomething()` 时，实际上是替身先接到了请求，替身去开启数据库事务，然后再把请求转交给肚子里的真实 Service 执行，真实代码执行完，替身再负责提交或回滚事务。
+
+---
+
+**同类方法调用的“AOP 失效”惨案**
+
+- 理解了后置处理产生的“代理替身”，你就能瞬间秒杀 Spring 开发中最臭名昭著的一个大坑：**同类方法内部调用，事务/切面为什么会失效？**
+
+**事故现场：**
+```java
+@Service
+public class OrderService {
+
+    // 方法 A 没有事务
+    public void createOrder() {
+        System.out.println("订单创建准备...");
+        // 🚨 致命报错预警：这里直接调用同类内部的方法 B
+        this.pay(); 
+    }
+
+    // 方法 B 有事务
+    @Transactional
+    public void pay() {
+        System.out.println("扣减余额，此操作受事务保护...");
+        // 数据库操作...
+    }
+}
+```
+- 如果你在外部调用 `orderService.createOrder()`，当代码执行到 `this.pay()` 时，哪怕 `pay` 方法上加了 `@Transactional`，**事务也绝对不会生效！发生异常也不会回滚！**
+
+**破案分析：**
+1. 外部 Controller 调用 `createOrder()` 时，其实是调用的**代理替身**。替身看了一眼 `createOrder`，发现没事务注解，于是直接把任务扔给了肚子里的**真实对象**。
+2. 真实对象开始执行 `createOrder` 的代码逻辑。
+3. 当走到 `this.pay()` 时，关键来了！这里的 `this` 是谁？**是真实对象自己！**
+4. 真实对象直接调用了自己的 `pay()` 方法，**完美绕过了外面的代理替身！** 既然没有经过替身，替身怎么可能帮你开启事务呢？
+
+**如何优雅地解决？（大厂规范）**
+- 既然问题出在绕过了代理，那我们**强行把代理对象抓过来调用**就行了。最优雅的做法是，自己注入自己（Spring 支持这种操作，三级缓存能搞定它）：
+
+```java
+@Service
+public class OrderService {
+
+    // ✅ 自己注入自己的代理对象
+    @Autowired
+    @Lazy // 最好加个 @Lazy 防止一些极端的循环依赖报错
+    private OrderService selfProxy;
+
+    public void createOrder() {
+        // ✅ 使用代理对象去调用 pay()，事务完美生效！
+        selfProxy.pay(); 
+    }
+
+    @Transactional
+    public void pay() { ... }
+}
+```
+
+---
+
+
+
+
+
+#####  使用阶段、销毁阶段
+
+
+严格来说，**使用阶段没有任何 Spring 生命周期“钩子”**。因为钩子是用来干预创建和销毁的，而在使用阶段，主角是你写的业务代码。但在这个阶段，有一个**全网最高频、引发无数生产事故的绝对红线**：
+- 线程安全问题：绝对不要在单例 Bean里定义带有状态的成员变量，如果非要全局共享数据，必须使用**并发安全的集合**（如 `ConcurrentHashMap`）或者**原子类**（如 `AtomicInteger`）。
+- 用户的状态数据，要么扔进 `ThreadLocal` 里，要么通过**方法参数**老老实实往下传（局部变量是线程安全的）。
+
+---
+
+
+当服务器准备关机重启，或者应用下线时，Spring 容器会发出销毁指令。**`@PreDestroy` 注解**清理那些 **Spring 管不到的、或者你自己手动开辟的底层资源**
+
+**高频业务实战**：
+  * 你自己在 Service 里 `new` 了一个业务专属的线程池，关机前必须把它优雅关闭，否则可能导致正在跑的任务数据丢失。
+  * 你自己开了一个对外的 WebSocket 连接、或者某个底层硬件的 Socket 通讯，关机前需要发个“再见”的报文给对面。
+  * 你在内存里积攒了一批日志或埋点数据，准备每 10 秒批量刷入数据库，突然要关机了，你必须在销毁前把最后一点尾巴数据刷进去。
+
+**实战代码：**
+```java
+@Service
+public class LogAsyncService {
+
+    // 自己开的线程池，Spring 不会自动帮你关！
+    private ExecutorService myThreadPool = Executors.newFixedThreadPool(5);
+
+    public void asyncLog() {
+        myThreadPool.submit(() -> System.out.println("异步记录日志..."));
+    }
+
+    // 离职交接钩子
+    @PreDestroy
+    public void cleanUp() {
+        System.out.println("收到关机指令，正在优雅关闭日志线程池...");
+        myThreadPool.shutdown(); // 拒绝新任务，等老任务跑完
+        try {
+            if (!myThreadPool.awaitTermination(5, TimeUnit.SECONDS)) {
+                myThreadPool.shutdownNow(); // 5秒还没跑完，强杀！
+            }
+        } catch (InterruptedException e) {
+            myThreadPool.shutdownNow();
+        }
+        System.out.println("线程池关闭完毕，安心离职。");
+    }
+}
+```
+
+ **整合第三方组件的收尾：`@Bean(destroyMethod = "...")`**
+- 这个用法和初始化阶段的 `init-method` 是一对。当你用 `@Bean` 把第三方的类塞进 Spring 时，可以用它指定第三方类里自带的关闭方法。
+
+**实战代码：**
+```java
+@Configuration
+public class RedisConfig {
+    
+    // 假设引入了一个第三方的缓存客户端组件
+    // 告诉 Spring：销毁这个 Bean 的时候，去调它里面的 "closeConnection" 方法
+    @Bean(destroyMethod = "closeConnection")
+    public ThirdPartyCacheClient cacheClient() {
+        return new ThirdPartyCacheClient();
+    }
+}
+```
+
+---
+
+##### 销毁阶段的坑
+**销毁阶段的最大坑：“杀鸡取卵”的 `kill -9`**
+- 你要特别注意：`@PreDestroy` **并不是绝对可靠的**！
+
+* 如果运维人员在服务器上使用 `kill -15`（优雅终止）关闭进程，或者正常点击停止按钮，Spring 会捕获到关闭信号，`@PreDestroy` **完美执行**。
+* 但如果遇到服务器突然断电，或者运维不耐烦了直接使用 **`kill -9`（强制物理击杀）**，整个 JVM 瞬间灰飞烟灭，Spring 根本来不及反应，**`@PreDestroy` 绝对不会被执行！**
+
+**业务建议：** **永远不要把绝对不能丢失的、涉及到钱的核心业务数据持久化动作放在 `@PreDestroy` 里。它只能用来做“资源释放”和“尽力而为”的收尾。**
+
+---
+
+
+**`Prototype`原型 / 多例作用域**
+- 在类上加 `@Scope("prototype")` 或者 `@Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)`
+- 每次依赖注入时，或者通过 `applicationContext.getBean()` 获取它时，Spring 都会**立刻走一遍前面学过的实例化、属性赋值、初始化流程，给你 `new` 一个全新的对象**。
+- 对于 Prototype 作用域的 Bean，**Spring 是管生不管杀的！**
+- Spring执行完 `@PostConstruct` 交给你之后，不会把这个对象放进单例池，而是**彻底撒手不管了**
+- 当你的业务代码用完这个对象，并且没有其他引用指向它时，它会被 **JVM 的垃圾回收器（GC）** 默默回收掉。**它绝对不会执行 `@PreDestroy` 销毁方法！**
+- 给 Prototype 作用域的 Bean 加上 @PreDestroy 方法，不报错，也不执行，写了白写
+- **业务场景**：当你需要一个包含状态（比如存了特定用户的数据），且绝对不能被其他线程共享的工具类对象时，会声明为 Prototype。但现在很多人更倾向于直接自己 `new`，所以出场率在逐渐下降。
+
+
+---
+
+**Web 专属作用域**
+-  `Request` 作用域寿命大概只有几百毫秒。当客户端（浏览器）发起一次 HTTP 请求，Tomcat 接收到请求的那一刻，Spring 悄悄实例化这个 Bean。等这几个微服务的链路走完，HTTP 响应（Response）打回给前端时，**这个 Bean 立刻被 Spring 销毁**。
+-  Bean被 Spring 销毁时会 执行销毁钩子，Spring 会正常调用它的 `@PreDestroy`。
+
+
+
+
+---
+
+
+
+#### 条件装配
+
+
+那么 `IOC` 和 `DI` 负责生产和组装零件，而 **条件装配**根据环境的变化（比如有没有某个文件、有没有配置某个属性、或者有没有安装某个软件），自动决定是否要创建一个 Bean。
+
+---
+
+**为什么需要条件装配？**
+- 在没有条件装配之前，如果你想在“开发环境”用内存数据库，在“生产环境”用 MySQL，你可能需要写两套配置文件，或者手动屏蔽代码。
+- 有了条件装配，你可以告诉 Spring：
+  * “如果配置文件里写了 `database=mysql`，你就创建 MySQL 的 Bean。”
+  * “如果项目里引入了 Redis 的 jar 包，你就自动配置 Redis 模板。”
+  * “如果容器里已经有人提供了一个叫 `customDataSource` 的 Bean，那我就闭嘴，不创建默认的了。”
+
+---
+
+**核心注解：`@Conditional`**
+
+- 它是所有条件注解的“始祖”。它需要配合一个实现了 `Condition` 接口的类来使用。
+
+```java
+@Bean
+// 只有当 MyCondition 类里的 matches 方法返回 true 时，这个 Bean 才会被创建
+@Conditional(MyCondition.class)
+public Service myService() {
+    return new ServiceImpl();
+}
+```
+
+---
+
+在实际开发中，我们**很少直接写原始的 @Conditional，而是使用 Spring 为我们封装好的、语义更明确的派生注解**。这些注解是 Spring Boot 能够实现“**零配置、自动装配**”的根本原因。
+* **`@ConditionalOnProperty`**：把开关交给运维和部署人员（改配置文件）。
+* **`@ConditionalOnClass`**：把开关交给 Maven 依赖（引了包就生效）。
+* **`@ConditionalOnMissingBean`**：把控制权交给业务代码（你不写我兜底，你写了听你的）。
+
+##### `@ConditionalOnProperty`（外部配置开关）
+
+这是我们在日常业务开发中最常用的注解，通常用于做**功能开关（Feature Toggle）**。你可以通过修改配置文件，在不重新打包代码的情况下，动态开启或关闭某个功能。
+
+**核心参数：**
+* **`prefix`**：配置项的前缀。
+* **`name`**：配置项的具体名字。
+* **`havingValue`**：期望该配置项的值等于多少时才生效（通常是 `true`）。
+* **`matchIfMissing`**：当配置文件里压根没有写这个属性时，是否默认开启（默认是 `false`）。
+
+**实战场景：**
+假设公司有一个短信发送功能，但在本地开发环境为了省钱不想真实发送，我们希望通过配置来控制。
+
+**配置文件 (`application.yml`)：**
+```yaml
+notification:
+  sms:
+    enabled: true  # 生产环境设为 true，本地开发设为 false
+```
+
+**Java 代码：**
+```java
+@Configuration
+public class SmsConfiguration {
+
+    @Bean
+    // 传感器逻辑：去查 application.yml，看看 notification.sms.enabled 的值是不是 true。
+    // 如果配置文件里没写这个配置，默认不创建这个 Bean (matchIfMissing = false)。
+    @ConditionalOnProperty(prefix = "notification.sms", name = "enabled", havingValue = "true", matchIfMissing = false)
+    public SmsService smsService() {
+        System.out.println("短信发送功能已开启！正在创建 SmsService Bean...");
+        return new RealSmsService();
+    }
+}
+```
+
+---
+
+#####  `@ConditionalOnClass`（类存在探针）
+
+这个注解通常不用在日常业务代码里，而是当你给公司**封装通用的 Starter 组件**时才会用到。它的核心逻辑是利用反射去类路径（Classpath）下找存不存在某个具体的 `.class` 文件。
+
+**核心参数：**
+* **`value`**：直接传入 Class 对象（如 `Jedis.class`）。
+* **`name`**：传入类的全限定名字符串（如 `"redis.clients.jedis.Jedis"`）。当你不想在代码里强引入目标类的包时，使用字符串更安全。
+
+**实战场景：**
+你写了一个通用的缓存插件库。你想实现：如果别人在 `pom.xml` 里引入了 Redis 的包，你就帮他自动配置一个 RedisTemplate；如果没有引入，你就什么都不做，系统也不会报错。
+
+**Java 代码：**
+```java
+@Configuration
+// 传感器逻辑：先扫描项目的依赖包。只有当项目里存在 redis.clients.jedis.Jedis 这个类时，
+// 整个配置类才会生效。否则这个类里所有的 @Bean 都不会被处理。
+@ConditionalOnClass(name = "redis.clients.jedis.Jedis")
+public class RedisAutoConfiguration {
+
+    @Bean
+    public CustomRedisTemplate customRedisTemplate() {
+        System.out.println("检测到 Redis 依赖！自动为你配置 CustomRedisTemplate...");
+        return new CustomRedisTemplate();
+    }
+}
+```
+
+---
+
+#####  `@ConditionalOnMissingBean`（优雅的底层兜底）
+
+这是框架设计中最体现“礼让精神”的注解，也是 Spring Boot 源码里出现频率最高的注解之一。它解决了“框架的默认配置”与“开发者自定义配置”的冲突问题。
+
+**核心原则：** “开发者自定义优先，框架提供兜底”。
+
+**实战场景：**
+你正在封装一个文件上传组件。你提供了一个默认存放到本地磁盘的实现（`LocalFileUploader`）。但是，你希望给调用者留一个口子：如果他们想存到阿里云 OSS，只需自己定义一个同类型的 Bean 即可，你的默认实现会自动退让。
+
+**底层框架代码（你封装的组件）：**
+```java
+@Configuration
+public class FileUploadAutoConfiguration {
+
+    @Bean
+    // 传感器逻辑：去 Spring 容器里找找，看有没有人已经注册了 FileUploader 类型的 Bean。
+    // 如果没有（Missing），我才创建这个 LocalFileUploader。
+    // 如果有，我就默默退出，绝不覆盖开发者的自定义实现。
+    @ConditionalOnMissingBean(FileUploader.class)
+    public FileUploader defaultFileUploader() {
+        System.out.println("开发者没有提供文件上传器，正在使用默认的【本地磁盘上传器】...");
+        return new LocalFileUploader();
+    }
+}
+```
+
+**业务开发者的代码（如果你想替换默认行为）：**
+```java
+@Configuration
+public class MyProjectConfig {
+
+    @Bean
+    // 因为你自己写了这段代码，注册了 FileUploader。
+    // 上面的 defaultFileUploader() 上的传感器就会感知到，从而自动失效。
+    public FileUploader aliyunOssUploader() {
+        System.out.println("开发者自定义了【阿里云 OSS 上传器】！");
+        return new AliyunOssUploader();
+    }
+}
+```
+
+
+
+
+---
+
+
+#### 外部化配置：@Value 与 @ConfigurationProperties
+
+在 Spring 的世界里，**外部化配置**的核心目的就是：**让代码保持纯净，让变化的参数随环境而动。**
+
+想象一下，如果你把数据库密码硬编码在 Java 代码里，每次修改密码都要重新编译、打包、部署，这简直是运维的噩梦。外部化配置就像是给你的程序开了一扇“窗户”，让它能读取运行环境中的 `application.yml`、环境变量或者命令行参数。
+
+Spring 为我们提供了两把开启这扇窗户的钥匙：**`@Value`** 和 **`@ConfigurationProperties`**。
+
+---
+
+**`@Value`：手术刀式的单项注入**
+
+- `@Value` 适合用于注入**单个、零散**的配置项。它的灵活性极高，不仅能读配置，还能写简单的逻辑（SpEL）。
+
+* **语法：** `@Value("${property.name:default_value}")`
+* **特点：**
+    * **支持 SpEL：** 可以写 `#{...}` 表达式。
+    * **不支持松散绑定：** 配置文件里必须和注解里的名字完全匹配。
+    * **不支持 JSR-303 校验：** 没法简单地校验注入的值是否合法（比如是否为空、是否是邮箱格式）。
+
+**示例代码：**
+```java
+@Component
+public class OssClient {
+    // 读取配置，如果读不到则默认为 "default-bucket"
+    @Value("${storage.oss.bucket-name:default-bucket}")
+    private String bucketName;
+
+    // 使用 SpEL 计算逻辑：读取配置并转大写
+    @Value("#{'${storage.oss.endpoint}'.toUpperCase()}")
+    private String endpoint;
+}
+```
+
+---
+
+**`@ConfigurationProperties`：标准化的结构映射**
+
+- 如果你有一组相关的配置（比如整个数据库连接池、整个邮件服务器配置），`@ConfigurationProperties` 是绝对的首选。它能将配置文件中的一段层级结构，**批量、自动**地映射到一个 Java Bean 中。
+
+* **语法：** `@ConfigurationProperties(prefix = "storage.oss")`
+* **特点：**
+    * **松散绑定（Relaxed Binding）：** 非常智能。配置文件写 `bucket-name`，Java 字段写 `bucketName`，它能自动识别。
+    * **支持 JSR-303 校验：** 可以配合 `@Validated` 确保配置合法。
+    * **类型安全：** 适合复杂的对象嵌套、List 或 Map 结构。
+
+**示例代码：**
+```java
+@Component
+@ConfigurationProperties(prefix = "storage.oss")
+@Data // 必须提供 Setter 方法，Spring 才能注入
+@Validated // 开启参数校验
+public class OssProperties {
+    
+    @NotBlank // 确保 bucketName 不能为空
+    private String bucketName;
+    
+    private String endpoint;
+    
+    private int maxConnections = 100; // 默认值
+}
+```
+
+---
+
+
+
+
+
+
+#### 懒加载
+
+在 Spring 框架中，**Bean 的懒加载（Lazy Initialization）** 是一个非常实用的性能优化手段。简单来说，它改变了 Bean 生命周期的“启动即加载”策略，将初始化动作延迟到真正需要它的那一刻。
+
+---
+
+**什么是懒加载？**
+- 在默认情况下，Spring 容器（`ApplicationContext`）在启动阶段会**预先实例化**（Pre-instantiation）所有单例（Singleton）级别的 Bean。
+
+* **默认行为（非懒加载）：** 容器启动 $\rightarrow$ 扫描配置 $\rightarrow$ 实例化所有单例 Bean $\rightarrow$ 启动完成。
+* **懒加载行为：** 容器启动 $\rightarrow$ 扫描并注册定义 $\rightarrow$ 启动完成。**（只有当代码中第一次调用 `getBean()` 或该 Bean 被注入到其他已初始化的 Bean 中时，才会触发实例化）**。
+
+
+
+---
+
+**如何实现懒加载？**
+- 使用 `@Lazy` 注解。它可以放在类上，也可以放在配置类的方法上。
+
+* **放在组件上：**
+    ```java
+    @Component
+    @Lazy
+    public class ExpensiveBean {
+        public ExpensiveBean() {
+            System.out.println("只有用到我时，你才会看到这句话！");
+        }
+    }
+    ```
+* **放在 `@Bean` 方法上：**
+    ```java
+    @Configuration
+    public class AppConfig {
+        @Bean
+        @Lazy
+        public MyService myService() {
+            return new MyService();
+        }
+    }
+    ```
+
+---
+
+ **核心机制：它是如何工作的？**
+
+懒加载并不是说 Spring 忘记了这个 Bean，而是通过 **代理（Proxy）** 或者 **控制反转容器的内部状态管理** 来实现的。
+
+1.  **注册定义：** 启动时，Spring 依然会读取 Bean 的定义（BeanDefinition），知道有这个 Bean 的存在。
+2.  **延迟触发：** 当一个非懒加载的 Bean A 依赖了 懒加载的 Bean B 时，Spring 会在初始化 A 时去尝试获取 B。
+    * **注意：** 如果 Bean A 是非懒加载的，即使 Bean B 标注了 `@Lazy`，B 也会被提前初始化，因为 A 依赖它。
+
+> **小技巧：** 如果想让 A 注入 B 时依然保持 B 的懒加载特性，可以在 A 的注入字段上也加上 `@Lazy`。此时 Spring 会给 A 注入一个 B 的**代理对象**，直到你调用 B 的方法时，真实对象才会被创建。
+
+---
+
+
+---
+
+**什么时候该使用它？**
+* **推荐场景：**
+    * 某个 Bean 极其消耗资源（如大型缓存、复杂的网络连接），且并不总是被使用。
+    * 为了加快本地开发环境的启动速度。
+* **不推荐场景：**
+    * **生产环境的核心链路：** 你肯定不希望第一个访问网站的用户因为要触发一堆 Bean 的初始化而感到卡顿。
+    * **排查问题：** 懒加载会掩盖配置错误（如类找不到、属性注入失败），这些错误会推迟到系统运行期间才爆发。
+
+---
+
+
+
+
+#### FactoryBean 接口
+
+>`FactoryBean` vs `BeanFactory` 
+>* **BeanFactory**：是 **IoC 容器本身**（大脑），负责管理所有的 Bean。
+>* **FactoryBean**：是一个特殊的 **Bean**（工厂），它存在于容器中，但它的职责是**产生另一个对象**。
+
+---
+
+
+当你向容器注册一个普通的 Bean 时，Spring 会直接实例化这个类。但当你注册一个实现了 `FactoryBean` 接口的类时，Spring 会识别它，并根据你的逻辑向容器返回它“生产”出的对象，而不是它本身。
+
+```java
+public interface FactoryBean<T> {
+    // 核心：返回由这个工厂创建的对象实例
+    T getObject() throws Exception;
+
+    // 返回创建的对象的类型
+    Class<?> getObjectType();
+
+    // 默认是单例，决定创建的对象是否在容器中唯一
+    default boolean isSingleton() {
+        return true;
+    }
+}
+```
+
+**&符号的魔法**
+* **`getBean("myBean")`**：获取的是 `FactoryBean.getObject()` 返回的那个对象。
+* **`getBean("&myBean")`**：获取的是 `FactoryBean` **类本身**的实例。
+
+---
+
+
+**既然我们可以用 `@Bean` 或 `@Component` 实例化对象，为什么还要多此一举写个 FactoryBean？**
+
+* **`@Bean` 方法**：适合**简单的、逻辑可见**的实例化。它通常依附于配置类。
+* **`FactoryBean`**：适合**可复用的、具有通用逻辑**的工厂。它可以作为一个独立的类分发（比如打成 SDK 给别人用），并且由于它是一个类，可以利用 Spring 的各种生命周期回调（如 `Aware` 接口）。
+
+
+
+这是一个非常敏锐且切中框架底层设计的思考。在业务开发中，大部分人只会用 `@Bean`，但当你要为公司编写基础架构代码（比如封装一个全局通用的分布式锁机制、或者一个微服务 RPC 调用客户端）时，`FactoryBean` 才是真正的大杀器。
+
+为了让你深入骨髓地理解它们的区别，我们直接拿一个**真实的框架级场景**来举例：**动态代理生成通用 RPC 客户端**。
+
+假设我们有几十个甚至上百个第三方接口（如 `UserService`、`OrderService`），我们不想为每个接口手写实现类，而是希望通过动态代理，自动拦截方法调用并发起 HTTP/RPC 请求。
+
+---
+
+如果只用 `@Bean`（方法式声明）
+- 当我们面对这种需求时，如果强行使用 `@Bean` 来做，代码会是这样的：
+- **`@Bean` 的局限性暴露无遗：**
+它是硬编码的。`@Bean` 方法的返回值类型和内部逻辑通常是固定的，很难做到“泛型化”和“动态批量注册”。
+```java
+@Configuration
+public class RpcClientConfig {
+
+    // 【痛点1：逻辑可见但不通用】
+    // 你需要把代理的生成逻辑死死地写在配置类里。
+    @Bean
+    public UserService userService() {
+        return (UserService) Proxy.newProxyInstance(
+            UserService.class.getClassLoader(),
+            new Class[]{UserService.class},
+            new RpcInvocationHandler() // 假设这是我们写的网络请求处理器
+        );
+    }
+
+    // 【痛点2：无法批量复用】
+    // 如果有 50 个接口，你得在这个配置类里写 50 个极其相似的 @Bean 方法！
+    @Bean
+    public OrderService orderService() {
+        return (OrderService) Proxy.newProxyInstance(
+            OrderService.class.getClassLoader(),
+            new Class[]{OrderService.class},
+            new RpcInvocationHandler()
+        );
+    }
+}
+```
+
+
+
+---
+
+**使用 `FactoryBean`（黑魔法与通用工厂）**
+
+- 如果把这个需求交给 `FactoryBean`，我们可以将其做成一个**高度抽象、可打包分发给其他团队使用的 SDK 组件**。
+
+- 同时，我们还能利用 Spring 的生命周期回调（如 `ApplicationContextAware` 和 `InitializingBean`），让这个工厂拥有极其强大的上下文感知能力。
+
+```java
+import org.springframework.beans.factory.FactoryBean;
+import org.springframework.beans.factory.InitializingBean;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
+import java.lang.reflect.Proxy;
+
+// 1. 这是一个泛型工厂，T 代表它将要生产的接口类型
+public class RpcClientFactoryBean<T> implements FactoryBean<T>, ApplicationContextAware, InitializingBean {
+
+    private Class<T> interfaceType; // 要代理的具体接口类型
+    private ApplicationContext context; // 容器上下文
+    private String serverUrl;       // RPC 服务端地址
+
+    // 构造器传入接口类型
+    public RpcClientFactoryBean(Class<T> interfaceType) {
+        this.interfaceType = interfaceType;
+    }
+
+    // 【优势1：利用 Aware 接口回调】
+    // 在工厂实例化时，Spring 会自动把容器环境塞进来。
+    // 这意味着你的工厂对象可以随便去容器里找其他的 Bean（比如找全局的权限校验器）。
+    @Override
+    public void setApplicationContext(ApplicationContext context) {
+        this.context = context;
+    }
+
+    // 【优势2：利用初始化生命周期】
+    // 在属性填充完毕，正式生产对象之前，执行复杂的检查或预热逻辑
+    @Override
+    public void afterPropertiesSet() throws Exception {
+        // 从环境变量或配置中动态获取 URL
+        this.serverUrl = context.getEnvironment().getProperty("rpc.server.url");
+        if (this.serverUrl == null) {
+            throw new RuntimeException("RPC Server URL 未配置！");
+        }
+        System.out.println("工厂预热完毕，目标地址: " + this.serverUrl);
+    }
+
+    // 【核心：生产对象】
+    // 这里封装了极其复杂的动态代理逻辑
+    @Override
+    @SuppressWarnings("unchecked")
+    public T getObject() throws Exception {
+        return (T) Proxy.newProxyInstance(
+            interfaceType.getClassLoader(),
+            new Class[]{interfaceType},
+            (proxy, method, args) -> {
+                System.out.println("拦截到 " + interfaceType.getSimpleName() + " 的方法调用，发起远程请求到: " + serverUrl);
+                return "远程调用的模拟结果"; 
+            }
+        );
+    }
+
+    @Override
+    public Class<?> getObjectType() {
+        return interfaceType;
+    }
+
+    @Override
+    public boolean isSingleton() {
+        return true; // 代理对象通常全局唯一即可
+    }
+}
+```
+
+**如何使用这个高阶组件？**
+- 在实际的框架底层（比如 MyBatis 的 `MapperScannerConfigurer` 或 Feign 的自动配置中），框架会扫描你包下的所有接口，然后**动态地为每一个接口注册一个 `RpcClientFactoryBean` 的 BeanDefinition（Bean 定义）**。
+
+- 即使不写动态扫描，手动注册也变得极其优雅：
+
+```java
+@Configuration
+public class AppConfig {
+
+    // 我们只需注册“工厂”，告诉工厂我们要什么接口。
+    // 至于怎么代理、怎么拿配置、怎么找其他 Bean，工厂全包了。
+    @Bean
+    public RpcClientFactoryBean<UserService> userService() {
+        return new RpcClientFactoryBean<>(UserService.class);
+    }
+
+    @Bean
+    public RpcClientFactoryBean<OrderService> orderService() {
+        return new RpcClientFactoryBean<>(OrderService.class);
+    }
+}
+```
+
+
+
+
+
+
+
+
+
+## AOP
+### AOP核心理论
+
+
+AOP 的核心理论：**关注点分离**。**在不修改原有业务代码源代码的前提下，通过一种无侵入的方式，为系统统一添加横向的公共功能**
+- 它主张把那些**与核心业务无关**、却又**散布在整个系统各处的公共逻辑**（专业术语叫**横切关注点**），像抽丝剥茧一样提取出来，封装成一个个独立的模块（也就是**切面 Aspect**）。
+- 然后，AOP 框架会像变魔术一样，在程序运行的时候，**动态地**将这些公共逻辑“织入”（套用）到核心业务的周围。在这个过程中，你的核心业务代码干干净净，完全不知道日志和权限系统的存在。
+
+### Spring AOP 底层实现原理
+
+
+Spring AOP 的底层实现原理：**基于代理模式，在运行时动态生成代理对象。**
+
+**代理模式**
+- Spring AOP 并不修改你编写的源代码，而是在系统运行期间，为你的目标对象（Target）创建一个**代理对象（Proxy）**。
+* 当调用者尝试调用目标方法时，实际上调用的是代理对象。
+* 代理对象根据配置，在调用目标方法前后插入“通知”（Advice）逻辑。
+
+
+
+---
+
+
+
+#### **JDK 动态代理**
+
+JDK 动态代理JdkDynamicAopProxy，是Java 原生在`java.lang.reflect`中提供的代理机制
+* **`Proxy` 类：** 这是一个工厂类。专门用来在运行时动态生成代理对象。最常用的是它的 `newProxyInstance()` 方法。
+* **`InvocationHandler` 接口：** 这是一个处理器接口。你所有的“切面逻辑”（比如记录日志、检查权限）以及“调用目标方法”的动作，都要写在这个接口的 `invoke()` 方法里。
+
+
+**为什么 JDK 动态代理必须要有接口？**
+![](images/20260421145401.png)
+
+- 当代码执行 `Proxy.newProxyInstance` 时，Java 会在底层动态编译生成一个字节码文件（通常命名为 `$Proxy0.class`）。如果你把这个生成在内存里的类反编译出来，它大概长这样：
+
+```java
+// 动态生成的代理类，默认继承了 Proxy，并实现了你的 UserService 接口
+public final class $Proxy0 extends Proxy implements UserService {
+    
+    // ...
+    public void addUser(String name) {
+        // 内部直接调用你写的 InvocationHandler 的 invoke 方法
+        super.h.invoke(this, m3, new Object[]{name});
+    }
+}
+```
+
+- 因为 Java 语言**不支持多继承**（只能单继承）。这个动态生成的 `$Proxy0` 类，**已经被强制安排继承了 `java.lang.reflect.Proxy` 父类**。为了能够伪装成你的目标对象，它唯一的出路就是**实现和目标对象一模一样的接口**。
+* **优点：** JDK 原生自带，不需要引入任何第三方依赖（如 CGLIB 的 asm 包）；随着 JVM 的升级，反射和动态代理的性能一直在稳步提升；生成的代理类非常精简。
+* **缺点：** 极度依赖接口。如果一个类就是个普通类，没有实现任何接口，JDK 动态代理直接罢工。
+
+
+
+---
+**手写一个 “用户添加带有日志记录”的JDK 动态代理**
+
+**第一步：定义接口**（强制要求）
+- JDK 动态代理**必须**基于接口来实现。
+```java
+public interface UserService {
+    void addUser(String name);
+}
+```
+
+**第二步：编写目标类**（Target）
+- 这是你真正的业务核心逻辑，没有任何杂质。
+```java
+public class UserServiceImpl implements UserService {
+    @Override
+    public void addUser(String name) {
+        System.out.println("核心业务：成功将用户 [" + name + "] 写入数据库！");
+    }
+}
+```
+
+**第三步：编写 `InvocationHandler`**（代理逻辑）
+- 相当于 AOP 里的“通知(Advice)”。我们在这里把日志逻辑加进去。
+```java
+import java.lang.reflect.InvocationHandler;
+import java.lang.reflect.Method;
+
+public class LogInvocationHandler implements InvocationHandler {
+    
+    // 1. 内部维护一个目标对象（就是要被代理的那个类）
+    private Object target; 
+
+    public LogInvocationHandler(Object target) {
+        this.target = target;
+    }
+
+    /**
+     * 所有的代理对象方法调用，最终都会走到这里
+     * @param proxy  JDK在内存中动态生成的代理对象本身
+     * @param method 当前正在被调用的方法
+     * @param args   方法传入的参数
+     */
+    @Override
+    public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+        System.out.println("【前置通知】开启事务，记录参数：" + args[0]);
+        
+        // 2. 通过反射，调用真正目标对象的方法
+        Object result = method.invoke(target, args); 
+        
+        System.out.println("【后置通知】提交事务，记录完毕！");
+        return result;
+    }
+}
+```
+
+**第四步：使用 `Proxy` 生成代理对象**并测试
+```java
+import java.lang.reflect.Proxy;
+
+public class JdkProxyTest {
+    public static void main(String[] args) {
+        // 1. 创建真正的业务对象 (Target)
+        UserService target = new UserServiceImpl();
+
+        // 2. 将目标对象传给 Handler
+        LogInvocationHandler handler = new LogInvocationHandler(target);
+
+        // 3. 施展魔法：动态生成代理对象
+        UserService proxy = (UserService) Proxy.newProxyInstance(
+                target.getClass().getClassLoader(), // 类加载器
+                target.getClass().getInterfaces(),  // 目标类实现的接口们
+                handler                             // 代理逻辑处理器
+        );
+
+        // 4. 调用方法（此时调用的其实是代理对象的方法）
+        proxy.addUser("张三");
+    }
+}
+```
+
+---
+
+
+
+#### CGLIB动态代理
+
+在程序运行期间，CGLIB 会通过底层的字节码处理框架（ASM），在内存中动态构建一个目标类的子类。在这个子类中，它会**重写**父类中所有的非 final 方法，并将“切面逻辑”（比如日志、事务）塞进重写的方法中。
+
+当外部调用时，实际上调用的是这个“披着子类外衣”的代理对象。
+
+---
+
+CGLIB两大核心 API：
+* **`Enhancer` 类：** 顾名思义叫“增强器”。它是 CGLIB 的核心工厂类，专门用来设置目标类、回调接口，并最终生成代理对象（即动态子类）。
+* **`MethodInterceptor` 接口：** 方法拦截器。类似于 JDK 的 `InvocationHandler`，你所有的 AOP 增强逻辑都要写在它的 `intercept()` 方法里。
+
+---
+CGLIB 虽然绕过了接口的限制，但它同样有自己的软肋：**它极度害怕 `final` 关键字和 `private` 方法**。
+
+* **无法代理 `final` 类：** 因为 Java 语法规定，被 `final` 修饰的类无法被继承。CGLIB 生成子类的第一步就会被编译器无情拒绝（报错）。
+* **无法拦截 `final` 或 `private` 方法：** 即使类不是 `final`，如果某个方法是 `final` 或是 `private` 的，子类也无法**重写（Override）**它。这意味着当你通过代理对象调用这个方法时，CGLIB 无法把你的“通知逻辑”插进去，只能直勾勾地调用目标类原有的代码，导致 **AOP 失效**。
+
+---
+
+在 **Spring Boot 2.x 之后**，**Spring Boot 默认强制使用 CGLIB 代理（即 `proxy-target-class=true`）。**
+- 因为在实际开发中，如果使用 JDK 代理，开发者经常会遇到一种极其恶心的 `ClassCastException`（类型转换异常）。
+- 假设你写了一个 `UserServiceImpl` 实现了 `UserService` 接口。如果你在 Controller 里这样注入：
+```java
+@Autowired
+private UserServiceImpl userService; // 报错！
+```
+- 因为 JDK 生成的代理类只实现了 `UserService` 接口，它和 `UserServiceImpl` 实际上是**兄弟关系**，而不是父子关系，所以无法转型。为了避免开发者掉进这个大坑，且随着 CGLIB 性能的不断提升（其内部引入了 FastClass 机制，调用方法不再依赖慢速的反射），Spring Boot 干脆一刀切，默认全用 CGLIB，让代理对象始终是目标类的子类，彻底解决了类型注入报错的痛点。
+
+
+---
+**手写 CGLIB 代理**
+- 同样的“用户添加带日志”的场景，这次**目标类不实现任何接口**。
+
+**第一步：编写目标类（没有接口的普通类）**
+```java
+// 注意：这里没有 implements 任何接口
+public class UserServiceImpl {
+    public void addUser(String name) {
+        System.out.println("核心业务：成功将用户 [" + name + "] 写入数据库！");
+    }
+}
+```
+
+**第二步：编写 `MethodInterceptor`（拦截器逻辑）**
+- 这里是写公共逻辑的地方。
+```java
+import org.springframework.cglib.proxy.MethodInterceptor;
+import org.springframework.cglib.proxy.MethodProxy;
+import java.lang.reflect.Method;
+
+public class LogMethodInterceptor implements MethodInterceptor {
+
+    /**
+     * @param obj    CGLIB 动态生成的代理对象本身（子类）
+     * @param method 当前被调用的目标方法
+     * @param args   方法传入的参数
+     * @param proxy  方法代理对象（用于调用父类真正的业务方法，速度比反射快）
+     */
+    @Override
+    public Object intercept(Object obj, Method method, Object[] args, MethodProxy proxy) throws Throwable {
+        System.out.println("【前置通知】开启事务，准备执行方法：" + method.getName());
+
+        // 核心警告：这里必须调用 invokeSuper！
+        // 因为 obj 是子类（代理类），调用 invokeSuper 就是调用父类（目标类）的原始方法。
+        // 如果手滑写成了 proxy.invoke(obj, args)，会导致无限递归死循环（StackOverflowError）！
+        Object result = proxy.invokeSuper(obj, args);
+
+        System.out.println("【后置通知】提交事务，方法执行完毕！");
+        return result;
+    }
+}
+```
+
+**第三步：使用 `Enhancer` 生成代理对象并测试**
+```java
+import org.springframework.cglib.proxy.Enhancer;
+
+public class CglibProxyTest {
+    public static void main(String[] args) {
+        // 1. 创建 Enhancer 增强器
+        Enhancer enhancer = new Enhancer();
+
+        // 2. 指定父类（也就是告诉 CGLIB，你要代理哪个目标类）
+        enhancer.setSuperclass(UserServiceImpl.class);
+
+        // 3. 设置回调函数（把你写的拦截器塞进去）
+        enhancer.setCallback(new LogMethodInterceptor());
+
+        // 4. 施展魔法：动态在内存中创建子类，并实例化为代理对象
+        UserServiceImpl proxy = (UserServiceImpl) enhancer.create();
+
+        // 5. 调用方法
+        proxy.addUser("李四");
+    }
+}
+```
+
+
+---
+
+
+
+### 通知、拦截器链
+
+
+#### 五种通知
+
+##### `@Before` 前置通知
+`@Before` 前置通知：**在目标方法执行之前运行**。它通常用于做一些前置的拦截、校验或日志记录。
+- **除非`@Before`方法主动抛出一个异常，否则一定会执行下一个通知**
+* **典型场景：** 权限校验、入参非空校验、请求限流。
+- **可以拿到目标方法参数，但是无法做出任何更改**
+
+```java
+@Aspect
+@Component
+public class AuthAspect {
+    
+    // 拦截 OrderService 下的所有方法
+    @Before("execution(* com.example.OrderService.*(..))")
+    public void checkAuth(JoinPoint joinPoint) {
+        System.out.println("【@Before 前置通知】");
+        // 获取方法名和参数
+        String methodName = joinPoint.getSignature().getName();
+        Object[] args = joinPoint.getArgs();
+        
+        System.out.println("准备执行方法：" + methodName + "，入参：" + Arrays.toString(args));
+        
+        // 模拟权限校验：如果不通过，直接抛出异常，阻止目标方法执行
+        if (args.length == 0 || args[0] == null) {
+            throw new SecurityException("非法请求，参数为空！");
+        }
+    }
+}
+```
+
+---
+##### `@AfterReturning`
+**`@AfterReturning` 返回通知**
+- 当且仅当目标方法**正常执行完毕并 return 返回结果后**才会执行`@AfterReturning`方法
+- **如果目标方法抛出了异常，这个通知绝对不会被执行**。
+- **可以拿到目标方法的最终返回值，但是无法更改返回值**
+  - 如果返回值是引用，且该引用提供更改器，则可以修改对象的属性
+  - 如果返回值是基本数据类型或 `String`，则无法更改它
+* **典型场景：** 操作日志记录（记录某人操作成功及返回结果）、基于返回结果的数据加工（如脱敏）。
+- `@AfterReturning`的 returning参数必须和方法的参数名保持一致
+```java
+@Aspect
+@Component
+public class LogAspect {
+
+    // returning = "result" 必须和方法参数名保持一致
+    @AfterReturning(pointcut = "execution(* com.example.OrderService.createOrder(..))", returning = "result")
+    public void logSuccess(JoinPoint joinPoint, Object result) {
+        System.out.println("【@AfterReturning 返回通知】");
+        System.out.println("方法正常结束，拿到的返回值是：" + result);
+        
+        // 如果 result 是个对象，这里可以对其属性进行二次加工/脱敏
+    }
+}
+```
+
+---
+##### `@AfterThrowing`异常通知
+**`@AfterThrowing`异常通知**
+- 在目标方法**抛出异常时**运行。
+- **可以精准捕获到目标方法抛出的异常堆栈信息**
+- `@AfterThrowing` **并不会把异常“吃掉”**。**它只是在异常抛出并向上抛的过程中，顺便拦截下来让你看一眼、做个记录**。**执行完这个通知后，异常依然会继续向上抛给调用方**。**如果想彻底“吞掉”并处理异常，必须用 `@Around`。**
+* **典型场景：** 全局异常日志记录、告警邮件/短信发送。
+
+```java
+@Aspect
+@Component
+public class ExceptionAlertAspect {
+
+    // throwing = "ex" 必须和方法参数名保持一致
+    @AfterThrowing(pointcut = "execution(* com.example.OrderService.*(..))", throwing = "ex")
+    public void handleException(JoinPoint joinPoint, Throwable ex) {
+        System.out.println("【@AfterThrowing 异常通知】");
+        System.err.println("警报！方法执行发生崩溃，异常信息：" + ex.getMessage());
+        
+        // 这里可以调用发钉钉/邮件告警的代码
+    }
+}
+```
+
+---
+##### `@After`最终通知 
+**`@After`最终通知 / 后置通知**
+- 在目标方法执行完毕后运行，**无论方法是正常结束还是抛出异常，它都一定会执行**。这是由源代码的finally块决定的，所以它的职责和finally块一样，既不关心正常返回值，也不关心异常，只关心清理
+- 它**只知道方法结束**，**既拿不到方法的返回值**，**也拿不到具体的异常**
+* **典型场景：** 资源释放（如关闭文件流、归还数据库连接）、清理 ThreadLocal 变量（防止内存泄漏）。
+
+```java
+@Aspect
+@Component
+public class CleanupAspect {
+
+    @After("execution(* com.example.OrderService.*(..))")
+    public void doCleanup(JoinPoint joinPoint) {
+        System.out.println("【@After 最终通知】");
+        System.out.println("无论成功还是失败，我都会执行，开始清理 ThreadLocal 脏数据...");
+    }
+}
+```
+
+---
+##### **`@Around` 环绕通知**
+
+ 前四种通知是观察者，除非抛异常否则无法改变程序的既定执行走向（除了@AfterReturning能更新引用字段），而`@Around`是独裁者： 它不仅能看，还能绝对控制目标方法的生死、入参、出参甚至异常，是其他四种通知的增强。
+
+- 它可以**决定目标方法是否执行**、**什么时候执行**、**执行几次**，甚至**可以强行修改入参**、**强行篡改返回值**、**吞掉异常**。
+
+* **参数强制：** 方法签名中必须包含 `ProceedingJoinPoint` 类型的参数
+* **致命漏写：** **必须在方法内部手动调用 `joinPoint.proceed()`**
+* **返回值处理：** `@Around` 方法必须 `return` 返回值
+
+```java
+@Aspect
+@Component
+public class PerformanceAndCacheAspect {
+
+    @Around("execution(* com.example.OrderService.createOrder(..))")
+    public Object doAround(ProceedingJoinPoint joinPoint) throws Throwable {
+        System.out.println("【@Around 环绕通知 - 前置部分】");
+        long startTime = System.currentTimeMillis();
+        
+        // 1. 【篡改入参体验】你可以拿到原参数，修改后再传给 proceed()
+        Object[] originalArgs = joinPoint.getArgs();
+        // 假设你要改参数，可以这么做，然后调用 joinPoint.proceed(newArgs);
+        
+        Object result = null;
+        try {
+            // 2. 核心代码：必须调用 proceed()，放行！
+            result = joinPoint.proceed();
+            
+            System.out.println("【@Around 环绕通知 - 成功返回部分】");
+            
+            // 3. 【篡改返回值体验】
+            if (result instanceof String) {
+                result = result + " (被 @Around 添加的防伪后缀)";
+            }
+            
+        } catch (Throwable e) {
+            System.out.println("【@Around 环绕通知 - 异常捕获部分】拦截到异常：" + e.getMessage());
+            // 你可以选择把异常再次 throw 出去，或者在这里彻底吞掉它，返回一个降级的兜底结果
+            throw e; 
+        } finally {
+            System.out.println("【@Around 环绕通知 - 最终结束部分】");
+            long endTime = System.currentTimeMillis();
+            System.out.println("耗时监控：执行共花费了 " + (endTime - startTime) + " 毫秒");
+        }
+
+        // 4. 必须将结果返回给调用方
+        return result;
+    }
+}
+```
+
+---
+##### **`@Around` 业务场景**
+
+> **“永远使用能满足你需求的最简单的通知类型。” (Always use the least powerful form of advice that can meet your requirements.)**
+
+* 如果只是想在方法执行前校验一下参数，**请用 `@Before`**。
+* 如果是核心的框架级切面（如事务 `@Transactional`、分布式锁、缓存、性能监控、容错降级），非 **`@Around`** 莫属。
+
+
+
+**阻断执行**（例如：缓存切面 / 接口防刷）
+- 假设你要写一个“查询缓存切面”：如果 Redis 里有数据，就直接返回缓存数据，**不要去查数据库（也就是不要执行目标方法）**。
+
+* **如果用 `@Before`：** 你在 `@Before` 里查到了缓存，然后呢？你没法把缓存里的值直接 `return` 给前端。而且只要你不抛异常，目标方法（查数据库）依然会被头铁地执行一次。
+* **必须用 `@Around`：**
+    ```java
+    Object cachedData = redis.get(key);
+    if (cachedData != null) {
+        return cachedData; // 核心：直接 return，彻底绕过目标方法！
+    }
+    // 没缓存，才放行去查数据库
+    return joinPoint.proceed(); 
+    ```
+
+**吞并异常与服务降级**(Fallback)
+- 假设调用的第三方接口极其不稳定，经常抛异常。你想做个兜底：如果抛异常了，不要让前端报错，而是**悄悄吞掉异常，返回一个默认的“降级数据”**。
+
+* **如果用 `@AfterThrowing`：** 它确实能捕获到异常（比如用来发告警），但**它无法阻止异常继续往上抛**。前端依然会收到 500 报错。
+* **必须用 `@Around`：**
+    ```java
+    try {
+        return joinPoint.proceed();
+    } catch (Exception e) {
+        log.error("接口挂了，触发降级");
+        return new Result(200, "这是兜底的默认数据"); // 异常被彻底吃掉，转危为安
+    }
+    ```
+
+**彻底篡改返回值**
+- 假设你想对接口返回的手机号进行脱敏（`138****1234`）。
+
+* **如果用 `@AfterReturning`：** 如果返回值是一个 `User` 对象，你可以 `user.setPhone("xxx")`（修改对象的属性，这没问题）。但如果目标方法直接返回了一个 `String` 或者一个不可变对象，`@AfterReturning` 是**绝对无法把这个对象替换成另一个新对象的**。
+* **必须用 `@Around`：** `@Around` 拿到了 `proceed()` 的结果后，可以随心所欲地返回一个全新的对象给调用方。
+
+**跨越前后的“状态共享”**（例如：计算耗时）
+- 你想计算一个方法的执行时间（结束时间 - 开始时间）。
+* **如果用 `@Before` + `@After`：** 你怎么把 `@Before` 里记录的 `startTime` 传给 `@After` 呢？由于它们是两个独立的方法，你只能被迫引入 `ThreadLocal` 来跨方法传递变量。这不仅代码臃肿，还容易引发内存泄漏。
+* **必须用 `@Around`：** 都在同一个方法体内，局部变量天然共享，干净利落！
+```java
+long start = System.currentTimeMillis();
+try {
+    return joinPoint.proceed();
+} finally {
+    long time = System.currentTimeMillis() - start;
+    System.out.println("耗时：" + time);
+}
+```
+
+---
+
+
+#### 拦截器链
+
+在实际项目中，一个核心方法往往会被多个切面同时盯上，为了确保切面和目标方法有序执行，Spring 采用了**责任链模式**构建拦截器链
+- **适配器模式**：使用不同的适配器类将不同的通知包装成统一的`MethodInterceptor`对象，将切片逻辑统一封装在`Object invoke(MethodInvocation invocation) throws Throwable`方法中
+  - 注意它传入了`MethodInvocation`类型的对象，并允许抛出异常
+- `ReflectiveMethodInvocation`类维护两个关键字段和一个关键方法
+  - `interceptors`：`MethodInterceptor`对象构建的有序链表
+  - `currentInterceptorIndex`：一个游标（索引），初始值为 `-1`，用来记录当前执行到了第几个拦截器。
+  - `Object proceed() throws Throwable`
+
+`proceed()`方法是**递归执行拦截器方法**的关键
+- 它的职责是
+  - 如果所有拦截器都执行完，执行目标方法
+  - 否则游标+1，通过`interceptors`拿到下一个拦截器
+  - 执行刚才拿到的拦截器的`invoke()`方法
+
+
+```java
+// 这是 ReflectiveMethodInvocation 内部的 proceed() 伪代码
+public Object proceed() throws Throwable {
+    // 1. 如果游标走到了链条的尽头（）
+    if (this.currentInterceptorIndex == this.interceptors.size() - 1) {
+        // 终点站：利用反射，真正去！
+        return invokeJoinpoint(); 
+    }
+
+    // 2. 游标 + 1，拿到下一个拦截器
+    Object interceptor = this.interceptors.get(++this.currentInterceptorIndex);
+
+    // 3. 执行这个拦截器，并把【自己(this)】传进去，方便拦截器内部继续调用 proceed()
+    return ((MethodInterceptor) interceptor).invoke(this);
+}
+```
+
+递归调用的模型
+- 每种通知都会包装为`MethodInterceptor`对象，统一为`Object invoke(MethodInvocation invocation) throws Throwable`方法
+- 在invoke方法内部，**调用切面方法的代码和调用`proceed()`方法的位置顺序，决定了是先执行切面还是先执行目标方法**
+  - 对于`@Before`，先调用切面，在调用`proceed()`方法
+  - 对于`@AfterReturning`、`@AfterThrowing`、`@After`，切面逻辑包裹在try-catch-finally结构中，首先在try块调用`proceed()`，如果正常返回则执行`@AfterReturning`切面方法，如果抛出异常则在catch块中调用`@AfterThrowing`切面方法，`@After`切面方法
+  - `@After` 使用 try（`proceed()`）-finally（`@After`切面方法） ，保证最后不管是正常返回还是抛出异常都会执行
+  - `@AfterReturning` 在 `proceed()` 后正常执行
+  - `@AfterThrowing` 使用 try（`proceed()`）-catch（`@AfterThrowing`切面方法） 捕获异常
+  - 对于`@Around`不会调用`proceed()`，只会调用切面方法，所以**必须在`@Around`切面方法中手动调用`proceed()`**，否则无法执行其他切面方法，也无法执行目标方法，仅执行`@Around`切面方法
+- 递归调用的洋葱模型
+  - 在不同位置递归调用proceed()方法，返回后继续执行未执行的逻辑或者直接返回，形成以下的洋葱模型
+  - ps：如果没有定义某种通知方法，就不会有对应的拦截器对象
+  - 如果任意一个拦截器或者目标方法抛出异常，则沿递归栈层层冒泡，除非`@Aroud`切面吞噬异常
+  - 目标方法正常返回的洋葱模型
+    ```text
+    ▶ 外部请求调用 AOP 代理对象的逻辑开始：
+
+    【压栈向下深入】
+    1. 进入 @Around 拦截器 (AspectJAroundAdvice)
+    |-- 打印："@Around 前置"
+    |-- 调用 invocation.proceed() ────────┐ (游标 + 1)
+                                            ↓
+    2. 进入 @Before 拦截器 (MethodBeforeAdviceInterceptor)
+    |-- 打印："@Before 执行"              │
+    |-- 调用 invocation.proceed() ────────┼─────┐ (游标 + 1)
+                                            │     ↓
+    3. 进入 @After 拦截器 (AspectJAfterAdvice)│     │
+    |-- try {                             │     │
+    |-- 调用 invocation.proceed() ────────┼─────┼─────┐ (游标 + 1)
+                                            │     │     ↓
+    4. 进入 @AfterReturning 拦截器           │     │     │
+    |-- 调用 invocation.proceed() ────────┼─────┼─────┼─────┐ (游标 + 1)
+                                            │     │     │     ↓
+    5. 进入 @AfterThrowing 拦截器            │     │     │     │
+    |-- try {                             │     │     │     │
+    |-- 调用 invocation.proceed() ────────┼─────┼─────┼─────┼─────┐ (游标触底！)
+                                            │     │     │     │     ↓
+    6. 执行目标方法                          │     │     │     │     │
+    |-- 💥 invokeJoinpoint() 核心业务逻辑 │     │     │     │     │
+    |-- return "Success"  ────────────────┼─────┼─────┼─────┼─────┘ (目标方法出栈)
+                                            │     │     │     │
+    【出栈向上回溯】                         │     │     │     │
+    7. 回到 @AfterThrowing 拦截器            │     │     │     │
+    |-- 正常返回，未触发 catch 块         │     │     │     │
+    |-- 抛出结果 "Success" ───────────────┼─────┼─────┼─────┘ (AfterThrowing 出栈)
+                                            │     │     │
+    8. 回到 @AfterReturning 拦截器           │     │     │
+    |-- 顺利拿到结果 "Success"            │     │     │
+    |-- 打印："@AfterReturning 执行"      │     │     │
+    |-- 抛出结果 "Success" ───────────────┼─────┼─────┘ (AfterReturning 出栈)
+                                            │     │
+    9. 回到 @After 拦截器                    │     │
+    |-- 进入 finally 块                   │     │
+    |-- 打印："@After 执行"               │     │
+    |-- 抛出结果 "Success" ───────────────┼─────┘ (After 出栈)
+                                            │
+    10. 回到 @Before 拦截器                   │
+    |-- 没有后置逻辑，直接原样抛出 ───────┘ (Before 出栈)
+                                            
+    11. 回到 @Around 拦截器 (收到 "Success")
+    |-- 代码走到了 proceed() 的下一行
+    |-- 打印："@Around 后置"
+    |-- return "最终结果" (Around 拦截器出栈)
+
+    ▶ 最终，调用方拿到了结果
+    ```
+
+  - **目标方法抛出异常的洋葱模型**
+    ```TEXT
+    ▶ 外部请求调用 AOP 代理对象的逻辑开始：
+
+    【压栈向下深入】
+    （前 5 步与正常流程完全一致，层层进入，直到目标方法）
+                                            
+    6. 执行目标方法                          
+    |-- 💥 invokeJoinpoint() 核心业务逻辑 
+    |-- 抛出异常 throw new Exception() ───┐ (带着异常出栈)
+                                            ↓
+    【异常冒泡向上回溯】
+    5. 回到 @AfterThrowing 拦截器
+    |-- 异常被 catch (Throwable ex) 捕获
+    |-- 打印："@AfterThrowing 执行"
+    |-- 继续向外抛出异常 throw ex ────────┐ (AfterThrowing 出栈)
+                                            ↓
+    4. 回到 @AfterReturning 拦截器
+    |-- 因为是异常弹出，没有收到正常返回值
+    |-- 不执行它的后置逻辑，异常继续冒泡 ─┐ (AfterReturning 被跳过并出栈)
+                                            ↓
+    3. 回到 @After 拦截器
+    |-- 异常冒泡触发 finally 块
+    |-- 打印："@After 执行" (无论如何都会执行)
+    |-- 异常继续向外冒泡 ─────────────────┐ (After 出栈)
+                                            ↓
+    2. 回到 @Before 拦截器
+    |-- 拦截器不处理异常，异常继续冒泡 ───┐ (Before 出栈)
+                                            ↓
+    1. 回到 @Around 拦截器
+    |-- 除非你在 @Around 手动 try-catch 了 proceed()
+    |-- 否则异常直接抛给代理对象的调用方 ─┘ (Around 出栈)
+
+    ▶ 最终，调用方收到了 Exception
+    ```
+
+
+`proceed()`方法是`ReflectiveMethodInvocation`类中的方法，为什么可以被invoke方法内部调用？
+- 拦截器链是责任链模式，`Object invoke(MethodInvocation invocation) throws Throwable`方法的方法参数`MethodInvocation invocation`，实际上传入的是`ReflectiveMethodInvocation`对象本身，`ReflectiveMethodInvocation`实现`MethodInvocation`接口
+- 注意invoke方法可以抛出异常，也就是说，每种通知都可以通过抛出异常强行中断执行，不再执行后续方法
+
+
+---
+
+#### BeanPostProcessor、CGLIB动态代理、拦截器链
+
+
+
+Spring启动阶段，如果目标类被AOP增强，在BeanPostProcessor 的后置处理阶段，使用CGLIB动态代理生成一个子类放入Bean池，外部所有的调用都只能经过代理类
+- 外部调用代理对象方法时，代理对象检查目标方法被哪些切面增强，然后将这些切面转换为拦截器链，随后执行拦截器链，执行完后向代理方法返回正常值或抛出异常
+- 即使目标类的方法被不同的切面增强，也只会生成一个代理类，只不过每个方法的拦截器链不一样
+
+#### 多切面时的优先级控制
+
+使用`@Order` 注解控制切面对应的拦截器在拦截器链中的位置
+- 切面的优先级高不代表最先执行：比如将After设置为最高优先级，在洋葱模型中，它在最外侧，如果没有异常，它反而是最后执行的。
+- `@Order(1)`：值越小，优先级越高，取值范围为int的范围，没有标注Order注解时，默认为Int的最大值
+
+
+
+
+### 切入点表达式
+
+通知决定了切面要干什么以及什么时候干，**切入点决定了切面在哪里干**
+- 在 Spring 容器中，可能运行着成百上千个 Bean，每个 Bean 又有几十个方法。切入点表达式通过一套严密的语法规则，在茫茫Bean海中精准筛选出你需要拦截的那个或那一批目标方法。
+
+---
+
+#### 核心通配符
+
+切入点表达式有三个核心通配符
+
+**`*`（星号）：匹配任意字符，但只能匹配一层或一个维度**
+* **用在返回值位置：** **匹配任意返回值类型**。
+    * 例：`execution(* com.example.MyService.doSomething())` （不管返回 `void`、`String` 还是 `List`，统统匹配）。
+* **用在包名位置：** 匹配**恰好一层**包路径。
+    * 例：`execution(* com.example.*.MyService.*(..))`。
+    * *死扣细节：* 它可以匹配 `com.example.order.MyService`，也可以匹配 `com.example.user.MyService`，但**绝对不能**匹配 `com.example.order.api.MyService`（跨了两层）或 `com.example.MyService`（0 层）。
+* **用在类名/方法名位置：** 模糊匹配类名或方法名的一部分或全部。
+    * 例：`*Service` 匹配 `OrderService`、`UserService`。
+    * 例：`set*` 匹配 `setName`、`setAge`。
+* **用在参数列表位置：** 匹配**恰好一个**任意类型的参数。
+    * 例：`execution(* *.*(*))` 匹配所有只有一个参数的方法。
+    * 例：`execution(* *.*(*, String))` 匹配有两个参数，且第二个必须是 `String`，第一个无所谓的方法。
+
+---
+
+
+
+**`..`（双点）：匹配任意数量，AOP 中的“深水炸弹”**
+- 如果说 `*` 只能打一层，那 `..` 就是用来打穿层级和数量限制的。它包含**零个或多个**的概念。
+
+* **用在包路径位置：** 匹配当前包及其**所有的子包**（无限层级深透）。
+    * 例：`execution(* com.example..MyService.*(..))`。
+    * *死扣细节：* 它可以匹配 `com.example.MyService`（0 层子包），也可以匹配 `com.example.a.b.c.MyService`（多层子包）。这也是为什么日常开发中包路径通常用 `..` 而不用 `*`。
+    * 在包路径中用..就已经有了.层级连接符的作用，不要写成...，这个是可变参数
+* **用在参数列表位置：** 匹配**任意个数（包括 0 个）、任意类型**的参数。
+    * 例：`execution(* *.*(..))` 匹配所有方法，无论是有参、无参，参数是什么类型。
+    * 例：`execution(* *.*(String, ..))` 匹配第一个参数必须是 `String`，后面跟着 0 个或无数个任意参数的方法。
+
+**`+`（加号）：血统追踪器（匹配子类/实现类）**
+- `+` 的作用范围非常专一，它只用来处理类的继承与接口的实现关系。它必须**紧跟在类名或接口名之后**。
+
+* **核心语义：** 匹配指定的类及其**所有子类**，或者指定的接口及其**所有实现类**。
+* **典型场景：** 当你想拦截实现了某个特定接口的所有方法时。
+    * 例：`execution(* com.example.BaseService+.*(..))`。
+    * *死扣细节：* 假设 `OrderServiceImpl` 实现了 `BaseService` 接口，那么上述表达式不仅会拦截 `BaseService` 接口中声明的方法，还会拦截 `OrderServiceImpl` 中**独有**的方法。
+    * +代表com.example.BaseService本身以及它的所有子类，
+    * +后面的.是层级连接符：前面是类名，则该.连接类名和方法名，紧跟着的*表示任意方法名
+    * *后面的()是返回值的位置，里面的..表示匹配任意任意数量、任意类型的方法入参
+
+---
+**💡 避坑小结：**
+在写表达式时，最容易混淆的就是包路径下的 `.*` 和 `..*`：
+* `com.example.*` = `com.example` 下的直系类（不含子包）。
+* `com.example..*` = `com.example` 包及其所有子孙包下的所有类。
+#### `execution`指示器
+
+
+`execution` 是**方法执行型**指示器，能够精确匹配到方法签名的每一个细节
+
+`execution` 的表达式完全基于 Java 方法签名的结构，它的完整语法如下：
+
+> execution( [修饰符] <返回值类型> [包名.类名]<方法名>(<参数列表>) [异常类型] )
+
+* `< >` 包裹的部分：**绝对不可省略**，否则表达式报错。
+* `[ ]` 包裹的部分：**可以省略**，省略即代表“匹配任意”。
+* **注意空格**：修饰符、返回值类型之间**必须有空格**，类名和方法名之间通常用 `.` 连接。
+
+---
+
+**`[修饰符]`（可省略）**
+* **规则**：匹配方法的访问控制符，如 `public`、`protected`、`private`、`*`。如果不写，默认匹配所有修饰符。
+* Spring AOP默认是CGLIB 动态代理，虽然能代理 protected 或 default 方法，但是Spring 官方强烈建议 AOP 仅作用于 public 方法
+* **最佳实践**：**要么显式写 `public`，要么直接省略**。
+
+**`<返回值类型>`（不可省略！）**
+* **规则**：匹配方法的返回值。
+* **常见写法**：
+    * `*`：最常见，表示匹配任意返回值类型（包括 `void`）。
+    * `void`：只匹配没有返回值的方法。
+    * `java.lang.String`：只匹配返回值为 String 的方法。
+* **如果指定具体的非基础数据类型，必须写全限定类名（包名+类名）**，例如 `com.example.entity.User`，不能只写 `User`。
+
+**`[包名.类名]`（可省略）**
+* **规则**：定位方法属于哪个包、哪个类。如果不写，表示当前 Spring 容器中所有类的所有方法。
+* **符号差异**：
+    * **不写**：直接接方法名，比如 `execution(* *(..))`。
+    * **单点 `.`**：**精确层级**。`com.example.*` 表示 `example` 包下的类（**不包含**它的子包）。
+    * **双点 `..`**：**无限层级**。`com.example..*` 表示 `example` 包**及其所有子孙包**下的类。
+* **类名匹配**：**`*Service` 匹配所有以 Service 结尾的类**，**`UserService` 匹配精确的类。**
+
+**`<方法名>`（不可省略！）**
+* **规则**：匹配方法的名称。
+* **常见写法**：
+    * `*`：**匹配所有方法**。
+    * `set*`：**匹配所有以 set 开头的方法**（常用于拦截 Setter）。
+    * `*User`：**匹配所有以 User 结尾的方法**。
+    * `createOrder`：**精确匹配名为 `createOrder` 的方法**。
+
+**`<参数列表>`（不可省略！）**
+* **规则**：这是最容易写错、也最能体现功底的地方。匹配方法定义中的入参。
+* **组合拳**：
+    * `()`：精确匹配**无参**方法。
+    * `(..)`：匹配**任意数量（0 个或多个）、任意类型**的参数。
+    * `(*)`：精确匹配**只有一个参数**的方法，无论什么类型。
+    * `(*, *)`：精确匹配**只有两个参数**的方法，无论什么类型。
+    * `(java.lang.String, ..)`：匹配**第一个参数必须是 String**，后面跟着 0 个或多个任意类型参数的方法。
+    * `(.., java.lang.Long)`：匹配**最后一个参数必须是 Long**，前面有 0 个或多个任意类型参数的方法。
+* **细节**：和返回值一样，如果指定具体类型，非 `java.lang` 包下的类**必须写全限定类名**。
+
+**`[异常类型]`（可省略）**
+* **规则**：匹配方法声明中 `throws` 抛出的异常类型。
+* **范例**：`throws java.io.IOException`。
+* **现状**：在实际企业开发中**几乎从不使用**。因为我们通常通过 `@AfterThrowing` 或 `@Around` 去捕获运行时异常，而不是通过切入点去死磕方法签名上的 `throws` 声明。
+
+---
+
+
+
+#### 注解指示器
+
+`execution`依靠包名和方法名的硬编码来实施拦截，一旦代码重构、包名变更，切面就会大面积失效
+- 在现代 Spring Boot 企业级开发中，**（自定义注解 + 注解指示器）是最主流、最优雅、最抗重构的 AOP 最佳实践**。
+- 它**实现了切面与业务逻辑的彻底解耦：切面只认注解，不关心你方法叫什么、在哪个包下**。
+- 注解指示器有四个：`@annotation`、`@within`、`@target`、`@args`
+
+**参数绑定与自动绑定机制**
+
+- 在需要注入切面的地方使用自定义注解，并可以初始化其值（编译器的硬编码，运行期动态代理生成Proxy）
+- **所有通知都支持参数绑定与自动绑定机制**，只需要添加入参：**注解类型+参数名**，并且在通知注解的参数中使用**同名参数**，此时**自动绑定参数和全限定注解类名**，例如`@Around("@annotation(rateLimit)")`
+- 切面方法能够**通过该同名参数获取注解的值**
+- 如果要使用参数绑定，建议添加入参，否则只能这样使用：`@annotation(com.example.anno.RateLimit)`，如果更改包路径，一样需要处处修改
+
+
+```JAVA
+// 1. 自定义注解
+@Target(ElementType.METHOD)
+@Retention(RetentionPolicy.RUNTIME)
+public @interface RateLimit {
+    int permitsPerSecond() default 10;
+}
+
+
+// 2. 切面类
+@Aspect
+@Component
+public class RateLimitAspect {
+
+    // 【核心死扣点】：
+    // 这里 @annotation 括号里的 rateLimit 不是类名，而是下面方法参数的名字！
+    // Spring 会自动匹配、拦截，并把目标方法上的注解实例直接塞给这个参数！
+    @Around("@annotation(rateLimit)")
+    public Object doLimit(ProceedingJoinPoint joinPoint, RateLimit rateLimit) throws Throwable {
+        
+        // 极致优雅：直接拿到了注解里配置的值，连反射都不用写！
+        int limit = rateLimit.permitsPerSecond();
+        System.out.println("当前接口限流阈值：" + limit);
+        
+        return joinPoint.proceed();
+    }
+}
+
+
+public class ExportController{
+    @RateLimit(permitsPerSecond = 100) // 这个接口抗压，每秒 100 次
+    public void queryList() { ... }
+
+    @RateLimit(permitsPerSecond = 5)  // 这个接口极度消耗 CPU，每秒只能 5 次
+    public void exportExcel() { ... }
+}
+```
+
+
+
+
+---
+
+**`@annotation`**
+* **核心语义**：拦截**方法上**标有指定注解的方法。
+* **标准语法**：`@annotation(全限定注解类名)`
+
+
+---
+
+**`@within`（类级广域覆盖）**
+- 如果你想给一个类里的所有方法都加上切面，在每一个方法上贴 `@annotation` 太累了。这时候就用 `@within`。
+
+* **核心语义**：拦截**类上**标有指定注解的类里面的**所有方法**。
+* **标准语法**：`@within(全限定注解类名)`
+
+- 常用于全局性能监控。比如拦截所有 `@RestController` 标注的控制层方法。
+
+```java
+@Aspect
+@Component
+public class WebLogAspect {
+
+    // 只要类上打了 @RestController，这个类里面的所有方法都会被拦截
+    @Before("@within(org.springframework.web.bind.annotation.RestController)")
+    public void logApiCall(JoinPoint joinPoint) {
+        System.out.println("收到 HTTP 请求，调用方法：" + joinPoint.getSignature().getName());
+    }
+
+    @Before("@within(rest)")
+    public void logApiCall(JoinPoint joinPoint,RestController rest) {
+        System.out.println("收到 HTTP 请求，调用方法：" + joinPoint.getSignature().getName());
+    }
+}
+```
+**死扣边界限制**：**`@within` 只会拦截目标类自身声明的方法**。如果目标类继承了一个父类，且父类的方法没有被重写，那么**调用父类的方法时，不会触发 `@within` 拦截**。
+
+---
+
+**`@target`（运行时对象狙击：最容易踩坑）**
+
+- `@target` 的字面意思和 `@within` 非常像，很多人根本分不清它俩。这里必须死扣它们的底层时机差异：
+
+* **核心语义**：匹配**运行时目标对象（Target Object）的实际类型**上带有指定注解的所有方法。
+* **与 `@within` 的致命区别**：
+  * `@within` 是**静态的、声明式的**。Spring 在解析切入点时，只要看到类的代码上写了注解，就匹配。
+  * `@target` 是**动态的、运行时的**。Spring 必须在运行时判断被代理的那个原始对象的真实类型是否带有该注解。
+
+慎用 `@target`
+- 在 Spring Boot 中，如果你单独写一个 `@target(com.example.MyAnno)` 而不加任何包路径限制，**会导致极其可怕的后果**：
+- Spring 启动时**为了判断运行时类型**，会**尝试去实例化并代理容器中的所有 Bean**（包括 Spring 内部的各种后置处理器、底层组件），这会直接导致启动极慢，或者引发严重的循环依赖、代理异常（`BeanCurrentlyInCreationException`）。
+
+- **最佳实践**：日常开发中，**尽量用 `@within` 替代 `@target`**。如果非要用 `@target`，**必须强制加上包路径限制**，缩小爆炸范围：
+```java
+// 必须用 && 配合 execution 限制在自己的业务包内，否则会出大事故！
+@Pointcut("execution(* com.example.service..*.*(..)) && @target(com.example.anno.MyTargetAnno)")
+public void safeTargetPointcut() {}
+```
+
+---
+
+**`@args`（参数类型狙击：极度冷门，了解即可）**
+
+- 这个指示器的逻辑非常绕，必须仔细死扣它的定义，它极容易被误解。
+
+* **核心语义**：匹配方法**运行时传入的实际参数对象的类上**是否带有指定注解。
+* **标准语法**：`@args(全限定注解类名)`
+
+- 它不是拦截方法参数上的注解！）
+- **严重误区**：很多人以为 `@args(MyAnno)` 是用来拦截像 `public void test(@MyAnno User user)` 这样的方法的（也就是注解写在参数前面）。**大错特错！**
+
+**真正用法**：注解是打在**类**上的。
+```java
+@Validated // 注解在这里
+public class User { ... }
+```
+
+目标方法声明时，可能参数类型是父类或接口（比如 `Object`）。
+```java
+public class MyService {
+    public void processData(Object data) { ... }
+}
+```
+1. 运行时，当你调用 `processData(new User())` 时，AOP 发现传入的实参 `User` 类的头顶上带有 `@Validated` 注解，于是**触发拦截**！如果传入 `processData(new String())`，则不拦截。
+
+由于这种“基于运行时参数的类头顶的注解”来决定是否拦截的逻辑过于魔幻且不可控，**在实际企业开发中，`@args` 的出场率几乎为 0**，了解即可。
+
+---
+
+
+
+
+
+#### 逻辑运算符
+
+在实际的企业级业务中，需求往往是非常刁钻的，比如：“我要拦截 Service 包下的所有方法，**但是**要排除掉带 `@NoLog` 注解的方法，**或者**只拦截名字叫 `update` 开头的方法”。单一的指示器根本无法完成这种任务，必须依靠逻辑运算符。
+
+Spring AOP 支持三种逻辑运算符：**`&&`（与）、`||`（或）、`!`（非）**。
+
+
+---
+
+**`&&`（与）**
+
+* **核心语义**：必须**同时满足**左右两边的表达式，才会触发拦截。它主要用于“缩小范围”或“精准定位”。
+- 假设你只想拦截 `OrderService` 中且带有 `@RequiresRole` 注解的方法。
+
+```java
+// 必须在指定的包下，并且方法上必须有指定的注解
+@Pointcut("execution(* com.example.service.OrderService.*(..)) && @annotation(com.example.anno.RequiresRole)")
+public void authPointcut() {}
+```
+
+---
+**`||`（或）**
+
+* **核心语义**：只要满足左右两边**任意一个**表达式，就会触发拦截。它主要用于“合并同类项”。
+* **死扣细节**：当你有多个散落的切入点，它们都需要执行完全相同的切面逻辑时，千万不要写多个 `@Before` 方法，用 `||` 连起来即可。
+
+- 假设你要做一个“数据修改审计日志”，需要拦截所有的“新增”和“修改”操作。
+
+```java
+// 拦截以 insert 开头的方法，或者以 update 开头的方法
+@Pointcut("execution(* com.example.service.*.insert*(..)) || execution(* com.example.service.*.update*(..))")
+public void writeOperationLog() {}
+```
+
+---
+
+**`!`（非）**
+
+* **核心语义**：排除掉满足该表达式的方法。
+* **永远、绝对不要单独使用 `!`**。
+    * 如果你写一个 `@Pointcut("!@annotation(com.example.Ignore)")`，你的意思是“除了标有 `@Ignore` 的方法，其他全拦截”。
+    * **后果**：Spring 会尝试去代理容器里的成千上万个底层方法，直接导致 OOM 或者启动卡死。
+    * **正确用法**：`!` **必须**依附于一个范围限定的表达式（通常通过 `&&` 连接），用来在限定范围内“挖洞”。
+
+- 大范围覆盖 + 局部豁免（黑名单机制）：例如，全局鉴权，但允许少部分接口“免密放行”。
+
+```java
+// 1. 限定在 api 包下
+// 2. 并且排除掉那些带有 @PassToken（免登录）注解的方法
+@Pointcut("execution(* com.example.api..*.*(..)) && !@annotation(com.example.anno.PassToken)")
+public void globalAuth() {}
+```
+
+
+---
+
+“优先级”陷阱
+
+- 当 `&&`、`||` 和 `!` 混合在一起时，它们的运算优先级和 Java 基础语法一样：**`!` > `&&` > `||`**。
+
+- 为了避免人类大脑解析错误，**强烈建议在混合使用时，加上括号 `()` 来明确优先级**。
+
+
+```java
+// 拦截 (insert 或 update) 并且 (不能带有 @IgnoreLog 注解)
+@Pointcut("(execution(* *.insert*(..)) || execution(* *.update*(..))) && !@annotation(com.example.IgnoreLog)")
+public void safeLogPointcut() {}
+```
+
+---
+
+
+
+
+
+
+
+---
+
+### AOP 失效与解决方案
+
+AOP失效的本质：**调用目标对象的原始方法，而不是代理对象的增强方法，没有走拦截器链**
+
+---
+
+**只要同类内部方法调用其他内部AOP方法，就一定AOP失效，**
+- 内部方法a调用AOP内部方法b，无论a有没有被AOP增强，当执行`this.b`时，this一定是目标对象，AOP失效
+- 解决方案：**通过代理对象调用AOP方法，而不是this**
+- **怎么让目标对象持有代理对象？**
+  - 在Spring 2.6之前，让IOC容器注入代理对象，即循环依赖，但是**Spring Boot 2.6+ 默认禁止循环依赖直接报错**，**不推荐这种方式**
+  - 最佳方案：**利用 AopContext 强行获取当前代理对象**
+    - 前提：必须在启动类加上 `@EnableAspectJAutoProxy(exposeProxy = true)` 暴露代理对象。 
+    ```java
+    public void a() {
+        // 从上下文中强行拽出代理对象
+        OrderService proxy = (OrderService) AopContext.currentProxy();
+        proxy.b(); // AOP 生效！
+    }
+    ```
+
+---
+
+
+**被`private`、`protected` 或默认修饰符修饰的目标方法，一定AOP失效**
+* 如果 Spring 使用 **JDK 动态代理**：它必须基于接口实现。Java 的接口方法天生只能是 `public` 的，所以 JDK 代理绝对搞不定非 public 方法。
+* 如果 Spring 使用 **CGLIB 动态代理**：虽然 CGLIB 底层是可以重写 `protected` 甚至包可见（default）方法的，但是 **Spring AOP 官方规范强行写死了逻辑**：它在扫描切面时，**只认 `public` 方法**。如果在非 public 方法上强行加切面，Spring 会在启动或运行时直接将其忽略。
+
+---
+
+
+**方法或类被 `final` 修饰**
+- CGLIB无法动态代理final方法或final类，因为不支持重写或继承
+
+
+---
+
+
+**不在IOC容器中的对象**
+- AOP代理对象的生成起始于**BeanPostProcessor（后置处理器）**阶段的检查，既然不在IOC容器中，自然无法生成代理对象
+
+---
+
+**异常被“提前吞掉”导致 `@AfterThrowing` 或事务失效**
+- 如果目标方法没有抛出异常，则`@AfterThrowing`永远不会执行，也不能让 `@Transactional` 发生异常时回滚
+
+
+
+
+---
+
+
+
+### 上下文参数获取
+
+
+* 想要全知全能的上下文信息？首选 `JoinPoint` / `ProceedingJoinPoint`。
+* 想要免去强转的烦恼，直接操作实体对象或注解属性？使用 `args()` 和 `@annotation()` 表达式绑定。
+* 想要处理执行结果或兜底异常？使用 `returning` 和 `throwing`。
+
+#### `JoinPoint`
+
+在通知方法的入参中加上`JoinPoint`，它包括当前的上下文信息
+* `getArgs()`：获取目标方法的入参（也就是访客背包里的东西）。
+* `getSignature()`：获取方法签名。强转为 `MethodSignature` 后，可以拿到方法名、返回值类型，甚至直接拿到 `Method` 对象本身。
+* `getTarget()`：获取真实的目标对象（还记得那个被绕过的原汁原味的对象吗？就是它）。
+* `getThis()`：获取当前的 CGLIB 代理对象（门卫本卫）。
+
+> **⚠️ 特别注意：** 如果你使用的是 `@Around`（环绕通知），你需要使用 `JoinPoint` 的子接口 **`ProceedingJoinPoint`**。因为它比 `JoinPoint` 多了一个核心方法：`proceed()`，用来放行请求去执行下一个拦截器或目标方法。
+
+**代码示例：**
+```java
+@Before("execution(* com.example.service.*.*(..))")
+public void beforeAdvice(JoinPoint joinPoint) {
+    // 1. 获取方法名
+    String methodName = joinPoint.getSignature().getName();
+    
+    // 2. 获取方法入参
+    Object[] args = joinPoint.getArgs();
+    System.out.println("方法 " + methodName + " 的入参是: " + Arrays.toString(args));
+    
+    // 3. 获取目标类名
+    String targetClassName = joinPoint.getTarget().getClass().getName();
+}
+```
+
+---
+
+#### 切点表达式绑定
+
+使用 `JoinPoint.getArgs()` 的缺点是，拿到的是 `Object[]` 数组，你还需要自己去判断类型和强转，这不够优雅。Spring 提供了一种更高级的玩法：**通过切点表达式，直接把目标参数绑定到通知方法的参数上。**
+
+**绑定方法入参：`args()`**
+- 如果目标方法是 `saveUser(User user, String operator)`，你可以直接把 `User` 抓取出来。
+
+```java
+// 切点表达式里写 args(user, ..)，通知方法参数里写 User user
+// Spring 会自动把目标方法的第一个参数匹配并赋值给 user
+@Before("execution(* com.example.service.*.saveUser(..)) && args(user, ..)")
+public void beforeSave(User user) {
+    System.out.println("准备保存用户，用户名为: " + user.getName());
+}
+```
+
+**绑定自定义注解：`@annotation()`**
+- 实际开发中，我们最常用 AOP 来做权限校验或日志记录。通常会在方法上打一个自定义注解（比如 `@Log(action = "删除记录")`）。怎么拿到这个注解里的 `action` 属性呢？
+
+```java
+// 直接在表达式中声明绑定注解对象
+@Around("@annotation(logAnnotation)")
+public Object logAround(ProceedingJoinPoint pjp, Log logAnnotation) throws Throwable {
+    // 直接获取注解上的属性，太优雅了！
+    String action = logAnnotation.action(); 
+    System.out.println("开始执行危险操作: " + action);
+    
+    return pjp.proceed();
+}
+```
+
+---
+
+#### 获取返回值和异常
+
+如果是 `@AfterReturning`（返回后通知）或 `@AfterThrowing`（异常后通知），此时目标方法已经执行完毕，我们可以拿到它的“战利品”或“事故报告”。
+
+**捕获返回值：`returning`**
+- 在注解中指定 `returning = "变量名"`，Spring 会把方法执行的返回值绑定到通知方法的同名参数上。
+
+```java
+@AfterReturning(value = "execution(* com.example.service.*.getUser(..))", returning = "result")
+public void afterReturningAdvice(JoinPoint joinPoint, Object result) {
+    System.out.println("方法执行成功，返回值是: " + result);
+    // 这里甚至可以对 result 进行脱敏处理，但无法改变它的引用
+}
+```
+
+ **捕获异常：`throwing`**
+- 同理，发生异常时，可以用 `throwing = "变量名"` 捕获具体的异常堆栈。
+
+```java
+@AfterThrowing(value = "execution(* com.example.service.*.*(..))", throwing = "ex")
+public void afterThrowingAdvice(JoinPoint joinPoint, Exception ex) {
+    System.out.println("糟糕，方法出错了！异常信息: " + ex.getMessage());
+    // 可以在这里发送报警邮件或写入错误日志
+}
+```
+
+---
+
+
+### 手写日志记录AOP
+
+#### 自定义注解 `@OperationLog`
+这个注解就像一个“标记”，你想记录哪个方法的日志，就把它贴在哪个方法上。
+
+```java
+import java.lang.annotation.*;
+
+/**
+ * 自定义操作日志注解
+ */
+@Target({ElementType.TYPE, ElementType.METHOD}) // 作用在方法或类的所有方法上
+@Retention(RetentionPolicy.RUNTIME) // 运行时有效，这样反射才能抓到它
+@Documented
+public @interface OperationLog {
+    
+    // 操作模块，例如："订单模块"、"用户模块"
+    String module() default "";
+
+    // 具体操作，例如："创建订单"、"删除用户"
+    String action() default "";
+}
+
+
+```
+
+---
+
+#### 编写切面类 `LogAspect`
+这里我们会用到之前学过的 `ProceedingJoinPoint`（万能钥匙）以及 `@annotation`（优雅绑定参数）。
+
+```java
+
+@Aspect
+@Component
+@Order(100) // 设定优先级，建议留出空间
+public class LogAspect {
+
+    // 借助 Jackson 将对象转为 JSON 字符串方便打印
+    private static final ObjectMapper objectMapper = new ObjectMapper();
+
+    /**
+     * 环绕通知：拦截所有打上 @OperationLog 注解的方法。@within: 匹配类上标注了注解的情况
+     * 注意这里的神仙写法：直接在表达式里绑定参数 operationLog，免去了复杂的反射获取注解！
+     */
+    @Around("@annotation(operationLog) || @within(operationLog)")
+    public Object recordLog(ProceedingJoinPoint pjp, OperationLog operationLog) throws Throwable {
+        
+        long startTime = System.currentTimeMillis();
+        MethodSignature signature = (MethodSignature) pjp.getSignature();
+        String methodName = signature.getDeclaringTypeName() + "." + signature.getName();
+        
+        // 1. === 执行前：收集入参信息 ===
+        System.out.println("========== 操作日志开始 ==========");
+        System.out.println("模块: " + operationLog.module());
+        System.out.println("动作: " + operationLog.action());
+        System.out.println("调用方法: " + methodName);
+        System.out.println("请求参数: " + objectMapper.writeValueAsString(pjp.getArgs()));
+
+        Object result = null;
+        try {
+            // 2. === 执行核心方法 ===
+            // 这里就是那个 "门卫放行" 的瞬间，去执行真实的业务逻辑
+            result = pjp.proceed();
+
+            // 3. === 执行后：记录正常返回结果 ===
+            long costTime = System.currentTimeMillis() - startTime;
+            System.out.println("执行状态: 成功");
+            System.out.println("执行耗时: " + costTime + " ms");
+            System.out.println("返回结果: " + objectMapper.writeValueAsString(result));
+
+        } catch (Throwable e) {
+            // 4. === 异常兜底：记录异常信息 ===
+            long costTime = System.currentTimeMillis() - startTime;
+            System.out.println("执行状态: 失败 (异常)");
+            System.out.println("执行耗时: " + costTime + " ms");
+            System.out.println("异常信息: " + e.getMessage());
+            
+            // ⚠️ 极其重要：记录完日志后，必须把异常原样抛出！
+            // 否则外部的全局异常处理器或事务切面就抓不到这个异常了！
+            throw e; 
+            
+        } finally {
+            System.out.println("========== 操作日志结束 ==========\n");
+        }
+
+        return result;
+    }
+}
+```
+
+---
+
+#### 在业务层使用
+现在，你的底层设施已经搭好了。以后的业务开发中，别人只需要极其优雅地加上一行注解：
+
+```java
+import org.springframework.stereotype.Service;
+
+@Service
+public class UserService {
+
+    @OperationLog(module = "用户管理", action = "新增用户")
+    public String createUser(String username, int age) {
+        System.out.println(">>> 正在执行真实的数据库 Insert 操作...");
+        
+        // 模拟一个业务逻辑
+        if (age < 18) {
+            throw new IllegalArgumentException("未成年人禁止注册！");
+        }
+        
+        return "用户 " + username + " 创建成功，ID: 1001";
+    }
+}
+
+// 场景 A：给整个类所有方法加日志
+@Service
+@OperationLog(module = "订单服务", action = "类级别自动记录")
+public class OrderService {
+    public void create() { /* 会被记录 */ }
+    public void query()  { /* 会被记录 */ }
+}
+```
+
+
+
+
+
+
+
+
+
+## 持久层与事务管理
+
+在 Java 中，数据是以**对象**的形式存在于内存中的，它们随生随灭。而数据库中，数据是以**表和行**的形式固化在磁盘里的。
+
+
+
+> **持久层**为我们提供了操作数据的**能力**，而**事务管理**则通过 **Spring AOP** 这种“上帝之手”，为这种能力套上了**安全防护罩**，确保了业务逻辑在各种意外面前依然能保持数据的一致。
+
+---
+
+**持久层** 的核心使命就是解决：**如何把不稳定的内存对象，安全、高效地转化并存储到稳定的磁盘数据库中。**
+* **没有持久层时：** 你需要手写繁琐的 SQL，手动打开/关闭连接，把结果集一条条塞进对象。
+* **有了持久层（MyBatis）：** 它像一个**自动翻译官**。你只要定义好对象和表的映射关系，它就负责把 Java 操作翻译成 SQL 执行，让你能像操作本地集合一样操作数据库。
+
+---
+
+
+**事务管理**：如果说持久层解决了**怎么存**的问题，那么事务管理解决的就是**存得对不对**的问题。
+
+在复杂的业务中，一个操作往往包含多个步骤。比如**转账**：
+1.  A 账户减 100 元。
+2.  B 账户加 100 元。
+
+如果步骤 1 成功了，由于网络波动，步骤 2 失败了，这 100 元就会凭空消失。
+**事务管理就像一份“生死契约”：** 它向你保证，这一组操作要么**全部成功**（一起写进账本），要么**全部失败**（像没发生过一样撤销）。
+
+---
+
+**Spring 事务的定位**
+- **Spring 自己并不具备事务能力。**真正的事务能力是由**数据库（如 MySQL）**提供的。Spring 的角色是**指挥家**
+* **统一接口：** 不管你底层用的是 JDBC、MyBatis 还是 JPA，Spring 都给你一套统一的 `@Transactional` 接口。
+* **资源同步：** 它利用 AOP 机制，在方法开始前向数据库要一个连接（Connection），把它绑定到当前线程，并关闭自动提交；在方法结束时，根据结果通知数据库是 `commit`（提交）还是 `rollback`（回滚）。
+
+
+---
+
+
+### 持久层的连接与配置
+
+#### 数据库连接
+
+在Spring框架中，持久层的核心就是如何高效、稳定地与数据库建立和管理连接。这是一个非常基础且关键的领域，因为**数据库连接通常是整个应用中最昂贵的资源之一**。
+
+---
+**数据库连接：`javax.sql.DataSource`**
+- Spring处理数据库连接的核心并不是自己发明一套新标准，而是全面拥抱了Java官方的标准接口 `javax.sql.DataSource`
+* **传统 JDBC 的痛点**：早期的 `DriverManager.getConnection()` 每次调用都会与数据库进行TCP三次握手、权限验证、分配资源等，操作极其耗时。
+* **DataSource 的优势**：`DataSource` 接口不仅标准化了获取连接的方式，更重要的是，它为**数据库连接池**的引入提供了标准接入点。在Spring中，我们几乎所有的数据库操作（无论用什么框架）最终都是从注入的 `DataSource` Bean 中获取连接的。
+
+
+---
+
+**数据库连接池**
+- 在生产环境中，我们绝不会每次请求都去新建数据库连接，而是使用连接池。Spring Boot 默认集成并高度推荐使用连接池。常见的有：
+* **HikariCP**：Spring Boot 2.x 和 3.x 的默认连接池。它的特点是“极致的快”、代码精简（零内存泄漏设计）和极高的并发性能。如果你的应用没有特殊监控需求，它是首选。
+* **Alibaba Druid**：在国内极其流行。它的绝对性能可能略逊于HikariCP，但它提供了极其强大的 **SQL 监控面板**、SQL防火墙（防注入）以及慢查询日志记录等功能。
+
+---
+
+**Spring Boot 中的典型配置**
+- 在Spring Boot中，通过 `application.yml` 或 `application.properties` 配置数据库连接是非常直观的。Spring的自动装配（AutoConfiguration）会读取这些配置并自动在IoC容器中为你创建一个 `DataSource` 实例。
+
+以下是一个配置了 MySQL 和 HikariCP 连接池参数的典型示例：
+
+```yaml
+spring:
+  datasource:
+    # 1. 核心连接信息
+    url: jdbc:mysql://localhost:3306/your_database?useUnicode=true&characterEncoding=utf-8&serverTimezone=UTC&useSSL=false
+    username: root
+    password: your_password
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    
+    # 2. 指定连接池类型（通常SpringBoot会自动推断，但显式指定更清晰）
+    type: com.zaxxer.hikari.HikariDataSource
+    
+    # 3. 连接池高级调优参数 (以Hikari为例)
+    hikari:
+      maximum-pool-size: 15     # 线程池最大连接数，决定了最大并发量
+      minimum-idle: 5           # 最小空闲连接数，保证突发流量时的响应速度
+      connection-timeout: 30000 # 客户端等待连接池分配连接的最大时间（毫秒）
+      idle-timeout: 600000      # 空闲连接在池中保留的最长时间（毫秒）
+```
+
+---
+
+**Spring 如何管理连接与事务**
+- 当你配置好 `DataSource` 后，Spring 会**通过 `DataSourceTransactionManager`（事务管理器）来接管连接的生命周期**。
+- 这里有一个极其精妙的设计：**`ThreadLocal` 绑定**。
+  - 当一个声明了 `@Transactional` 的方法开始执行时，Spring 会从连接池中取出一个连接，并将其绑定到**当前执行的线程**上。
+  - 这意味着在这个方法内部，无论你调用了多少个DAO层的不同方法，只要它们在同一个线程下，它们使用的都是**同一个数据库物理连接**。
+  - 这不仅保证了**事务的一致性（要么全提交，要么全回滚）**，也**避免了在同一个事务中反复获取/释放连接的开销。**
+
+---
+
+#### 数据源管理
+
+#### Spring JDBC 抽象
+#### 主流 ORM 整合思想
+---
+
+### Spring 事务
+
+#### Spring 事务体系架构
+#### 事务模式
+
+##### 编程式事务
+
+##### 声明式事务
+
+### `@Transactional`属性与行为
+
+#### 隔离级别
+#### 传播行为
+#### 回滚规则
+#### 只读事务与超时
+
+### 事务失效
+
+
+## 配置管理
+## 缓存抽象 (Cache)
+## 资源处理与数据绑定
+## Spring 表达式语言 (SpEL)
+
+
+## Spring MVC
+## Spring WebFlux
+## 异步与任务调度 (Async & Task Scheduling)
+
+## Spring Event事件驱动模型
+## Spring 测试框架
+
+
+# Spring Boot
+
+
+##  Spring Boot基础
+
+### Spring Boot 启动流程与运行原理
+
+#### `@SpringBootApplication`
+
+`@SpringBootApplication` 是 Spring Boot 项目的灵魂，通常标注在主启动类上。进入源码可以发现，它是一个复合注解，核心由以下三个注解“三体合一”构成：
+
+1. `@SpringBootConfiguration`
+* **作用**：标记当前类为 Spring 的配置类。
+* **底层**：其实际上就是一个 `@Configuration` 注解的派生注解。这说明 Spring Boot 的主启动类本身也就是一个 Spring IoC 容器的配置类，可以在其中定义 `@Bean`。
+
+2. `@ComponentScan`
+* **作用**：组件扫描。默认扫描**当前配置类所在包及其所有子包**下的组件（如 `@Controller`、`@Service`、`@Component`、`@Repository` 等），并将它们注册到 Spring 容器中。
+* **注意**：这就是为什么我们通常要求将 Spring Boot 的主启动类放在项目的根包（Root Package）下的原因。
+
+1. `@EnableAutoConfiguration`
+* **作用**：开启自动配置机制。它是 Spring Boot 实现“开箱即用”的关键。
+* **底层原理**：该注解通过 `@Import(AutoConfigurationImportSelector.class)` 将 `AutoConfigurationImportSelector` 导入到容器中。这个选择器会根据当前项目的 Classpath 环境、配置信息等，动态地决定需要加载哪些自动配置类。
+
+---
+
+#### 自动装配机制
+
+自动装配的核心逻辑是：**收集所有潜在的自动配置类 -> 结合条件注解（Conditionals）进行过滤 -> 将符合条件的 Bean 注入容器**。
+
+1. 自动配置类的加载来源
+`AutoConfigurationImportSelector` 会调用 Spring 内部的工厂加载机制来获取自动配置类的全限定名列表。在 Spring Boot 的演进过程中，这里的机制发生过重要改变：
+
+* **Spring Boot 2.7 之前的旧机制 (`spring.factories`)**
+    * 通过 `SpringFactoriesLoader` 读取类路径下所有 `META-INF/spring.factories` 文件。
+    * 寻找 Key 为 `org.springframework.boot.autoconfigure.EnableAutoConfiguration` 的配置项，获取其对应的 Value（逗号分隔的自动配置类全限定名）。
+* **Spring Boot 2.7+ 的新机制 (`AutoConfiguration.imports`)**
+    * 引入了新的加载机制，直接读取 `META-INF/spring/org.springframework.boot.autoconfigure.AutoConfiguration.imports` 文件。
+    * **改变的原因**：`spring.factories` 文件过于庞大，包含了各种组件（监听器、初始化器等），解析时有性能损耗。独立出 `.imports` 文件，专职负责自动配置，提高了启动加载效率，并且支持以行为单位添加注释，更清晰。
+
+2. 条件注解（`@Conditional` 家族）过滤
+加载到的自动配置类并不会全部生效，Spring Boot 大量使用了按需加载的 `@Conditional` 派生注解。只有条件成立，自动配置类及其内部的 `@Bean` 才会被注册：
+* `@ConditionalOnClass`：Classpath 中存在指定的类时生效（例如：引入了 Redis 依赖，才配置 RedisTemplate）。
+* `@ConditionalOnMissingBean`：容器中不存在指定的 Bean 时生效（保证用户自定义的 Bean 优先于自动配置）。
+* `@ConditionalOnProperty`：配置文件（application.yml）中存在指定的属性配置时生效。
+* `@ConditionalOnWebApplication`：当前应用是 Web 应用时生效。
+
+---
+
+#### 自定义 Starter 开发
+
+开发自定义 Starter 通常用于封装公司内部的公共中间件（如统一日志、鉴权客户端、自定义 RPC 框架等），实现各微服务间的“引入即用”。
+
+1. 命名规范
+* **官方 Starter**：`spring-boot-starter-{name}` (例如：`spring-boot-starter-web`)
+* **自定义/第三方 Starter**：`{name}-spring-boot-starter` (例如：`mybatis-spring-boot-starter` 或 `acme-log-spring-boot-starter`)
+
+2. 开发步骤
+**步骤一：引入依赖**
+创建一个普通的 Maven/Gradle 项目，引入自动配置所需的基础依赖：
+```xml
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-autoconfigure</artifactId>
+</dependency>
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-configuration-processor</artifactId>
+    <optional>true</optional> </dependency>
+```
+
+**步骤二：定义属性配置类 (`@ConfigurationProperties`)**
+用于接收 `application.yml` 中的配置：
+```java
+@ConfigurationProperties(prefix = "acme.log")
+public class AcmeLogProperties {
+    private boolean enabled = true;
+    private String level = "INFO";
+    // getters and setters...
+}
+```
+
+**步骤三：编写核心业务组件**
+（例如：拦截器、日志切面类等组件逻辑）。
+
+**步骤四：编写自动配置类 (`@AutoConfiguration`)**
+结合 `@EnableConfigurationProperties` 和 `@Conditional` 注解完成组装：
+```java
+@AutoConfiguration // Spring Boot 2.7+ 推荐使用，替代 @Configuration
+@EnableConfigurationProperties(AcmeLogProperties.class)
+@ConditionalOnProperty(prefix = "acme.log", name = "enabled", havingValue = "true", matchIfMissing = true)
+public class AcmeLogAutoConfiguration {
+    
+    @Bean
+    @ConditionalOnMissingBean
+    public LogAspect logAspect(AcmeLogProperties properties) {
+        return new LogAspect(properties.getLevel());
+    }
+}
+```
+
+**步骤五：注册自动配置类（暴露给 Spring Boot）**
+在 `src/main/resources/META-INF/spring/org.springframework.boot.autoconfigure.AutoConfiguration.imports` 文件中写入你的自动配置类全限定名：
+```text
+com.acme.log.starter.AcmeLogAutoConfiguration
+```
+*(注：如果兼容 Spring Boot 2.7 以前，仍需要写在 `META-INF/spring.factories` 中)*。打包发布后，其他业务线引入该 Starter 即可生效。
+
+---
+
+#### Spring Application 生命周期与事件发布机制
+
+当你调用 `SpringApplication.run(Application.class, args)` 时，Spring Boot 会经历一个复杂的启动生命周期。它通过**观察者模式**（事件发布与监听机制）贯穿始终，允许开发者在启动的不同阶段进行扩展。
+
+1. 核心启动流程阶段
+
+1.  **准备阶段（实例化 SpringApplication）**：
+    * 推断当前应用类型（REACTIVE、NONE、SERVLET）。
+    * 从 `spring.factories` 加载 `ApplicationContextInitializer`（初始化器）和 `ApplicationListener`（监听器）。
+    * 推断 Main 方法所在的类。
+2.  **运行阶段（调用 `run()` 方法）**：
+    * **获取并启动 RunListeners**：获取 `SpringApplicationRunListeners` 并触发 `starting()` 事件。
+    * **准备环境 (Environment)**：解析系统参数、命令行参数、配置文件（application.yml）。触发 `environmentPrepared()` 事件。
+    * **打印 Banner**：控制台输出 Spring 图标。
+    * **创建上下文 (Context)**：根据应用类型创建对应的 IoC 容器（如 `AnnotationConfigServletWebServerApplicationContext`）。
+    * **准备上下文**：应用 Initializers，触发 `contextPrepared()` 事件。将启动类加载到上下文中，触发 `contextLoaded()` 事件。
+    * **刷新上下文 (Refresh Context)**：**（绝对核心步骤）** 这一步执行 Spring 框架核心的 `refresh()` 方法。完成包扫描、自动配置类加载、Bean 的实例化、依赖注入、AOP 代理生成、内嵌 Tomcat 启动等。
+    * **完成刷新**：触发 `started()` 事件。
+    * **执行 Runners**：调用容器中所有的 `ApplicationRunner` 和 `CommandLineRunner` 接口实现类（常用于项目启动后执行初始化数据加载）。
+    * **运行完毕**：触发 `ready()` 事件。如果启动失败，会触发 `failed()` 事件。
+
+2. 生命周期事件 (Events) 对应表
+
+如果你需要在启动的特定阶段执行逻辑，可以通过实现 `ApplicationListener<E>` 来监听以下核心事件（按触发顺序排序）：
+
+| 启动事件 | 触发时机 | 典型用途 |
+| :--- | :--- | :--- |
+| `ApplicationStartingEvent` | Run 方法刚执行，获取到 RunListeners 之后。 | 在任何处理之前做一些极早期的初始化。 |
+| `ApplicationEnvironmentPreparedEvent` | Environment 构建完成，但上下文尚未创建。 | 动态修改或注入环境变量/配置项。 |
+| `ApplicationContextInitializedEvent` | Context 准备完成，Initializers 执行完毕。 | 在 Bean 定义加载前对上下文做微调。 |
+| `ApplicationPreparedEvent` | 配置类/Bean 定义已被加载到容器，但尚未实例化。 | 注册自定义的 BeanDefinition。 |
+| `ApplicationStartedEvent` | 容器刷新完成 (`refresh` 结束)，所有 Bean 已被创建。 | 启动后执行一些依赖于完整容器的逻辑。 |
+| `ApplicationReadyEvent` | Runners 执行完毕，应用已完全就绪，可以接收请求。 | 暴露健康检查状态，或执行最终的就绪通知。 |
+| `ApplicationFailedEvent` | 启动过程中的任何阶段发生异常时触发。 | 记录致命错误日志、发送告警。 |
+
+**补充说明**：由于某些早期事件（如 `ApplicationStartingEvent`）触发时 Spring 容器尚未创建完毕，因此不能通过 `@Component` 的方式注册监听器。必须通过 `SpringApplication.addListeners()` 或在 `META-INF/spring.factories` 中配置才能生效。
+
+### 核心上下文与 Bean 管理
+* **Bean 的生命周期**：从实例化、属性赋值、初始化（`@PostConstruct`、`InitializingBean`）到销毁的完整链路。
+* **循环依赖**：Spring 如何通过三级缓存解决 Setter 注入的循环依赖？为什么 Spring Boot 2.6+ 默认禁用了循环依赖？
+* **条件注解的妙用**：`@ConditionalOnClass`、`@ConditionalOnProperty` 等注解在多环境动态装配中的实战。
+
+---
+
+## Web与网关层
+
+### 统一标准与防御性编程
+
+* **RESTful 进阶**：除了 GET/POST，PUT/PATCH/DELETE 的语义化设计。
+* **全局异常处理**：`@RestControllerAdvice` 与 `@ExceptionHandler` 配合，打造统一的 JSON 错误响应体。
+* **参数校验（Validation）**：`@Validated` 分组校验、自定义校验注解（如校验手机号格式、敏感词）。
+* **Jackson 序列化定制**：全局处理时间格式化、Long 类型精度丢失（转 String 前端接收）、忽略 Null 值。
+
+### 2拦截与切面机制（AOP 实战）
+* **过滤器 (Filter) vs 拦截器 (Interceptor) vs 切面 (AOP)**：三者的执行顺序与核心应用场景对比。
+* **高频 AOP 场景**：全局操作日志打点、接口耗时统计、基于注解的接口防刷限流。
+
+---
+
+## 数据访问与分布式事务
+
+
+### MyBatis-Plus
+* **基础进阶**：自动代码生成、逻辑删除、自动填充（创建时间/更新时间）。
+* **高级特性**：乐观锁插件防超卖、防全表更新/删除插件。
+* **性能优化**：MyBatis 一级/二级缓存的坑、批量插入的真实底层优化（`rewriteBatchedStatements`）。
+
+### `@Transactional`
+* **事务失效的 8 大经典场景**：内部方法自调用（AOP 代理失效）、异常被 catch 吞没、非 public 方法等。
+* **事务传播行为**：`REQUIRES_NEW` 与 `NESTED` 在复杂业务（如记录独立日志、主从表嵌套处理）中的抉择。
+
+### 多数据源与读写分离
+* **动态数据源路由**：基于 `AbstractRoutingDataSource` 和 AOP 实现的数据源动态切换。
+* **分布式事务初探**：引入 Seata（AT 模式）解决跨库/跨服务的数据一致性。
+
+---
+
+## 中间件集成
+
+### Redis集成
+* **缓存一致性治理**：双写一致性策略（延迟双删验证、Canal 监听 Binlog 异步更新缓存）。
+* **分布式锁实战**：放弃原生的 `setnx`，全面接入 Redisson（看门狗机制、可重入锁、红锁）。
+* **Spring Cache 避坑**：如何自定义缓存管理器，解决默认序列化乱码和无法针对单个 Key 设置 TTL 的痛点。
+
+### 消息队列集成
+* **可靠消息投递**：Spring Boot 结合 RocketMQ 事务消息实现分布式最终一致性。
+* **消费者幂等与异常处理**：消费失败的重试策略与死信队列（DLQ）的监听处理。
+
+---
+
+## 安全与鉴权
+*没有安全防护的系统是在“裸奔”。*
+
+### 认证与授权方案选型
+* **Spring Security**：重量级，功能极强但学习曲线陡峭。核心：FilterChain 机制、自定义 UserDetailsService。
+* **Sa-Token**：国内极度流行的轻量级权限框架（推荐），零配置实现登录、角色权限、踢人下线。
+
+### Token架构
+* **JWT 深度实践**：JWT 的优缺点，Token 续期问题（双 Token 刷新机制：Access Token + Refresh Token）。
+
+---
+
+## 生产运维与性能调优
+
+### 监控与观测 (Observability)
+* **Spring Boot Actuator**：暴露健康检查 (`/health`)、环境变量、线程池指标。
+* **链路追踪**：集成 SkyWalking 或 Zipkin，解决微服务架构下“错误查不到源头”的痛点。
+
+### 优雅停机 (Graceful Shutdown)
+* 如何配置 Spring Boot 和 Tomcat，保证在 K8s 销毁 Pod 时，先拒绝新请求，等老请求处理完、MQ 消息消费完再关闭 JVM？
+
+### JVM 与 Tomcat 调优参数
+* Spring Boot 内嵌 Tomcat 的核心参数调优（`max-threads`, `accept-count`, `max-connections`）。
+* 针对 Spring Boot 业务特性的 JVM 垃圾回收器选择与内存分配。
+
+---
+
+# 操作系统与多线程并发
+# Docker
 
 # Redis
 
@@ -589,236 +4346,9 @@ Spring Cache 是一套基于 AOP（面向切面编程）的缓存抽象。它让
 ## RocketMQ
 
 ## Kafka
+# MongoDB
 
-# Spring Framework
-# Spring Boot
-
-
-##  Spring Boot基础
-
-### Spring Boot 启动流程与运行原理
-
-#### `@SpringBootApplication`
-
-`@SpringBootApplication` 是 Spring Boot 项目的灵魂，通常标注在主启动类上。进入源码可以发现，它是一个复合注解，核心由以下三个注解“三体合一”构成：
-
-1. `@SpringBootConfiguration`
-* **作用**：标记当前类为 Spring 的配置类。
-* **底层**：其实际上就是一个 `@Configuration` 注解的派生注解。这说明 Spring Boot 的主启动类本身也就是一个 Spring IoC 容器的配置类，可以在其中定义 `@Bean`。
-
-2. `@ComponentScan`
-* **作用**：组件扫描。默认扫描**当前配置类所在包及其所有子包**下的组件（如 `@Controller`、`@Service`、`@Component`、`@Repository` 等），并将它们注册到 Spring 容器中。
-* **注意**：这就是为什么我们通常要求将 Spring Boot 的主启动类放在项目的根包（Root Package）下的原因。
-
-1. `@EnableAutoConfiguration`
-* **作用**：开启自动配置机制。它是 Spring Boot 实现“开箱即用”的关键。
-* **底层原理**：该注解通过 `@Import(AutoConfigurationImportSelector.class)` 将 `AutoConfigurationImportSelector` 导入到容器中。这个选择器会根据当前项目的 Classpath 环境、配置信息等，动态地决定需要加载哪些自动配置类。
-
----
-
-#### 自动装配机制
-
-自动装配的核心逻辑是：**收集所有潜在的自动配置类 -> 结合条件注解（Conditionals）进行过滤 -> 将符合条件的 Bean 注入容器**。
-
-1. 自动配置类的加载来源
-`AutoConfigurationImportSelector` 会调用 Spring 内部的工厂加载机制来获取自动配置类的全限定名列表。在 Spring Boot 的演进过程中，这里的机制发生过重要改变：
-
-* **Spring Boot 2.7 之前的旧机制 (`spring.factories`)**
-    * 通过 `SpringFactoriesLoader` 读取类路径下所有 `META-INF/spring.factories` 文件。
-    * 寻找 Key 为 `org.springframework.boot.autoconfigure.EnableAutoConfiguration` 的配置项，获取其对应的 Value（逗号分隔的自动配置类全限定名）。
-* **Spring Boot 2.7+ 的新机制 (`AutoConfiguration.imports`)**
-    * 引入了新的加载机制，直接读取 `META-INF/spring/org.springframework.boot.autoconfigure.AutoConfiguration.imports` 文件。
-    * **改变的原因**：`spring.factories` 文件过于庞大，包含了各种组件（监听器、初始化器等），解析时有性能损耗。独立出 `.imports` 文件，专职负责自动配置，提高了启动加载效率，并且支持以行为单位添加注释，更清晰。
-
-2. 条件注解（`@Conditional` 家族）过滤
-加载到的自动配置类并不会全部生效，Spring Boot 大量使用了按需加载的 `@Conditional` 派生注解。只有条件成立，自动配置类及其内部的 `@Bean` 才会被注册：
-* `@ConditionalOnClass`：Classpath 中存在指定的类时生效（例如：引入了 Redis 依赖，才配置 RedisTemplate）。
-* `@ConditionalOnMissingBean`：容器中不存在指定的 Bean 时生效（保证用户自定义的 Bean 优先于自动配置）。
-* `@ConditionalOnProperty`：配置文件（application.yml）中存在指定的属性配置时生效。
-* `@ConditionalOnWebApplication`：当前应用是 Web 应用时生效。
-
----
-
-#### 自定义 Starter 开发
-
-开发自定义 Starter 通常用于封装公司内部的公共中间件（如统一日志、鉴权客户端、自定义 RPC 框架等），实现各微服务间的“引入即用”。
-
-1. 命名规范
-* **官方 Starter**：`spring-boot-starter-{name}` (例如：`spring-boot-starter-web`)
-* **自定义/第三方 Starter**：`{name}-spring-boot-starter` (例如：`mybatis-spring-boot-starter` 或 `acme-log-spring-boot-starter`)
-
-2. 开发步骤
-**步骤一：引入依赖**
-创建一个普通的 Maven/Gradle 项目，引入自动配置所需的基础依赖：
-```xml
-<dependency>
-    <groupId>org.springframework.boot</groupId>
-    <artifactId>spring-boot-autoconfigure</artifactId>
-</dependency>
-<dependency>
-    <groupId>org.springframework.boot</groupId>
-    <artifactId>spring-boot-configuration-processor</artifactId>
-    <optional>true</optional> </dependency>
-```
-
-**步骤二：定义属性配置类 (`@ConfigurationProperties`)**
-用于接收 `application.yml` 中的配置：
-```java
-@ConfigurationProperties(prefix = "acme.log")
-public class AcmeLogProperties {
-    private boolean enabled = true;
-    private String level = "INFO";
-    // getters and setters...
-}
-```
-
-**步骤三：编写核心业务组件**
-（例如：拦截器、日志切面类等组件逻辑）。
-
-**步骤四：编写自动配置类 (`@AutoConfiguration`)**
-结合 `@EnableConfigurationProperties` 和 `@Conditional` 注解完成组装：
-```java
-@AutoConfiguration // Spring Boot 2.7+ 推荐使用，替代 @Configuration
-@EnableConfigurationProperties(AcmeLogProperties.class)
-@ConditionalOnProperty(prefix = "acme.log", name = "enabled", havingValue = "true", matchIfMissing = true)
-public class AcmeLogAutoConfiguration {
-    
-    @Bean
-    @ConditionalOnMissingBean
-    public LogAspect logAspect(AcmeLogProperties properties) {
-        return new LogAspect(properties.getLevel());
-    }
-}
-```
-
-**步骤五：注册自动配置类（暴露给 Spring Boot）**
-在 `src/main/resources/META-INF/spring/org.springframework.boot.autoconfigure.AutoConfiguration.imports` 文件中写入你的自动配置类全限定名：
-```text
-com.acme.log.starter.AcmeLogAutoConfiguration
-```
-*(注：如果兼容 Spring Boot 2.7 以前，仍需要写在 `META-INF/spring.factories` 中)*。打包发布后，其他业务线引入该 Starter 即可生效。
-
----
-
-#### Spring Application 生命周期与事件发布机制
-
-当你调用 `SpringApplication.run(Application.class, args)` 时，Spring Boot 会经历一个复杂的启动生命周期。它通过**观察者模式**（事件发布与监听机制）贯穿始终，允许开发者在启动的不同阶段进行扩展。
-
-1. 核心启动流程阶段
-
-1.  **准备阶段（实例化 SpringApplication）**：
-    * 推断当前应用类型（REACTIVE、NONE、SERVLET）。
-    * 从 `spring.factories` 加载 `ApplicationContextInitializer`（初始化器）和 `ApplicationListener`（监听器）。
-    * 推断 Main 方法所在的类。
-2.  **运行阶段（调用 `run()` 方法）**：
-    * **获取并启动 RunListeners**：获取 `SpringApplicationRunListeners` 并触发 `starting()` 事件。
-    * **准备环境 (Environment)**：解析系统参数、命令行参数、配置文件（application.yml）。触发 `environmentPrepared()` 事件。
-    * **打印 Banner**：控制台输出 Spring 图标。
-    * **创建上下文 (Context)**：根据应用类型创建对应的 IoC 容器（如 `AnnotationConfigServletWebServerApplicationContext`）。
-    * **准备上下文**：应用 Initializers，触发 `contextPrepared()` 事件。将启动类加载到上下文中，触发 `contextLoaded()` 事件。
-    * **刷新上下文 (Refresh Context)**：**（绝对核心步骤）** 这一步执行 Spring 框架核心的 `refresh()` 方法。完成包扫描、自动配置类加载、Bean 的实例化、依赖注入、AOP 代理生成、内嵌 Tomcat 启动等。
-    * **完成刷新**：触发 `started()` 事件。
-    * **执行 Runners**：调用容器中所有的 `ApplicationRunner` 和 `CommandLineRunner` 接口实现类（常用于项目启动后执行初始化数据加载）。
-    * **运行完毕**：触发 `ready()` 事件。如果启动失败，会触发 `failed()` 事件。
-
-2. 生命周期事件 (Events) 对应表
-
-如果你需要在启动的特定阶段执行逻辑，可以通过实现 `ApplicationListener<E>` 来监听以下核心事件（按触发顺序排序）：
-
-| 启动事件 | 触发时机 | 典型用途 |
-| :--- | :--- | :--- |
-| `ApplicationStartingEvent` | Run 方法刚执行，获取到 RunListeners 之后。 | 在任何处理之前做一些极早期的初始化。 |
-| `ApplicationEnvironmentPreparedEvent` | Environment 构建完成，但上下文尚未创建。 | 动态修改或注入环境变量/配置项。 |
-| `ApplicationContextInitializedEvent` | Context 准备完成，Initializers 执行完毕。 | 在 Bean 定义加载前对上下文做微调。 |
-| `ApplicationPreparedEvent` | 配置类/Bean 定义已被加载到容器，但尚未实例化。 | 注册自定义的 BeanDefinition。 |
-| `ApplicationStartedEvent` | 容器刷新完成 (`refresh` 结束)，所有 Bean 已被创建。 | 启动后执行一些依赖于完整容器的逻辑。 |
-| `ApplicationReadyEvent` | Runners 执行完毕，应用已完全就绪，可以接收请求。 | 暴露健康检查状态，或执行最终的就绪通知。 |
-| `ApplicationFailedEvent` | 启动过程中的任何阶段发生异常时触发。 | 记录致命错误日志、发送告警。 |
-
-**补充说明**：由于某些早期事件（如 `ApplicationStartingEvent`）触发时 Spring 容器尚未创建完毕，因此不能通过 `@Component` 的方式注册监听器。必须通过 `SpringApplication.addListeners()` 或在 `META-INF/spring.factories` 中配置才能生效。
-
-### 核心上下文与 Bean 管理
-* **Bean 的生命周期**：从实例化、属性赋值、初始化（`@PostConstruct`、`InitializingBean`）到销毁的完整链路。
-* **循环依赖**：Spring 如何通过三级缓存解决 Setter 注入的循环依赖？为什么 Spring Boot 2.6+ 默认禁用了循环依赖？
-* **条件注解的妙用**：`@ConditionalOnClass`、`@ConditionalOnProperty` 等注解在多环境动态装配中的实战。
-
----
-
-## Web与网关层
-
-### 统一标准与防御性编程
-
-* **RESTful 进阶**：除了 GET/POST，PUT/PATCH/DELETE 的语义化设计。
-* **全局异常处理**：`@RestControllerAdvice` 与 `@ExceptionHandler` 配合，打造统一的 JSON 错误响应体。
-* **参数校验（Validation）**：`@Validated` 分组校验、自定义校验注解（如校验手机号格式、敏感词）。
-* **Jackson 序列化定制**：全局处理时间格式化、Long 类型精度丢失（转 String 前端接收）、忽略 Null 值。
-
-### 2拦截与切面机制（AOP 实战）
-* **过滤器 (Filter) vs 拦截器 (Interceptor) vs 切面 (AOP)**：三者的执行顺序与核心应用场景对比。
-* **高频 AOP 场景**：全局操作日志打点、接口耗时统计、基于注解的接口防刷限流。
-
----
-
-## 数据访问与分布式事务
-
-
-### MyBatis-Plus
-* **基础进阶**：自动代码生成、逻辑删除、自动填充（创建时间/更新时间）。
-* **高级特性**：乐观锁插件防超卖、防全表更新/删除插件。
-* **性能优化**：MyBatis 一级/二级缓存的坑、批量插入的真实底层优化（`rewriteBatchedStatements`）。
-
-### `@Transactional`
-* **事务失效的 8 大经典场景**：内部方法自调用（AOP 代理失效）、异常被 catch 吞没、非 public 方法等。
-* **事务传播行为**：`REQUIRES_NEW` 与 `NESTED` 在复杂业务（如记录独立日志、主从表嵌套处理）中的抉择。
-
-### 多数据源与读写分离
-* **动态数据源路由**：基于 `AbstractRoutingDataSource` 和 AOP 实现的数据源动态切换。
-* **分布式事务初探**：引入 Seata（AT 模式）解决跨库/跨服务的数据一致性。
-
----
-
-## 中间件集成
-
-### Redis集成
-* **缓存一致性治理**：双写一致性策略（延迟双删验证、Canal 监听 Binlog 异步更新缓存）。
-* **分布式锁实战**：放弃原生的 `setnx`，全面接入 Redisson（看门狗机制、可重入锁、红锁）。
-* **Spring Cache 避坑**：如何自定义缓存管理器，解决默认序列化乱码和无法针对单个 Key 设置 TTL 的痛点。
-
-### 消息队列集成
-* **可靠消息投递**：Spring Boot 结合 RocketMQ 事务消息实现分布式最终一致性。
-* **消费者幂等与异常处理**：消费失败的重试策略与死信队列（DLQ）的监听处理。
-
----
-
-## 安全与鉴权
-*没有安全防护的系统是在“裸奔”。*
-
-### 认证与授权方案选型
-* **Spring Security**：重量级，功能极强但学习曲线陡峭。核心：FilterChain 机制、自定义 UserDetailsService。
-* **Sa-Token**：国内极度流行的轻量级权限框架（推荐），零配置实现登录、角色权限、踢人下线。
-
-### Token架构
-* **JWT 深度实践**：JWT 的优缺点，Token 续期问题（双 Token 刷新机制：Access Token + Refresh Token）。
-
----
-
-## 生产运维与性能调优
-
-### 监控与观测 (Observability)
-* **Spring Boot Actuator**：暴露健康检查 (`/health`)、环境变量、线程池指标。
-* **链路追踪**：集成 SkyWalking 或 Zipkin，解决微服务架构下“错误查不到源头”的痛点。
-
-### 优雅停机 (Graceful Shutdown)
-* 如何配置 Spring Boot 和 Tomcat，保证在 K8s 销毁 Pod 时，先拒绝新请求，等老请求处理完、MQ 消息消费完再关闭 JVM？
-
-### JVM 与 Tomcat 调优参数
-* Spring Boot 内嵌 Tomcat 的核心参数调优（`max-threads`, `accept-count`, `max-connections`）。
-* 针对 Spring Boot 业务特性的 JVM 垃圾回收器选择与内存分配。
-
----
-
-
-
+# 计算机网络
 # Spring Cloud Alibaba
 
 ## 服务治理与配置中心：Nacos
@@ -906,18 +4436,18 @@ com.acme.log.starter.AcmeLogAutoConfiguration
 
 
 
-# MySQL
 
-# MongoDB
+
+
+
+
+
+
+
 
 # 数据库中间件
-
 # 高并发架构设计
-
 # 领域驱动设计DDD
-
-
-# Docker
 
 # Kubernetes
 
