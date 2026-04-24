@@ -1,81 +1,54 @@
-#### 行锁
+**`@TransactionalEventListener`感知事务的本质是实现了`TransactionSynchronization` 接口**
 
-行锁
-- **相比表锁，行锁的粒度更细，发生锁冲突的概率更低**
 
-在RC级别下，因为不需要解决幻读，所以基本只有记录锁，没有间隙锁
+**监听器没有实现 `TransactionSynchronization` 接口，是怎么被事务管理器调用的？**
 
-**行锁是加在索引上的，而不是直接加在物理数据行上**
-- 在RR级别下，**如果一条 SQL 语句会加锁，且查询条件没有用到索引(即目标字段没有建立索引)，InnoDB 就会退化为全表扫描，此时所有的行都会被锁住**，无论是哪种行锁，都会表现为表锁的效果
-  - 因为不走索引时，无法通过索引树快速定位，它唯一的办法就是进行全表扫描
-  - 每扫描到一条记录，就会给这条记录的索引加记录锁、间隙锁
-  - 直到事务提交之前，该表的所有记录上的锁都不会释放，表现为表锁
-- 为了解决幻读，InnoDB 将行锁细分为了三种主要类型：**记录锁**、**间隙锁**、**临键锁**
-
----
-
-##### 记录锁Record Lock
-
-记录锁**仅仅锁住索引中的某一条确定的记录**
-- **触发条件**：SQL查询条件中全是**唯一索引**时触发，比如主键或`UNIQUE` 约束的字段
-  - Mysql默认为主键或`UNIQUE`约束的字段建立索引，如果不建立索引无法快速确定是否唯一
-- 为什么要加记录锁：记录锁是互斥的，防止其他事务对这条被锁定的记录进行`UPDATE`、`DELETE`操作，这些事务会被阻塞直到本事务提交
-```sql
--- 事务A执行
-SELECT * FROM table WHERE id = 10 FOR UPDATE;
+```java
+@TransactionalEventListener(phase = TransactionPhase.AFTER_COMMIT)
+public void doSomething(MyEvent event) { ... }
 ```
 
 
-##### 间隙锁Gap Lock
+`ApplicationListenerMethodTransactionalAdapter`
 
-间隙锁是 InnoDB 为了解决可重复读（RR）隔离级别下的**幻读**问题而引入的。它不锁记录本身，而是**锁住索引记录之间的“空隙”**。
+- 在 Spring 启动阶段，当它扫描到带有 `@TransactionalEventListener` 的方法时，它会偷偷创建一个**代理对象**，**也是一个适配器**，全称叫 `ApplicationListenerMethodTransactionalAdapter`。
+- 这个适配器是整个魔术的核心。当业务代码执行 `publisher.publishEvent(event)` 时，**事件其实是交给了这个适配器，而不是直接交给你的业务方法**！
 
-* **锁定范围**：两个索引记录之间的间隙，或者第一条记录之前、最后一条记录之后的间隙。它是**开区间**，不包含两端的记录。
 
-* **作用**：唯一目的是**防止其他事务在这个间隙中 `INSERT`（插入）新数据**。
 
-* **触发条件**：
-  - 执行**范围查询**时（如 `WHERE id > 10 AND id < 20`）。
-    - B+ 树的叶子节点是通过双向链表连接的。当你定位到 $10$ 之后，指针会向右扫描直到 $20$。为了保证这块区域不被改动，InnoDB 会将扫描到的所有**索引间隙**都加上锁
-  - **等值查询时，记录不存在**（如查 `id=15`，但表里只有 10 和 20）。
-    - B+ 树确定目标行应该存在的位置，寻找前后索引，然后在这两个索引之间的每个行之间插入间隙锁
-    - 防止其他事务在查询期间刚好插入了 $id=15$，导致查询结果变化
-  - 使用**普通非唯一索引**进行等值查询时（除了锁住记录，还会锁住记录两侧的间隙）。
-    - 普通非唯一索引：普通字段建立了索引，但是InnoDB不知道到底有几条行符合查询条件，为了避免在查询期间，插入更多的符合查询条件的行，执行以下动作
-    - 给匹配到的 `age=18` 记录加 **行锁（Record Lock）**，这里是加在主键上的
-    - 给该记录前后的**间隙**加 **间隙锁（Gap Lock）**，这个是二级索引的间隙锁
-    - 当其他事务想插入符合查询条件的行时，必须先在二级索引中找到插入的位置，所以该事务会被阻塞
+- 当适配器拦截到事件后，它的执行链路是这样的（高度提炼的伪代码）：
 
-* **特殊性质**：间隙锁之间是**不互斥**的。事务 A 给 `(10, 20)` 加了间隙锁，事务 B 也可以给 `(10, 20)` 加间隙锁。它们共同的目标都是阻止事务 C 在这个区间插入数据。
-* **示例**：
-    假设表中有主键 `id` 为 `10` 和 `20` 的两行数据。
-    ```sql
-    -- 事务A尝试查询一个不存在的id，并加排他锁
-    SELECT * FROM table WHERE id = 15 FOR UPDATE;
-    ```
-    此时，InnoDB 找不到 `id=15` 的记录，为了防止别人在这个时候插入 `id=15` 导致幻读，它会在 `(10, 20)` 这个间隙加上间隙锁。如果此时事务 B 尝试执行 `INSERT INTO table (id) VALUES (15)`，就会被阻塞排队。
+```java
+// 适配器内部的事件处理逻辑
+@Override
+public void onApplicationEvent(ApplicationEvent event) {
+    
+    // 1. 探针：当前线程有活跃的事务吗？
+    if (TransactionSynchronizationManager.isSynchronizationActive()) {
+        
+        // 2. 偷梁换柱：将“你的方法”和“当前事件”打包，伪装成一个 TransactionSynchronization 寄生虫！
+        TransactionSynchronization synchronization = new TransactionalEventSynchronization(event, this.listenerMethod);
+        
+        // 3. 挂号登记：把这个寄生虫塞进当前线程的 ThreadLocal 口袋里
+        TransactionSynchronizationManager.registerSynchronization(synchronization);
+        
+        // 4. 立即溜走：不执行业务方法，直接 return！
+        return; 
+    }
+    // ... 无事务的降级逻辑（稍后小节讲）...
+}
+```
 
----
+**关键角色揭秘：`TransactionSynchronizationManager`**
+这是一个非常霸气的类，但它的本质极其简单——**它就是一个封装了 `ThreadLocal` 的管家**。
+它在当前线程里维护了一个 `List<TransactionSynchronization>`。
 
-#####  临键锁 Next-Key Lock
-
-临键锁本质上是 **“记录锁 + 间隙锁”** 的结合体。它既锁住了一条记录，又锁住了这条记录前面的间隙。
-
-* **锁定范围**：**左开右闭**的区间 `(gap_start, record]`。
-* **触发条件**：在可重复读（RR）隔离级别下，**InnoDB 的默认行锁算法就是临键锁**。
-* **作用**：既防止其他事务修改当前记录，又防止其他事务在记录之前的间隙插入新数据。从而完美解决了当前区间的幻读问题。
-* **示例与锁退化**：
-    假设表中有主键 `id` 为 `10`、`20`、`30` 的三行数据。此时自然形成了以下区间：`(-∞, 10]`, `(10, 20]`, `(20, 30]`, `(30, +∞)`。
-    ```sql
-    -- 事务A执行范围查询
-    SELECT * FROM table WHERE id > 10 AND id <= 20 FOR UPDATE;
-    ```
-    这条语句会加上 `(10, 20]` 的临键锁。不仅 `id=20` 这条记录不能被修改，别的事务也无法插入 `id=11` 到 `id=19` 的数据。
-
-**InnoDB 的智能锁退化机制（优化性能）：**
-1.  当使用**唯一索引等值查询**且**记录存在**时，因为唯一索引已经保证了不可能插入相同的 key，不会有幻读，所以临键锁会自动退化为**记录锁**。
-2.  当进行**等值查询**且**记录不存在**时，由于没有具体的记录可以锁，临键锁会自动退化为**间隙锁**。
+**“偷梁换柱”的完整拼图：**
+1. 业务主线程调用 `publishEvent()`。
+2. 适配器接到事件，发现当前在事务中。
+3. 适配器不执行你的监听器代码，而是生成一个回调对象（寄生虫），塞进 `ThreadLocal` 的列表里（这叫**挂号**）。
+4. `publishEvent()` 瞬间执行完毕，主线程继续往下走！
+5. 等到主线程走到 AOP 层面准备 `commit` 的时候，事务管理器（TransactionManager）再去翻看 `ThreadLocal`，把刚才挂号的寄生虫拿出来，依次触发它们的 `afterCommit()` 方法。
 
 ---
-
 
