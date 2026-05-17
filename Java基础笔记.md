@@ -12856,7 +12856,7 @@ public class ExchangerDemo {
 #### ConcurrentSkipListMap
 
 数据结构**跳表**：快速查找 ($O(\log N)$) + 强有序 + 纯无锁
-
+- Java中跳表最大的优势是在 `ConcurrentSkipListMap` 里实现无锁并发，因为红黑树旋转会锁住半棵树，而跳表只需CAS更新局部节点。
 ![](images/20260417200926.png)
 
 
@@ -14345,7 +14345,6 @@ Fork/Join 框架之所以能高效处理成千上万个任务，其灵魂在于*
 
 ## 虚拟线程
 # EOF
-
 
 
 
